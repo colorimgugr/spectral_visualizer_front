@@ -3,6 +3,7 @@ type SpectralCode = "vis" | "vnir" | "swir" | "uvis" | "uvf";
 type SpectralImgData = {
   code: SpectralCode;
   link: string;
+  tileSource: string;
 };
 
 type Artwork = {

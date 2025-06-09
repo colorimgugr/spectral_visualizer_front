@@ -36,5 +36,5 @@ yarn-error.log*
 next-env.d.ts
 
 # artworks
-/public/artworks
-/public/openseadragon
+# /public/artworks
+# /public/openseadragon

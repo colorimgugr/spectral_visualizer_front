@@ -1,10 +1,16 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useState } from "react";
 import { Row, Column, Media } from "@/once-ui/components";
 import type { Artwork, SpectralImgData } from "@/app/utils/utils";
 import { SelectImage } from "@/components/SelectImage";
-// import OpenSeadragon from "openseadragon";
+import dynamic from "next/dynamic";
+import {OpenSeaDragonViewerProps} from "@/components/OpenSeaDragonViewer";
+
+const OpenSeaDragonViewer = dynamic<OpenSeaDragonViewerProps>(
+  () => import("@/components/OpenSeaDragonViewer"),
+  { ssr: false }
+);
 
 type SingleViewProps = {
   selectedArtwork: Artwork;
@@ -17,47 +23,33 @@ export const SingleView = ({
   selectedImage,
   handleSelectImage,
 }: SingleViewProps) => {
-  const tileSource = "/artworks/mpa/mpa.dzi";
-  const viewerRef = useRef<any>(null);
-  const osdViewer = useRef<any>(null);
+  const [tileSource, setTileSource] = useState<string>("");
 
   useEffect(() => {
-    const loadViewer = async () => {
-      console.log("Aqyu");
+    if (!selectedImage?.code) return;
 
-      if (osdViewer.current || !viewerRef.current) return;
+    const fetchDZI = async () => {
+      try {
+        console.log("trying")
+        // const res = await fetch("http://localhost:5000/dzi", {
+        const res = await fetch("https://multispectral-visualizer-back.onrender.com/dzi", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ filename: selectedImage.code }),
+        });
 
-      const OpenSeadragon = (await import("openseadragon")).default;
-
-      // if (viewerRef.current) {
-      osdViewer.current = OpenSeadragon({
-        element: viewerRef.current,
-        prefixUrl: "/openseadragon/images/", // This folder must exist in /public
-        tileSources: tileSource,
-        showNavigationControl: true,
-      });
-      // }
-    };
-
-    loadViewer();
-
-    return () => {
-      if (osdViewer.current) {
-        osdViewer.current.destroy();
-        osdViewer.current = null;
-      }
-
-      if (viewerRef.current) {
-        viewerRef.current.destroy();
-        viewerRef.current = null;
+        const data = await res.json();
+        if (data.dzi_url) {
+          // setTileSource(`http://localhost:5000${data.dzi_url}`);
+          setTileSource(`https://multispectral-visualizer-back.onrender.com${data.dzi_url}`);
+        }
+      } catch (error) {
+        console.error("Failed to fetch DZI:", error);
       }
     };
-    console.log("👀 useEffect ran");
 
-    return () => {
-      console.log("💥 useEffect cleanup");
-    };
-  }, []);
+    fetchDZI();
+  }, [selectedImage]);
 
   return (
     <Row fillWidth gap="16" mobileDirection="column">
@@ -79,7 +71,8 @@ export const SingleView = ({
           border="neutral-alpha-medium"
           aspectRatio={selectedArtwork.apectRatio}
         /> */}
-        <div ref={viewerRef} style={{ width: "100%", height: "600px" }} />
+        <OpenSeaDragonViewer tileSource={selectedImage.tileSource} />
+        {/* <OpenSeaDragonViewer tileSource={tileSource} /> */}
       </Column>
     </Row>
   );
