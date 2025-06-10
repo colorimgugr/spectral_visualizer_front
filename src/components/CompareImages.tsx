@@ -1,6 +1,15 @@
+"use client";
+
 import { Row, Column, CompareImage } from "@/once-ui/components";
 import type { Artwork, SpectralImgData } from "@/app/utils/utils";
 import { SelectImage } from "@/components/SelectImage";
+import dynamic from "next/dynamic";
+import { OpenSeaDragonCompareProps } from "@/components/OpenSeaDragonCompare";
+
+const OpenSeaDragonCompare = dynamic<OpenSeaDragonCompareProps>(
+  () => import("@/components/OpenSeaDragonCompare"),
+  { ssr: false }
+);
 
 type CompareImagesProps = {
   selectedArtwork: Artwork;
@@ -16,7 +25,7 @@ export const CompareImages = ({
   handleSelectImage,
 }: CompareImagesProps) => {
   return (
-    <Row fillWidth gap="16" mobileDirection="column">
+    <Row fillWidth fillHeight gap="16" mobileDirection="column">
       <Column fillWidth flex="1">
         <SelectImage
           selectedArtwork={selectedArtwork}
@@ -26,19 +35,9 @@ export const CompareImages = ({
         />
       </Column>
       <Column fillWidth flex="4">
-        <CompareImage
-          radius="xs"
-          border="neutral-alpha-weak"
-          overflow="hidden"
-          aspectRatio={selectedArtwork.apectRatio}
-          leftContent={{
-            src: selectedImageLeft.link,
-            alt: "Image 1",
-          }}
-          rightContent={{
-            src: selectedImageRight.link,
-            alt: "Image 2",
-          }}
+        <OpenSeaDragonCompare
+          leftTile={selectedImageLeft.tileSource}
+          rightTile={selectedImageRight.tileSource}
         />
       </Column>
       <Column fillWidth flex="1">

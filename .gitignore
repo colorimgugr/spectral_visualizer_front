@@ -38,3 +38,4 @@ next-env.d.ts
 # artworks
 # /public/artworks
 # /public/openseadragon
+/public/originals

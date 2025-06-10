@@ -9,7 +9,6 @@ type SpectralImgData = {
 type Artwork = {
   id: string;
   name: string;
-  apectRatio: string;
   spectralImages: SpectralImgData[];
 };
 

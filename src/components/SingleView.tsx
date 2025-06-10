@@ -23,36 +23,36 @@ export const SingleView = ({
   selectedImage,
   handleSelectImage,
 }: SingleViewProps) => {
-  const [tileSource, setTileSource] = useState<string>("");
+  // const [tileSource, setTileSource] = useState<string>("");
 
-  useEffect(() => {
-    if (!selectedImage?.code) return;
+  // useEffect(() => {
+  //   if (!selectedImage?.code) return;
 
-    const fetchDZI = async () => {
-      try {
-        console.log("trying")
-        // const res = await fetch("http://localhost:5000/dzi", {
-        const res = await fetch("https://multispectral-visualizer-back.onrender.com/dzi", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ filename: selectedImage.code }),
-        });
+  //   const fetchDZI = async () => {
+  //     try {
+  //       console.log("trying")
+  //       // const res = await fetch("http://localhost:5000/dzi", {
+  //       const res = await fetch("https://multispectral-visualizer-back.onrender.com/dzi", {
+  //         method: "POST",
+  //         headers: { "Content-Type": "application/json" },
+  //         body: JSON.stringify({ filename: selectedImage.code }),
+  //       });
 
-        const data = await res.json();
-        if (data.dzi_url) {
-          // setTileSource(`http://localhost:5000${data.dzi_url}`);
-          setTileSource(`https://multispectral-visualizer-back.onrender.com${data.dzi_url}`);
-        }
-      } catch (error) {
-        console.error("Failed to fetch DZI:", error);
-      }
-    };
+  //       const data = await res.json();
+  //       if (data.dzi_url) {
+  //         // setTileSource(`http://localhost:5000${data.dzi_url}`);
+  //         setTileSource(`https://multispectral-visualizer-back.onrender.com${data.dzi_url}`);
+  //       }
+  //     } catch (error) {
+  //       console.error("Failed to fetch DZI:", error);
+  //     }
+  //   };
 
-    fetchDZI();
-  }, [selectedImage]);
+  //   fetchDZI();
+  // }, [selectedImage]);
 
   return (
-    <Row fillWidth gap="16" mobileDirection="column">
+    <Row fillWidth fillHeight gap="16" mobileDirection="column">
       <Column fillWidth flex="1">
         <SelectImage
           selectedArtwork={selectedArtwork}
@@ -62,17 +62,7 @@ export const SingleView = ({
         />
       </Column>
       <Column fillWidth flex="5">
-        {/* <Media
-          enlarge
-          // src={selectedImage.link}
-          src={tileSource}
-          alt="Image"
-          radius="xl"
-          border="neutral-alpha-medium"
-          aspectRatio={selectedArtwork.apectRatio}
-        /> */}
         <OpenSeaDragonViewer tileSource={selectedImage.tileSource} />
-        {/* <OpenSeaDragonViewer tileSource={tileSource} /> */}
       </Column>
     </Row>
   );

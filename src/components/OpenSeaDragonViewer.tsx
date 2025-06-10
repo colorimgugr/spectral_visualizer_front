@@ -7,9 +7,7 @@ export type OpenSeaDragonViewerProps = {
   tileSource: string;
 };
 
-const OpenSeaDragonViewer = ({
-  tileSource,
-}: OpenSeaDragonViewerProps) => {
+const OpenSeaDragonViewer = ({ tileSource }: OpenSeaDragonViewerProps) => {
   const viewerRef = useRef<Viewer | null>(null);
   const containerRef = useRef<HTMLDivElement | null>(null);
 
@@ -23,6 +21,7 @@ const OpenSeaDragonViewer = ({
         tileSources: tileSource,
         animationTime: 0.5,
         blendTime: 0.1,
+        maxZoomPixelRatio: 16,  
         zoomPerScroll: 2,
         showNavigationControl: true,
       });
@@ -41,7 +40,7 @@ const OpenSeaDragonViewer = ({
       <div
         ref={containerRef}
         id="openSeaDragon"
-        style={{ width: "100%", height: "600px" }}
+        style={{ width: "100%", height: "100%" }}
       />
     </>
   );
