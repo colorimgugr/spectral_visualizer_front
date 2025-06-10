@@ -1,6 +1,6 @@
 "use client";
 
-import OpenSeadragon from "openseadragon";
+import OpenSeadragon, { Viewport } from "openseadragon";
 import OpenSeaDragon, { Viewer } from "openseadragon";
 import { useEffect, useRef, useState } from "react";
 import styles from "@/styles/ImageSlider.module.scss";
@@ -76,7 +76,7 @@ const OpenSeaDragonCompare = ({
 
     viewer.addTiledImage({
       tileSource: leftTile,
-      success: (e) => {
+      success: (e: any) => {
         leftImageRef.current = e.item;
         onImageLoad();
       },
@@ -84,7 +84,7 @@ const OpenSeaDragonCompare = ({
 
     viewer.addTiledImage({
       tileSource: rightTile,
-      success: (e) => {
+      success: (e: any) => {
         rightImageRef.current = e.item;
         onImageLoad();
       },
@@ -126,7 +126,11 @@ const OpenSeaDragonCompare = ({
       return;
     }
 
-    const newSpringX = viewer.viewport.centerSpringX.current.value;
+    console.log(viewer.viewport)
+
+    const viewport:any = viewer.viewport;
+
+    const newSpringX = viewport.centerSpringX.current.value;
     const deltaX = newSpringX - oldSpringX.current;
     oldSpringX.current = newSpringX;
 
@@ -157,8 +161,8 @@ const OpenSeaDragonCompare = ({
     leftImage.setClip(leftRect.current);
     rightImage.setClip(rightRect.current);
 
-    leftImage._needsUpdate = true;
-    rightImage._needsUpdate = true;
+    // leftImage._needsUpdate = true;
+    // rightImage._needsUpdate = true;
   }
 
   const dragState = useRef({
