@@ -1,0 +1,44 @@
+.custom-slider {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 10px;
+
+  input[type="range"] {
+    // -webkit-appearance: none;
+    width: 150px;
+    height: 6px;
+    background: #ddd;
+    border-radius: 5px;
+    outline: none;
+    transition: background 0.2s;
+
+    &::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      height: 18px;
+      width: 18px;
+      border-radius: 50%;
+      background: #4a90e2;
+      cursor: pointer;
+    }
+
+    &::-moz-range-thumb {
+      height: 18px;
+      width: 18px;
+      border-radius: 50%;
+      background: #4a90e2;
+      cursor: pointer;
+    }
+
+    &:hover {
+      background: #ccc;
+    }
+  }
+
+  span {
+    font-size: 0.9rem;
+    color: #444;
+    min-width: 40px;
+    text-align: right;
+  }
+}

@@ -1,8 +1,8 @@
 "use client";
 
-import OpenSeadragon, { Viewport } from "openseadragon";
+import OpenSeadragon from "openseadragon";
 import OpenSeaDragon, { Viewer } from "openseadragon";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import styles from "@/styles/ImageSlider.module.scss";
 
 export type OpenSeaDragonCompareProps = {
@@ -17,6 +17,7 @@ const OpenSeaDragonCompare = ({
   const viewerRef = useRef<Viewer | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const handleRef = useRef<HTMLDivElement>(null);
+
   // View and sync state
   const middleRef = useRef<OpenSeadragon.Point | null>(null);
   const oldSpringX = useRef(0.5);
@@ -34,11 +35,11 @@ const OpenSeaDragonCompare = ({
     if (!container) return;
 
     const viewer = OpenSeaDragon({
-      element: containerRef.current!,
+      element: container,
       prefixUrl: "/openseadragon/images/",
-      tileSources: leftTile,
       showFullPageControl: false,
-      zoomPerClick: 1.3,
+      maxZoomPixelRatio: 16,
+      zoomPerScroll: 1.3,
     });
 
     viewerRef.current = viewer;
@@ -46,7 +47,7 @@ const OpenSeaDragonCompare = ({
     if (handleRef.current) {
       handleRef.current.style.left = "50%";
     }
-    
+
     viewer.addHandler("animation-start", clipImages);
     viewer.addHandler("animation", clipImagesWithScroll);
 
@@ -126,9 +127,9 @@ const OpenSeaDragonCompare = ({
       return;
     }
 
-    console.log(viewer.viewport)
+    console.log(viewer.viewport);
 
-    const viewport:any = viewer.viewport;
+    const viewport: any = viewer.viewport;
 
     const newSpringX = viewport.centerSpringX.current.value;
     const deltaX = newSpringX - oldSpringX.current;

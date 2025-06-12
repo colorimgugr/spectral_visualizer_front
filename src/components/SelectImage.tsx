@@ -9,7 +9,7 @@ type SelectImageProps = {
   side: number;
 };
 
-export const SelectImage = ({
+const SelectImage = ({
   selectedArtwork,
   selectedImage,
   handleSelect,
@@ -30,3 +30,5 @@ export const SelectImage = ({
     />
   );
 };
+
+export default SelectImage;

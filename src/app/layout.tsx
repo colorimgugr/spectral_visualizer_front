@@ -3,8 +3,19 @@ import "@/once-ui/tokens/index.scss";
 
 import classNames from "classnames";
 
-import { baseURL, style, meta, font, effects } from "@/app/resources/once-ui.config";
-import { Background, Column, Flex, ToastProvider, ThemeProvider } from "@/once-ui/components";
+import {
+  baseURL,
+  style,
+  meta,
+  font,
+} from "@/app/resources/once-ui.config";
+import {
+  Background,
+  Column,
+  Flex,
+  ToastProvider,
+  ThemeProvider,
+} from "@/once-ui/components";
 
 import { opacity, SpacingToken } from "@/once-ui/types";
 import { Meta, Schema } from "@/once-ui/modules";
@@ -50,7 +61,7 @@ export default function RootLayout({
         font.primary.variable,
         font.secondary.variable,
         font.tertiary.variable,
-        font.code.variable,
+        font.code.variable
       )}
     >
       <Schema
@@ -86,7 +97,7 @@ export default function RootLayout({
       <ThemeProvider>
         <ToastProvider>
           <Column as="body" fillWidth margin="0" padding="0">
-            <Background
+            {/* <Background
               position="absolute"
               mask={{
                 x: effects.mask.x,
@@ -126,7 +137,7 @@ export default function RootLayout({
                 angle: effects.lines.angle,
                 color: effects.lines.color,
               }}
-            />
+            /> */}
             {children}
           </Column>
         </ToastProvider>

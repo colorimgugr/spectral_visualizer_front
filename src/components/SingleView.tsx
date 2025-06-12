@@ -1,9 +1,9 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Row, Column, Media } from "@/once-ui/components";
+import { Row, Column } from "@/once-ui/components";
 import type { Artwork, SpectralImgData } from "@/app/utils/utils";
-import { SelectImage } from "@/components/SelectImage";
+import SelectImage from "@/components/SelectImage";
 import dynamic from "next/dynamic";
 import {OpenSeaDragonViewerProps} from "@/components/OpenSeaDragonViewer";
 

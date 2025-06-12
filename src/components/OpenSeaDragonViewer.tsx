@@ -12,18 +12,13 @@ const OpenSeaDragonViewer = ({ tileSource }: OpenSeaDragonViewerProps) => {
   const containerRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
-    if (typeof window === "undefined") return;
-
     if (containerRef.current) {
       viewerRef.current = OpenSeaDragon({
         element: containerRef.current,
         prefixUrl: "/openseadragon/images/",
         tileSources: tileSource,
-        animationTime: 0.5,
-        blendTime: 0.1,
-        maxZoomPixelRatio: 16,  
-        zoomPerScroll: 2,
-        showNavigationControl: true,
+        maxZoomPixelRatio: 16,
+        zoomPerScroll: 1.3,
       });
     }
 

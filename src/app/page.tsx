@@ -1,7 +1,6 @@
 "use client";
 
 import {
-  Heading,
   Text,
   Column,
   Row,
@@ -11,9 +10,6 @@ import {
   Logo,
   Line,
   LetterFx,
-  Background,
-  Particle,
-  Mask,
 } from "@/once-ui/components";
 import { useState, useEffect } from "react";
 import type { Artwork, SpectralImgData } from "@/app/utils/utils";
@@ -21,6 +17,7 @@ import { artworks } from "@/app/resources/content";
 
 import { SingleView } from "@/components/SingleView";
 import { CompareImages } from "@/components/CompareImages";
+import { BlendImages } from "@/components/BlendImages";
 
 export default function Home() {
   const [selectedMode, setSelectedMode] = useState<string>("single");
@@ -39,7 +36,7 @@ export default function Home() {
   }, []);
 
   if (!selectedArtwork || !selectedImageLeft || !selectedImageRight) {
-    return <p>Cargando...</p>; // Or null or a loading spinner
+    return <p>Loading...</p>; // Or null or a loading spinner
   }
 
   const handleArtwork = (value: string) => {
@@ -69,25 +66,28 @@ export default function Home() {
   };
 
   return (
-    <Column fill horizontal="center" padding="xs">
-      <Column maxWidth="s" gap="s" align="center" padding="xs">
-        {/* <Badge
-          textVariant="code-default-s"
+    <Column fill horizontal="center" gap="s" padding="xs">
+      <Row fillWidth horizontal="space-between" padding="xs">
+        <Badge
+          textVariant="code-default-m"
           border="neutral-alpha-medium"
           onBackground="neutral-medium"
           vertical="center"
           gap="2"
+          effect={false}
         >
-          <Logo icon={false} href="https://once-ui.com" size="xs" />
+          <Logo
+            wordmarkSrc="/colorimaginglab_logo.jpg"
+            icon={false}
+            href="https://colorimaginglab.ugr.es/"
+            size="s"
+          />
           <Line vert background="neutral-alpha-strong" />
           <Text marginX="4">
-            <LetterFx trigger="instant">An ecosystem, not a UI kit</LetterFx>
+            <LetterFx trigger="instant">Multispectral Visualization</LetterFx>
           </Text>
-        </Badge> */}
-        <Heading variant="display-strong-xs">
-          Multispectral Visualization
-        </Heading>
-        <Row fillWidth center gap="16">
+        </Badge>
+        <Row center gap="xs">
           <Column fillWidth flex="1">
             <Select
               id="empty-state-select"
@@ -100,7 +100,7 @@ export default function Home() {
               }))}
             />
           </Column>
-          <Row fillWidth gap="16" flex="1">
+          <Row fillWidth gap="16" flex="2">
             <Text
               variant="heading-default-xs"
               onBackground="neutral-weak"
@@ -122,17 +122,31 @@ export default function Home() {
               isChecked={selectedMode === "compare"}
               onToggle={() => handleMode("compare")}
             />
+            <RadioButton
+              name="visualizationMode"
+              value="blend"
+              label="Blend"
+              isChecked={selectedMode === "blend"}
+              onToggle={() => handleMode("blend")}
+            />
           </Row>
         </Row>
-      </Column>
+      </Row>
       {selectedMode === "single" ? (
         <SingleView
           selectedArtwork={selectedArtwork}
           selectedImage={selectedImageLeft}
           handleSelectImage={handleSelectImage}
         />
-      ) : (
+      ) : selectedMode === "compare" ? (
         <CompareImages
+          selectedArtwork={selectedArtwork}
+          selectedImageLeft={selectedImageLeft}
+          selectedImageRight={selectedImageRight}
+          handleSelectImage={handleSelectImage}
+        />
+      ) : (
+        <BlendImages
           selectedArtwork={selectedArtwork}
           selectedImageLeft={selectedImageLeft}
           selectedImageRight={selectedImageRight}

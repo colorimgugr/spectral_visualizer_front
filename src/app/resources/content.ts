@@ -16,19 +16,19 @@ const artworks: Artwork[] = [
       {
         code: "vnir",
         link: "https://lh3.googleusercontent.com/d/1tXB8XwmbbLeRHa5W8ZVwoLfkAANjOvKR",
-        tileSource: "/artworks/mpa/vnir/vnir.dzi",
+        tileSource: "/artworks/mpa/vnir.dzi",
         // tileSource: "/originals/vnir.jpg",
       },
       {
         code: "swir",
         link: "https://lh3.googleusercontent.com/d/1ybFLIuSLjoLB_nuMt3q5fhgtoQ4Ibv6C",
-        tileSource: "/artworks/mpa/swir/swir.dzi",
+        tileSource: "/artworks/mpa/swir.dzi",
         // tileSource: "/originals/swir.jpg",
       },
       {
         code: "uvf",
         link: "https://lh3.googleusercontent.com/d/1pHar53nzONsMVobOlO__sZKAdowem6iM",
-        tileSource: "/artworks/mpa/uvf/uvf.dzi",
+        tileSource: "/artworks/mpa/uvf.dzi",
         // tileSource: "/originals/uvf.jpg",
         // tileSource: "https://lh3.googleusercontent.com/d/1_DmPfUjbipgJedrPcnw6W9Ij_2XwPAUY",
       },
@@ -41,18 +41,39 @@ const artworks: Artwork[] = [
       {
         code: "vis",
         link: "",
-        tileSource: "/artworks/mdv/vis/vis.dzi",
+        tileSource: "/artworks/mdv/vis.dzi",
         // tileSource: "http://localhost:5000/static/image.dzi",
       },
       {
         code: "vnir",
         link: "",
-        tileSource: "/artworks/mdv/vnir/vnir.dzi",
+        tileSource: "/artworks/mdv/vnir.dzi",
       },
       {
         code: "swir",
         link: "",
-        tileSource: "/artworks/mdv/swir/swir.dzi",
+        tileSource: "/artworks/mdv/swir.dzi",
+      },
+    ],
+  },
+  {
+    id: "mfr",
+    name: "Madonna de Foligno de Rafael",
+    spectralImages: [
+      {
+        code: "vis",
+        link: "",
+        tileSource: "/artworks/mfr/vis.dzi",
+      },
+      {
+        code: "vnir",
+        link: "",
+        tileSource: "/artworks/mfr/vnir.dzi",
+      },
+      {
+        code: "swir",
+        link: "",
+        tileSource: "/artworks/mfr/swir.dzi",
       },
     ],
   },
