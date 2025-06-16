@@ -31,6 +31,10 @@ export default function Home() {
     useState<SpectralImgData | null>(null);
   const [selectedImageRight, setSelectedImageRight] =
     useState<SpectralImgData | null>(null);
+
+  const [normSpectralImages, setNormSpectralImages] = useState<
+    SpectralImgData[] | null
+  >(null);
   const [filteredSpectralImages, setFilteredSpectralImages] = useState<
     SpectralImgData[] | null
   >(null);
@@ -44,15 +48,20 @@ export default function Home() {
 
     setSelectedMode("single");
 
-    const [first, second, ...rest] = selectedArtwork.spectralImages;
-
-    setSelectedImageLeft(first ?? null);
-    setSelectedImageRight(second ?? null);
-
+    // Set the "normal" images vs "hsi" and "msi"
+    const normImages = selectedArtwork.spectralImages.filter(
+      (img) => img.spectralType === "nrm"
+    );
     const nonNormImages = selectedArtwork.spectralImages.filter(
       (img) => img.spectralType !== "nrm"
     );
+
+    setNormSpectralImages(normImages);
     setFilteredSpectralImages(nonNormImages);
+
+    const [first, second, ...rest] = normImages;
+    setSelectedImageLeft(first ?? null);
+    setSelectedImageRight(second ?? null);
   }, [selectedArtwork]);
 
   const getVisualizationModeOptions = () => {
@@ -162,17 +171,19 @@ export default function Home() {
       </Row>
       {selectedArtwork !== null &&
         selectedMode &&
+        normSpectralImages &&
         (selectedMode === "single" && selectedImageLeft ? (
           <SingleView
-            selectedArtwork={selectedArtwork}
+            imagesOptions={normSpectralImages}
             selectedImage={selectedImageLeft}
             handleSelectImage={handleSelectImage}
           />
         ) : selectedMode === "comp" &&
           selectedImageLeft &&
-          selectedImageRight ? (
+          selectedImageRight &&
+          normSpectralImages ? (
           <CompareImages
-            selectedArtwork={selectedArtwork}
+            imagesOptions={normSpectralImages}
             selectedImageLeft={selectedImageLeft}
             selectedImageRight={selectedImageRight}
             handleSelectImage={handleSelectImage}
@@ -181,7 +192,7 @@ export default function Home() {
           selectedImageLeft &&
           selectedImageRight ? (
           <BlendImages
-            selectedArtwork={selectedArtwork}
+            imagesOptions={normSpectralImages}
             selectedImageLeft={selectedImageLeft}
             selectedImageRight={selectedImageRight}
             handleSelectImage={handleSelectImage}

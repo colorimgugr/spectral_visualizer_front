@@ -3,18 +3,26 @@ import type { Artwork, SpectralImgData } from "@/app/utils/utils";
 import { spectralRangeLabels } from "@/app/resources/content";
 
 type SelectImageProps = {
-  selectedArtwork: Artwork;
+  imagesOptions: SpectralImgData[];
   selectedImage: SpectralImgData;
   handleSelect: (code: string, side: number) => void;
   side: number;
 };
 
 const SelectImage = ({
-  selectedArtwork,
+  imagesOptions,
   selectedImage,
   handleSelect,
   side,
 }: SelectImageProps) => {
+  const getImageOptions = () => {
+    return imagesOptions
+      .map((img) => ({
+        label: spectralRangeLabels[img.spectralRange],
+        value: img.spectralRange,
+      }));
+  };
+  
   return (
     <Select
       id="empty-state-select"
@@ -23,10 +31,7 @@ const SelectImage = ({
       } image`}
       value={selectedImage.spectralRange}
       onSelect={(value: string) => handleSelect(value, side)}
-      options={selectedArtwork.spectralImages.map((spectralImg) => ({
-        label: spectralRangeLabels[spectralImg.spectralRange],
-        value: spectralImg.spectralRange,
-      }))}
+      options={getImageOptions()}
     />
   );
 };

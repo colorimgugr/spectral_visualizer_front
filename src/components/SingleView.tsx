@@ -2,10 +2,10 @@
 
 import { useEffect, useState } from "react";
 import { Row, Column } from "@/once-ui/components";
-import type { Artwork, SpectralImgData } from "@/app/utils/utils";
+import type { SpectralImgData } from "@/app/utils/utils";
 import SelectImage from "@/components/SelectImage";
 import dynamic from "next/dynamic";
-import {OpenSeaDragonViewerProps} from "@/components/OpenSeaDragonViewer";
+import { OpenSeaDragonViewerProps } from "@/components/OpenSeaDragonViewer";
 
 const OpenSeaDragonViewer = dynamic<OpenSeaDragonViewerProps>(
   () => import("@/components/OpenSeaDragonViewer"),
@@ -13,13 +13,13 @@ const OpenSeaDragonViewer = dynamic<OpenSeaDragonViewerProps>(
 );
 
 type SingleViewProps = {
-  selectedArtwork: Artwork;
+  imagesOptions: SpectralImgData[];
   selectedImage: SpectralImgData;
   handleSelectImage: (code: string, side: number) => void;
 };
 
 export const SingleView = ({
-  selectedArtwork,
+  imagesOptions,
   selectedImage,
   handleSelectImage,
 }: SingleViewProps) => {
@@ -55,7 +55,7 @@ export const SingleView = ({
     <Row fillWidth fillHeight gap="16" mobileDirection="column">
       <Column fillWidth flex="1">
         <SelectImage
-          selectedArtwork={selectedArtwork}
+          imagesOptions={imagesOptions}
           selectedImage={selectedImage}
           handleSelect={handleSelectImage}
           side={0}

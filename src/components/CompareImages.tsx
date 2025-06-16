@@ -1,7 +1,7 @@
 "use client";
 
 import { Row, Column } from "@/once-ui/components";
-import type { Artwork, SpectralImgData } from "@/app/utils/utils";
+import type { SpectralImgData } from "@/app/utils/utils";
 import SelectImage from "@/components/SelectImage";
 import dynamic from "next/dynamic";
 import { OpenSeaDragonCompareProps } from "@/components/OpenSeaDragonCompare";
@@ -12,23 +12,24 @@ const OpenSeaDragonCompare = dynamic<OpenSeaDragonCompareProps>(
 );
 
 type CompareImagesProps = {
-  selectedArtwork: Artwork;
+  imagesOptions: SpectralImgData[];
   selectedImageLeft: SpectralImgData;
   selectedImageRight: SpectralImgData;
   handleSelectImage: (code: string, side: number) => void;
 };
 
 export const CompareImages = ({
-  selectedArtwork,
+  imagesOptions,
   selectedImageLeft,
   selectedImageRight,
   handleSelectImage,
 }: CompareImagesProps) => {
+  console.log("img", imagesOptions);
   return (
     <Row fillWidth fillHeight gap="16" mobileDirection="column">
       <Column fillWidth flex="1">
         <SelectImage
-          selectedArtwork={selectedArtwork}
+          imagesOptions={imagesOptions}
           selectedImage={selectedImageLeft}
           handleSelect={handleSelectImage}
           side={1}
@@ -44,7 +45,7 @@ export const CompareImages = ({
       </Column>
       <Column fillWidth flex="1">
         <SelectImage
-          selectedArtwork={selectedArtwork}
+          imagesOptions={imagesOptions}
           selectedImage={selectedImageRight}
           handleSelect={handleSelectImage}
           side={2}

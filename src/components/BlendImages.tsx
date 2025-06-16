@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { Row, Column } from "@/once-ui/components";
-import type { Artwork, SpectralImgData } from "@/app/utils/utils";
+import type { SpectralImgData } from "@/app/utils/utils";
 import SelectImage from "@/components/SelectImage";
 import Slider from "@/components/Slider";
 import dynamic from "next/dynamic";
@@ -14,7 +14,7 @@ const OpenSeaDragonBlend = dynamic<OpenSeaDragonBlendProps>(
 );
 
 type BlendImagesProps = {
-  selectedArtwork: Artwork;
+  imagesOptions: SpectralImgData[];
   selectedImageLeft: SpectralImgData;
   selectedImageRight: SpectralImgData;
   handleSelectImage: (code: string, side: number) => void;
@@ -22,7 +22,7 @@ type BlendImagesProps = {
 };
 
 export const BlendImages = ({
-  selectedArtwork,
+  imagesOptions,
   selectedImageLeft,
   selectedImageRight,
   handleSelectImage,
@@ -43,7 +43,7 @@ export const BlendImages = ({
     <Row fillWidth fillHeight gap="16" mobileDirection="column">
       <Column fillWidth flex="1">
         <SelectImage
-          selectedArtwork={selectedArtwork}
+          imagesOptions={imagesOptions}
           selectedImage={selectedImageLeft}
           handleSelect={handleSelectImage}
           side={1}
@@ -72,7 +72,7 @@ export const BlendImages = ({
       </Column>
       <Column fillWidth flex="1">
         <SelectImage
-          selectedArtwork={selectedArtwork}
+          imagesOptions={imagesOptions}
           selectedImage={selectedImageRight}
           handleSelect={handleSelectImage}
           side={2}
