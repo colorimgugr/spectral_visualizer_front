@@ -35,10 +35,12 @@ export const CompareImages = ({
         />
       </Column>
       <Column fillWidth flex="4">
-        <OpenSeaDragonCompare
-          leftTile={selectedImageLeft.tileSource}
-          rightTile={selectedImageRight.tileSource}
-        />
+        {selectedImageLeft.source && selectedImageRight.source && (
+          <OpenSeaDragonCompare
+            leftTile={selectedImageLeft.source}
+            rightTile={selectedImageRight.source}
+          />
+        )}
       </Column>
       <Column fillWidth flex="1">
         <SelectImage

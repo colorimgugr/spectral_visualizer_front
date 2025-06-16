@@ -127,8 +127,6 @@ const OpenSeaDragonCompare = ({
       return;
     }
 
-    console.log(viewer.viewport);
-
     const viewport: any = viewer.viewport;
 
     const newSpringX = viewport.centerSpringX.current.value;

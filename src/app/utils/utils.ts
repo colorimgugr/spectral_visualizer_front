@@ -1,15 +1,24 @@
-type SpectralCode = "vis" | "vnir" | "swir" | "uvis" | "uvf";
+export type VisualModeCode = "single" | "comp" | "blend" | "falseRGB";
 
-type SpectralImgData = {
-  code: SpectralCode;
-  link: string;
-  tileSource: string;
+export type SpectralTypeCode = "nrm" | "hsi" | "msi";
+export type SpectralRangeCode =
+  | "vis"
+  | "vnir"
+  | "swir"
+  | "uvr"
+  | "uvf"
+  | "uvis";
+
+export type SpectralImgData = {
+  spectralType: SpectralTypeCode;
+  spectralRange: SpectralRangeCode;
+  source?: string;
+  path?: string;
+  names?: string[];
 };
 
-type Artwork = {
+export type Artwork = {
   id: string;
   name: string;
   spectralImages: SpectralImgData[];
 };
-
-export type { SpectralCode, SpectralImgData, Artwork };

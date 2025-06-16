@@ -1,17 +1,12 @@
 .custom-slider {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 10px;
-
   input[type="range"] {
-    // -webkit-appearance: none;
-    width: 150px;
+    width: 100%;
     height: 6px;
     background: #ddd;
     border-radius: 5px;
     outline: none;
     transition: background 0.2s;
+    margin: 0;
 
     &::-webkit-slider-thumb {
       -webkit-appearance: none;
@@ -33,12 +28,5 @@
     &:hover {
       background: #ccc;
     }
-  }
-
-  span {
-    font-size: 0.9rem;
-    color: #444;
-    min-width: 40px;
-    text-align: right;
   }
 }

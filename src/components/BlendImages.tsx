@@ -18,6 +18,7 @@ type BlendImagesProps = {
   selectedImageLeft: SpectralImgData;
   selectedImageRight: SpectralImgData;
   handleSelectImage: (code: string, side: number) => void;
+  isLargeScreen: boolean;
 };
 
 export const BlendImages = ({
@@ -25,6 +26,7 @@ export const BlendImages = ({
   selectedImageLeft,
   selectedImageRight,
   handleSelectImage,
+  isLargeScreen,
 }: BlendImagesProps) => {
   const [leftOpacity, setLeftOpacity] = useState(1);
   const [rightOpacity, setRightOpacity] = useState(1);
@@ -47,20 +49,26 @@ export const BlendImages = ({
           side={1}
         />
         <Slider
+          title="Opacity"
           min={0}
           max={1}
           step={0.01}
           value={leftOpacity}
-          onChange={(val) => {handleOpacityChange(val, 1)}}
+          onChange={(value) => {
+            handleOpacityChange(value, 1);
+          }}
+          isLargeScreen={isLargeScreen}
         />
       </Column>
       <Column fillWidth flex="4">
-        <OpenSeaDragonBlend
-          leftTile={selectedImageLeft.tileSource}
-          rightTile={selectedImageRight.tileSource}
-          leftOpacity={leftOpacity}
-          rightOpacity={rightOpacity}
-        />
+        {selectedImageLeft.source && selectedImageRight.source && (
+          <OpenSeaDragonBlend
+            leftTile={selectedImageLeft.source}
+            rightTile={selectedImageRight.source}
+            leftOpacity={leftOpacity}
+            rightOpacity={rightOpacity}
+          />
+        )}
       </Column>
       <Column fillWidth flex="1">
         <SelectImage
@@ -70,11 +78,15 @@ export const BlendImages = ({
           side={2}
         />
         <Slider
+          title="Opacity"
           min={0}
           max={1}
           step={0.01}
           value={rightOpacity}
-          onChange={(val) => {handleOpacityChange(val, 2)}}
+          onChange={(value) => {
+            handleOpacityChange(value, 2);
+          }}
+          isLargeScreen={isLargeScreen}
         />
       </Column>
     </Row>

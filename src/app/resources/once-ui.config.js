@@ -83,9 +83,9 @@ const effects = {
 const meta = {
   home: {
     path: "/",
-    title: "Multispectral Visualization",
+    title: "Spectral Visualizer",
     description:
-      "Multispectral Visualization for Artworks",
+      "Spectral Visualizer for Artworks",
     image: "/og/home.jpg",
     canonical: "https://once-ui.com",
     robots: "index,follow",

@@ -5,65 +5,108 @@ import {
   Column,
   Row,
   Select,
-  RadioButton,
   Badge,
   Logo,
   Line,
   LetterFx,
 } from "@/once-ui/components";
 import { useState, useEffect } from "react";
-import type { Artwork, SpectralImgData } from "@/app/utils/utils";
-import { artworks } from "@/app/resources/content";
+import type {
+  VisualModeCode,
+  Artwork,
+  SpectralImgData,
+} from "@/app/utils/utils";
+import { visualizationModes, artworks } from "@/app/resources/content";
 
 import { SingleView } from "@/components/SingleView";
 import { CompareImages } from "@/components/CompareImages";
 import { BlendImages } from "@/components/BlendImages";
+import FalseRGBImages from "@/components/FalseRGBImages";
 
 export default function Home() {
-  const [selectedMode, setSelectedMode] = useState<string>("single");
+  const [selectedMode, setSelectedMode] = useState<VisualModeCode>("single");
 
   const [selectedArtwork, setSelectedArtwork] = useState<Artwork | null>(null);
   const [selectedImageLeft, setSelectedImageLeft] =
     useState<SpectralImgData | null>(null);
   const [selectedImageRight, setSelectedImageRight] =
     useState<SpectralImgData | null>(null);
+  const [filteredSpectralImages, setFilteredSpectralImages] = useState<
+    SpectralImgData[] | null
+  >(null);
 
   useEffect(() => {
-    const initialArtwork = artworks[0];
-    setSelectedArtwork(initialArtwork);
-    setSelectedImageLeft(initialArtwork.spectralImages[0]);
-    setSelectedImageRight(initialArtwork.spectralImages[1]);
-  }, []);
+    setSelectedArtwork(artworks[0] ?? null);
+  }, [artworks]);
 
-  if (!selectedArtwork || !selectedImageLeft || !selectedImageRight) {
-    return <p>Loading...</p>; // Or null or a loading spinner
-  }
+  useEffect(() => {
+    if (!selectedArtwork) return;
+
+    setSelectedMode("single");
+
+    const [first, second, ...rest] = selectedArtwork.spectralImages;
+
+    setSelectedImageLeft(first ?? null);
+    setSelectedImageRight(second ?? null);
+
+    const nonNormImages = selectedArtwork.spectralImages.filter(
+      (img) => img.spectralType !== "nrm"
+    );
+    setFilteredSpectralImages(nonNormImages);
+  }, [selectedArtwork]);
+
+  const getVisualizationModeOptions = () => {
+    const imageCount = selectedArtwork?.spectralImages.length ?? 0;
+
+    return Object.entries(visualizationModes)
+      .filter(([key]) => {
+        if (imageCount === 1) {
+          return key === "single";
+        }
+        if (key === "falseRGB") {
+          return (filteredSpectralImages?.length ?? 0) > 0;
+        }
+        return true;
+      })
+      .map(([key, label]) => ({
+        label,
+        value: key,
+      }));
+  };
 
   const handleArtwork = (value: string) => {
     const currentArtwork = artworks.find((artwork) => artwork.id === value);
-    if (currentArtwork !== undefined) {
+    if (currentArtwork) {
       setSelectedArtwork(currentArtwork);
-      setSelectedImageLeft(currentArtwork.spectralImages[0]);
-      setSelectedImageRight(currentArtwork.spectralImages[1]);
     }
-  };
-
-  const handleMode = (value: string) => {
-    setSelectedMode(value);
   };
 
   const handleSelectImage = (value: string, side: number) => {
-    const currentImage = selectedArtwork.spectralImages.find(
-      (spectralImg) => spectralImg.code === value
+    const currentImage = selectedArtwork?.spectralImages.find(
+      (spectralImg) => spectralImg.spectralRange === value
     );
-    if (currentImage != undefined) {
-      if (side <= 1) {
-        setSelectedImageLeft(currentImage);
-      } else {
-        setSelectedImageRight(currentImage);
-      }
+    if (currentImage) {
+      side <= 1
+        ? setSelectedImageLeft(currentImage)
+        : setSelectedImageRight(currentImage);
     }
   };
+
+  function useIsLargeScreen(breakpoint = 1024) {
+    const [isLarge, setIsLarge] = useState(false);
+
+    useEffect(() => {
+      const checkScreen = () => setIsLarge(window.innerWidth >= breakpoint);
+      checkScreen();
+
+      window.addEventListener("resize", checkScreen);
+      return () => window.removeEventListener("resize", checkScreen);
+    }, [breakpoint]);
+
+    return isLarge;
+  }
+
+  const isLargeScreen = useIsLargeScreen();
 
   return (
     <Column fill horizontal="center" gap="s" padding="xs">
@@ -84,75 +127,74 @@ export default function Home() {
           />
           <Line vert background="neutral-alpha-strong" />
           <Text marginX="4">
-            <LetterFx trigger="instant">Multispectral Visualization</LetterFx>
+            <LetterFx trigger="instant">Spectral Visualizer</LetterFx>
           </Text>
         </Badge>
         <Row center gap="xs">
-          <Column fillWidth flex="1">
-            <Select
-              id="empty-state-select"
-              label="Select the artwork"
-              value={selectedArtwork.id}
-              onSelect={(value: string) => handleArtwork(value)}
-              options={artworks.map((artwork) => ({
-                label: artwork.name,
-                value: artwork.id,
-              }))}
-            />
-          </Column>
-          <Row fillWidth gap="16" flex="2">
-            <Text
-              variant="heading-default-xs"
-              onBackground="neutral-weak"
-              wrap="balance"
-            >
-              Select mode
-            </Text>
-            <RadioButton
-              name="visualizationMode"
-              value="single"
-              label="Single view"
-              isChecked={selectedMode === "single"}
-              onToggle={() => handleMode("single")}
-            />
-            <RadioButton
-              name="visualizationMode"
-              value="compare"
-              label="Compare"
-              isChecked={selectedMode === "compare"}
-              onToggle={() => handleMode("compare")}
-            />
-            <RadioButton
-              name="visualizationMode"
-              value="blend"
-              label="Blend"
-              isChecked={selectedMode === "blend"}
-              onToggle={() => handleMode("blend")}
-            />
-          </Row>
+          {selectedArtwork && (
+            <>
+              <Column fillWidth flex="1">
+                <Select
+                  id="empty-state-select"
+                  label="Artwork"
+                  value={selectedArtwork.id}
+                  onSelect={(value: string) => handleArtwork(value)}
+                  options={artworks.map((artwork) => ({
+                    label: artwork.name,
+                    value: artwork.id,
+                  }))}
+                />
+              </Column>
+              <Row fillWidth gap="16" flex="1">
+                <Select
+                  id="empty-state-select"
+                  label="Visualization mode"
+                  value={selectedMode}
+                  onSelect={(value: string) =>
+                    setSelectedMode(value as VisualModeCode)
+                  }
+                  options={getVisualizationModeOptions()}
+                />
+              </Row>
+            </>
+          )}
         </Row>
       </Row>
-      {selectedMode === "single" ? (
-        <SingleView
-          selectedArtwork={selectedArtwork}
-          selectedImage={selectedImageLeft}
-          handleSelectImage={handleSelectImage}
-        />
-      ) : selectedMode === "compare" ? (
-        <CompareImages
-          selectedArtwork={selectedArtwork}
-          selectedImageLeft={selectedImageLeft}
-          selectedImageRight={selectedImageRight}
-          handleSelectImage={handleSelectImage}
-        />
-      ) : (
-        <BlendImages
-          selectedArtwork={selectedArtwork}
-          selectedImageLeft={selectedImageLeft}
-          selectedImageRight={selectedImageRight}
-          handleSelectImage={handleSelectImage}
-        />
-      )}
+      {selectedArtwork !== null &&
+        selectedMode &&
+        (selectedMode === "single" && selectedImageLeft ? (
+          <SingleView
+            selectedArtwork={selectedArtwork}
+            selectedImage={selectedImageLeft}
+            handleSelectImage={handleSelectImage}
+          />
+        ) : selectedMode === "comp" &&
+          selectedImageLeft &&
+          selectedImageRight ? (
+          <CompareImages
+            selectedArtwork={selectedArtwork}
+            selectedImageLeft={selectedImageLeft}
+            selectedImageRight={selectedImageRight}
+            handleSelectImage={handleSelectImage}
+          />
+        ) : selectedMode === "blend" &&
+          selectedImageLeft &&
+          selectedImageRight ? (
+          <BlendImages
+            selectedArtwork={selectedArtwork}
+            selectedImageLeft={selectedImageLeft}
+            selectedImageRight={selectedImageRight}
+            handleSelectImage={handleSelectImage}
+            isLargeScreen={isLargeScreen}
+          />
+        ) : selectedMode === "falseRGB" && filteredSpectralImages ? (
+          <FalseRGBImages
+            spectralImages={filteredSpectralImages}
+            isLargeScreen={isLargeScreen}
+          />
+        ) : (
+          <div>Loading...</div>
+        ))}
     </Column>
   );
 }

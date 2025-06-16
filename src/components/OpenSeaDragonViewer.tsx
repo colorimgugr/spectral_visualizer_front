@@ -4,31 +4,40 @@ import OpenSeaDragon, { Viewer } from "openseadragon";
 import { useEffect, useRef } from "react";
 
 export type OpenSeaDragonViewerProps = {
-  tileSource: string;
+  tileSource?: string;
+  url?: string;
 };
 
-const OpenSeaDragonViewer = ({ tileSource }: OpenSeaDragonViewerProps) => {
+const OpenSeaDragonViewer = ({ tileSource, url }: OpenSeaDragonViewerProps) => {
   const viewerRef = useRef<Viewer | null>(null);
-  const containerRef = useRef<HTMLDivElement | null>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (containerRef.current) {
+    const container = containerRef.current;
+    if (!container) return;
+
+    if (!viewerRef.current) {
       viewerRef.current = OpenSeaDragon({
-        element: containerRef.current,
+        element: container,
         prefixUrl: "/openseadragon/images/",
-        tileSources: tileSource,
+        tileSources: url ? { type: "image", url } : tileSource,
         maxZoomPixelRatio: 16,
         zoomPerScroll: 1.3,
       });
-    }
+    } else {
+      // Avoid flashing: only open new source without destroying viewer
+      const source = tileSource ?? (url ? { type: "image", url } : null);
+      if (source) {
+        // Wait for the new image to load before displaying
+        viewerRef.current.addOnceHandler("open", () => {
+          // Optional: fit to viewport after loading
+          // viewerRef.current?.viewport.goHome(true);
+        });
 
-    return () => {
-      if (viewerRef.current) {
-        viewerRef.current.destroy();
-        viewerRef.current = null;
+        viewerRef.current.open(source);
       }
-    };
-  }, [tileSource]);
+    }
+  }, [tileSource, url]);
 
   return (
     <>

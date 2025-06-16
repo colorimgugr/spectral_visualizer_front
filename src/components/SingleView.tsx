@@ -62,7 +62,7 @@ export const SingleView = ({
         />
       </Column>
       <Column fillWidth flex="5">
-        <OpenSeaDragonViewer tileSource={selectedImage.tileSource} />
+        <OpenSeaDragonViewer tileSource={selectedImage.source} />
       </Column>
     </Row>
   );
