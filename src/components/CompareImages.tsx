@@ -2,7 +2,7 @@
 
 import { Row, Column } from "@/once-ui/components";
 import type { SpectralImgData } from "@/app/utils/utils";
-import SelectImage from "@/components/SelectImage";
+import SideTools from "@/components/SideTools";
 import dynamic from "next/dynamic";
 import { OpenSeaDragonCompareProps } from "@/components/OpenSeaDragonCompare";
 
@@ -16,26 +16,36 @@ type CompareImagesProps = {
   selectedImageLeft: SpectralImgData;
   selectedImageRight: SpectralImgData;
   handleSelectImage: (code: string, side: number) => void;
+  isLargeScreen: boolean;
 };
 
-export const CompareImages = ({
+const CompareImages = ({
   imagesOptions,
   selectedImageLeft,
   selectedImageRight,
   handleSelectImage,
+  isLargeScreen,
 }: CompareImagesProps) => {
   console.log("img", imagesOptions);
   return (
-    <Row fillWidth fillHeight gap="16" mobileDirection="column">
-      <Column fillWidth flex="1">
-        <SelectImage
+    <Row fillWidth fillHeight gap="xs" mobileDirection="column">
+      <SideTools
+        side={1}
+        imagesOptions={imagesOptions}
+        selectedImage={selectedImageLeft}
+        handleSelectImage={handleSelectImage}
+        isLargeScreen={isLargeScreen}
+      />
+      {!isLargeScreen && imagesOptions && (
+        <SideTools
+          side={2}
           imagesOptions={imagesOptions}
-          selectedImage={selectedImageLeft}
-          handleSelect={handleSelectImage}
-          side={1}
+          selectedImage={selectedImageRight}
+          handleSelectImage={handleSelectImage}
+          isLargeScreen={isLargeScreen}
         />
-      </Column>
-      <Column fillWidth flex="4">
+      )}
+      <Column fillWidth flex={isLargeScreen ? 4 : 10}>
         {selectedImageLeft.source && selectedImageRight.source && (
           <OpenSeaDragonCompare
             leftTile={selectedImageLeft.source}
@@ -43,14 +53,17 @@ export const CompareImages = ({
           />
         )}
       </Column>
-      <Column fillWidth flex="1">
-        <SelectImage
+      {isLargeScreen && imagesOptions && (
+        <SideTools
+          side={2}
           imagesOptions={imagesOptions}
           selectedImage={selectedImageRight}
-          handleSelect={handleSelectImage}
-          side={2}
+          handleSelectImage={handleSelectImage}
+          isLargeScreen={isLargeScreen}
         />
-      </Column>
+      )}
     </Row>
   );
 };
+
+export default CompareImages;

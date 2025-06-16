@@ -3,8 +3,7 @@
 import { useState } from "react";
 import { Row, Column } from "@/once-ui/components";
 import type { SpectralImgData } from "@/app/utils/utils";
-import SelectImage from "@/components/SelectImage";
-import Slider from "@/components/Slider";
+import SideTools from "@/components/SideTools";
 import dynamic from "next/dynamic";
 import { OpenSeaDragonBlendProps } from "@/components/OpenSeaDragonBlend";
 
@@ -21,7 +20,7 @@ type BlendImagesProps = {
   isLargeScreen: boolean;
 };
 
-export const BlendImages = ({
+const BlendImages = ({
   imagesOptions,
   selectedImageLeft,
   selectedImageRight,
@@ -40,27 +39,30 @@ export const BlendImages = ({
   };
 
   return (
-    <Row fillWidth fillHeight gap="16" mobileDirection="column">
-      <Column fillWidth flex="1">
-        <SelectImage
+    <Row fillWidth fillHeight gap="xs" mobileDirection="column">
+      <SideTools
+        side={1}
+        imagesOptions={imagesOptions}
+        selectedImage={selectedImageLeft}
+        handleSelectImage={handleSelectImage}
+        showOpacity
+        opacity={leftOpacity}
+        handleOpacityChange={handleOpacityChange}
+        isLargeScreen={isLargeScreen}
+      />
+      {!isLargeScreen && imagesOptions && (
+        <SideTools
+          side={2}
           imagesOptions={imagesOptions}
-          selectedImage={selectedImageLeft}
-          handleSelect={handleSelectImage}
-          side={1}
-        />
-        <Slider
-          title="Opacity"
-          min={0}
-          max={1}
-          step={0.01}
-          value={leftOpacity}
-          onChange={(value) => {
-            handleOpacityChange(value, 1);
-          }}
+          selectedImage={selectedImageRight}
+          handleSelectImage={handleSelectImage}
+          showOpacity
+          opacity={rightOpacity}
+          handleOpacityChange={handleOpacityChange}
           isLargeScreen={isLargeScreen}
         />
-      </Column>
-      <Column fillWidth flex="4">
+      )}
+      <Column fillWidth flex={isLargeScreen ? 4 : 8}>
         {selectedImageLeft.source && selectedImageRight.source && (
           <OpenSeaDragonBlend
             leftTile={selectedImageLeft.source}
@@ -70,25 +72,20 @@ export const BlendImages = ({
           />
         )}
       </Column>
-      <Column fillWidth flex="1">
-        <SelectImage
+      {isLargeScreen && imagesOptions && (
+        <SideTools
+          side={2}
           imagesOptions={imagesOptions}
           selectedImage={selectedImageRight}
-          handleSelect={handleSelectImage}
-          side={2}
-        />
-        <Slider
-          title="Opacity"
-          min={0}
-          max={1}
-          step={0.01}
-          value={rightOpacity}
-          onChange={(value) => {
-            handleOpacityChange(value, 2);
-          }}
+          handleSelectImage={handleSelectImage}
+          showOpacity
+          opacity={rightOpacity}
+          handleOpacityChange={handleOpacityChange}
           isLargeScreen={isLargeScreen}
         />
-      </Column>
+      )}
     </Row>
   );
 };
+
+export default BlendImages;

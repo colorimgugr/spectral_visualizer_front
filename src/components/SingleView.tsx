@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { Row, Column } from "@/once-ui/components";
 import type { SpectralImgData } from "@/app/utils/utils";
-import SelectImage from "@/components/SelectImage";
+import SideTools from "@/components/SideTools";
 import dynamic from "next/dynamic";
 import { OpenSeaDragonViewerProps } from "@/components/OpenSeaDragonViewer";
 
@@ -16,12 +16,14 @@ type SingleViewProps = {
   imagesOptions: SpectralImgData[];
   selectedImage: SpectralImgData;
   handleSelectImage: (code: string, side: number) => void;
+  isLargeScreen: boolean;
 };
 
-export const SingleView = ({
+const SingleView = ({
   imagesOptions,
   selectedImage,
   handleSelectImage,
+  isLargeScreen,
 }: SingleViewProps) => {
   // const [tileSource, setTileSource] = useState<string>("");
 
@@ -52,18 +54,19 @@ export const SingleView = ({
   // }, [selectedImage]);
 
   return (
-    <Row fillWidth fillHeight gap="16" mobileDirection="column">
-      <Column fillWidth flex="1">
-        <SelectImage
-          imagesOptions={imagesOptions}
-          selectedImage={selectedImage}
-          handleSelect={handleSelectImage}
-          side={0}
-        />
-      </Column>
-      <Column fillWidth flex="5">
+    <Row fillWidth fillHeight gap="s" mobileDirection="column">
+      <SideTools
+        side={0}
+        imagesOptions={imagesOptions}
+        selectedImage={selectedImage}
+        handleSelectImage={handleSelectImage}
+        isLargeScreen={isLargeScreen}
+      />
+      <Column fillWidth flex={isLargeScreen ? 4 : 10}>
         <OpenSeaDragonViewer tileSource={selectedImage.source} />
       </Column>
     </Row>
   );
 };
+
+export default SingleView;

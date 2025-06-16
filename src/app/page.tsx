@@ -18,9 +18,9 @@ import type {
 } from "@/app/utils/utils";
 import { visualizationModes, artworks } from "@/app/resources/content";
 
-import { SingleView } from "@/components/SingleView";
-import { CompareImages } from "@/components/CompareImages";
-import { BlendImages } from "@/components/BlendImages";
+import SingleView from "@/components/SingleView";
+import CompareImages from "@/components/CompareImages";
+import BlendImages from "@/components/BlendImages";
 import FalseRGBImages from "@/components/FalseRGBImages";
 
 export default function Home() {
@@ -118,28 +118,40 @@ export default function Home() {
   const isLargeScreen = useIsLargeScreen();
 
   return (
-    <Column fill horizontal="center" gap="s" padding="xs">
-      <Row fillWidth horizontal="space-between" padding="xs">
-        <Badge
-          textVariant="code-default-m"
-          border="neutral-alpha-medium"
-          onBackground="neutral-medium"
+    <Column fill horizontal="center" gap="s" padding="s">
+      <Row
+        fillWidth
+        horizontal="space-between"
+        mobileDirection="column"
+        gap="s"
+      >
+        <Column
+          fillWidth
+          horizontal={isLargeScreen ? "start" : "center"}
           vertical="center"
-          gap="2"
-          effect={false}
+          flex="1"
         >
-          <Logo
-            wordmarkSrc="/colorimaginglab_logo.jpg"
-            icon={false}
-            href="https://colorimaginglab.ugr.es/"
-            size="s"
-          />
-          <Line vert background="neutral-alpha-strong" />
-          <Text marginX="4">
-            <LetterFx trigger="instant">Spectral Visualizer</LetterFx>
-          </Text>
-        </Badge>
-        <Row center gap="xs">
+          <Badge
+            textVariant="code-default-m"
+            border="neutral-alpha-medium"
+            onBackground="neutral-medium"
+            vertical="center"
+            gap="2"
+            effect={false}
+          >
+            <Logo
+              wordmarkSrc="/colorimaginglab_logo.jpg"
+              icon={false}
+              href="https://colorimaginglab.ugr.es/"
+              size="s"
+            />
+            <Line vert background="neutral-alpha-strong" />
+            <Text marginX="4">
+              <LetterFx trigger="instant">Spectral Visualizer</LetterFx>
+            </Text>
+          </Badge>
+        </Column>
+        <Row center gap="s" mobileDirection="column">
           {selectedArtwork && (
             <>
               <Column fillWidth flex="1">
@@ -154,7 +166,7 @@ export default function Home() {
                   }))}
                 />
               </Column>
-              <Row fillWidth gap="16" flex="1">
+              <Column fillWidth flex="1">
                 <Select
                   id="empty-state-select"
                   label="Visualization mode"
@@ -164,7 +176,7 @@ export default function Home() {
                   }
                   options={getVisualizationModeOptions()}
                 />
-              </Row>
+              </Column>
             </>
           )}
         </Row>
@@ -177,6 +189,7 @@ export default function Home() {
             imagesOptions={normSpectralImages}
             selectedImage={selectedImageLeft}
             handleSelectImage={handleSelectImage}
+            isLargeScreen={isLargeScreen}
           />
         ) : selectedMode === "comp" &&
           selectedImageLeft &&
@@ -187,6 +200,7 @@ export default function Home() {
             selectedImageLeft={selectedImageLeft}
             selectedImageRight={selectedImageRight}
             handleSelectImage={handleSelectImage}
+            isLargeScreen={isLargeScreen}
           />
         ) : selectedMode === "blend" &&
           selectedImageLeft &&
