@@ -28,23 +28,26 @@ const CompareImages = ({
 }: CompareImagesProps) => {
   return (
     <Row fillWidth fillHeight gap="xs" mobileDirection="column">
-      <SideTools
-        side={1}
-        imagesOptions={imagesOptions}
-        selectedImage={selectedImageLeft}
-        handleSelectImage={handleSelectImage}
-        isLargeScreen={isLargeScreen}
-      />
-      {!isLargeScreen && imagesOptions && (
+      <Row gap="s" flex={1}>
         <SideTools
-          side={2}
+          side={1}
           imagesOptions={imagesOptions}
-          selectedImage={selectedImageRight}
+          selectedImage={selectedImageLeft}
           handleSelectImage={handleSelectImage}
           isLargeScreen={isLargeScreen}
         />
-      )}
-      <Column fillWidth flex={isLargeScreen ? 4 : 10}>
+
+        {!isLargeScreen && imagesOptions && (
+          <SideTools
+            side={2}
+            imagesOptions={imagesOptions}
+            selectedImage={selectedImageRight}
+            handleSelectImage={handleSelectImage}
+            isLargeScreen={isLargeScreen}
+          />
+        )}
+      </Row>
+      <Column fillWidth flex={isLargeScreen ? 3 : 8}>
         {selectedImageLeft.source && selectedImageRight.source && (
           <OpenSeaDragonCompare
             leftUrl={selectedImageLeft.source}
@@ -53,13 +56,15 @@ const CompareImages = ({
         )}
       </Column>
       {isLargeScreen && imagesOptions && (
-        <SideTools
-          side={2}
-          imagesOptions={imagesOptions}
-          selectedImage={selectedImageRight}
-          handleSelectImage={handleSelectImage}
-          isLargeScreen={isLargeScreen}
-        />
+        <Row gap="xs" flex={1}>
+          <SideTools
+            side={2}
+            imagesOptions={imagesOptions}
+            selectedImage={selectedImageRight}
+            handleSelectImage={handleSelectImage}
+            isLargeScreen={isLargeScreen}
+          />
+        </Row>
       )}
     </Row>
   );

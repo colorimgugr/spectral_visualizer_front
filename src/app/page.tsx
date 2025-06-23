@@ -9,6 +9,7 @@ import {
   Logo,
   Line,
   LetterFx,
+  Spinner,
 } from "@/once-ui/components";
 import { useState, useEffect } from "react";
 import type {
@@ -189,6 +190,8 @@ export default function Home() {
           <SingleView
             imagesOptions={rgbMonoImages}
             selectedImage={selectedImageLeft}
+            artworkMetadata={selectedArtwork.metadata}
+            showImageMetadata
             handleSelectImage={handleSelectImage}
             isLargeScreen={isLargeScreen}
           />
@@ -219,7 +222,9 @@ export default function Home() {
             isLargeScreen={isLargeScreen}
           />
         ) : (
-          <div>Loading...</div>
+          <Column center>
+            <Spinner size="xl" />
+          </Column>
         ))}
     </Column>
   );

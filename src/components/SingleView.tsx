@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { Row, Column } from "@/once-ui/components";
-import type { SpectralImgData } from "@/app/resources/types";
+import type { SpectralImgData, ArtworkMetadata } from "@/app/resources/types";
 import SideTools from "@/components/SideTools";
 import dynamic from "next/dynamic";
 import { OpenSeaDragonViewerProps } from "@/components/OpenSeaDragonViewer";
@@ -15,6 +15,8 @@ const OpenSeaDragonViewer = dynamic<OpenSeaDragonViewerProps>(
 type SingleViewProps = {
   imagesOptions: SpectralImgData[];
   selectedImage: SpectralImgData;
+  artworkMetadata?: ArtworkMetadata;
+  showImageMetadata?: boolean;
   handleSelectImage: (code: string, side: number) => void;
   isLargeScreen: boolean;
 };
@@ -22,6 +24,7 @@ type SingleViewProps = {
 const SingleView = ({
   imagesOptions,
   selectedImage,
+  artworkMetadata,
   handleSelectImage,
   isLargeScreen,
 }: SingleViewProps) => {
@@ -60,6 +63,7 @@ const SingleView = ({
         imagesOptions={imagesOptions}
         selectedImage={selectedImage}
         handleSelectImage={handleSelectImage}
+        artworkMetadata={artworkMetadata}
         isLargeScreen={isLargeScreen}
       />
       <Column fillWidth flex={isLargeScreen ? 4 : 10}>

@@ -1,5 +1,14 @@
-import { Column } from "@/once-ui/components";
-import type { SpectralImgData } from "@/app/resources/types";
+import { Column, Row, Text, Line } from "@/once-ui/components";
+import type {
+  SpectralImgData,
+  ArtworkMetadataCode,
+  ArtworkMetadata,
+  ImageMetadataCode,
+} from "@/app/resources/types";
+import {
+  artworkMetadataLables,
+  imageMetadataLables,
+} from "@/app/resources/labels";
 import SelectImage from "@/components/SelectImage";
 import Slider from "@/components/Slider";
 
@@ -8,6 +17,8 @@ type SideToolsProps = {
   imagesOptions: SpectralImgData[];
   selectedImage: SpectralImgData;
   handleSelectImage: (code: string, side: number) => void;
+  artworkMetadata?: ArtworkMetadata;
+  showImageMetadata?: boolean;
   showOpacity?: boolean;
   opacity?: number;
   handleOpacityChange?: (val: number, side: number) => void;
@@ -19,6 +30,8 @@ const SideTools = ({
   imagesOptions,
   selectedImage,
   handleSelectImage,
+  artworkMetadata,
+  showImageMetadata = true,
   showOpacity,
   opacity,
   handleOpacityChange,
@@ -42,6 +55,36 @@ const SideTools = ({
         isLargeScreen={isLargeScreen}
       />
     )}
+    <Column fillWidth paddingLeft="s" paddingRight="s" gap="m" mobileDirection="row">
+      {artworkMetadata && (
+        <Column gap="xs" flex={1}>
+          {Object.entries(artworkMetadataLables).map(([code, label]) => (
+            <Row key={code} fillWidth gap="xs">
+              <Text onBackground="accent-weak">{`${label}:`}</Text>
+              <Text>
+                {artworkMetadata?.[code as ArtworkMetadataCode] ?? "Unknown"}
+              </Text>
+            </Row>
+          ))}
+        </Column>
+      )}
+      {artworkMetadata &&
+        showImageMetadata &&
+        (isLargeScreen && <Line />)}
+      {showImageMetadata && selectedImage.metadata && (
+        <Column gap="xs" flex={1}>
+          {Object.entries(imageMetadataLables).map(([code, label]) => (
+            <Row key={code} fillWidth gap="xs">
+              <Text onBackground="accent-weak">{`${label}:`}</Text>
+              <Text>
+                {selectedImage.metadata?.[code as ImageMetadataCode] ??
+                  "Unknown"}
+              </Text>
+            </Row>
+          ))}
+        </Column>
+      )}
+    </Column>
   </Column>
 );
 

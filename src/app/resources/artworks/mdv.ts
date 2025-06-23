@@ -2,7 +2,15 @@ import { Artwork } from "@/app/resources/types";
 
 const mdv: Artwork = {
   "id": "mdv",
-  "name": "Maternidad de Veronese",
+  "name": "Maternidad de Veronesse",
+  "metadata": {
+    "author": "Paolo Veronesse",
+    "date": "XVI Century",
+    "rest": "Yes",
+    "varn": "No",
+    "width": "60 cm",
+    "height": "40 cm"
+  },
   "spectralImages": [
     {
       "spectralType": "rgb",

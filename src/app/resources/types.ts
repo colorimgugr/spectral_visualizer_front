@@ -11,7 +11,23 @@ export type SpectralClassCode =
   | "irrs"
   | "irrl";
 
+export type ArtworkMetadataCode =
+  | "author"
+  | "date"
+  | "rest"
+  | "varn"
+  | "subs"
+  | "width"
+  | "height";
+
+export type ImageMetadataCode = "capSys" | "illSys" | "filter" | "bands";
+
+export type ArtworkMetadata = Partial<Record<ArtworkMetadataCode, string>>;
+
+export type ImageMetadata = Partial<Record<ImageMetadataCode, string>>;
+
 export type SpectralImgData = {
+  metadata?: ImageMetadata;
   spectralType: SpectralTypeCode;
   spectralClass: SpectralClassCode;
   source?: string;
@@ -22,5 +38,6 @@ export type SpectralImgData = {
 export type Artwork = {
   id: string;
   name: string;
+  metadata?: ArtworkMetadata;
   spectralImages: SpectralImgData[];
 };

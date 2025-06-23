@@ -40,29 +40,31 @@ const BlendImages = ({
 
   return (
     <Row fillWidth fillHeight gap="xs" mobileDirection="column">
-      <SideTools
-        side={1}
-        imagesOptions={imagesOptions}
-        selectedImage={selectedImageLeft}
-        handleSelectImage={handleSelectImage}
-        showOpacity
-        opacity={leftOpacity}
-        handleOpacityChange={handleOpacityChange}
-        isLargeScreen={isLargeScreen}
-      />
-      {!isLargeScreen && imagesOptions && (
+      <Row gap="s" flex={1}>
         <SideTools
-          side={2}
+          side={1}
           imagesOptions={imagesOptions}
-          selectedImage={selectedImageRight}
+          selectedImage={selectedImageLeft}
           handleSelectImage={handleSelectImage}
           showOpacity
-          opacity={rightOpacity}
+          opacity={leftOpacity}
           handleOpacityChange={handleOpacityChange}
           isLargeScreen={isLargeScreen}
         />
-      )}
-      <Column fillWidth flex={isLargeScreen ? 4 : 8}>
+        {!isLargeScreen && imagesOptions && (
+          <SideTools
+            side={2}
+            imagesOptions={imagesOptions}
+            selectedImage={selectedImageRight}
+            handleSelectImage={handleSelectImage}
+            showOpacity
+            opacity={rightOpacity}
+            handleOpacityChange={handleOpacityChange}
+            isLargeScreen={isLargeScreen}
+          />
+        )}
+      </Row>
+      <Column fillWidth flex={isLargeScreen ? 3 : 8}>
         {selectedImageLeft.source && selectedImageRight.source && (
           <OpenSeaDragonBlend
             leftUrl={selectedImageLeft.source}
@@ -73,6 +75,7 @@ const BlendImages = ({
         )}
       </Column>
       {isLargeScreen && imagesOptions && (
+        <Row gap="xs" flex={1}>
         <SideTools
           side={2}
           imagesOptions={imagesOptions}
@@ -83,6 +86,7 @@ const BlendImages = ({
           handleOpacityChange={handleOpacityChange}
           isLargeScreen={isLargeScreen}
         />
+        </Row>
       )}
     </Row>
   );
