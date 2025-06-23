@@ -4,11 +4,10 @@ import OpenSeaDragon, { Viewer } from "openseadragon";
 import { useEffect, useRef } from "react";
 
 export type OpenSeaDragonViewerProps = {
-  tileSource?: string;
-  url?: string;
+  url: string;
 };
 
-const OpenSeaDragonViewer = ({ tileSource, url }: OpenSeaDragonViewerProps) => {
+const OpenSeaDragonViewer = ({ url }: OpenSeaDragonViewerProps) => {
   const viewerRef = useRef<Viewer | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -20,13 +19,17 @@ const OpenSeaDragonViewer = ({ tileSource, url }: OpenSeaDragonViewerProps) => {
       viewerRef.current = OpenSeaDragon({
         element: container,
         prefixUrl: "/openseadragon/images/",
-        tileSources: url ? { type: "image", url } : tileSource,
+        tileSources: url.endsWith(".dzi") ? url : { type: "image", url },
         maxZoomPixelRatio: 16,
         zoomPerScroll: 1.3,
       });
     } else {
       // Avoid flashing: only open new source without destroying viewer
-      const source = tileSource ?? (url ? { type: "image", url } : null);
+      const source = url
+        ? url.endsWith(".dzi")
+          ? url
+          : { type: "image", url }
+        : null;
       if (source) {
         // Wait for the new image to load before displaying
         viewerRef.current.addOnceHandler("open", () => {
@@ -37,7 +40,7 @@ const OpenSeaDragonViewer = ({ tileSource, url }: OpenSeaDragonViewerProps) => {
         viewerRef.current.open(source);
       }
     }
-  }, [tileSource, url]);
+  }, [url]);
 
   return (
     <>

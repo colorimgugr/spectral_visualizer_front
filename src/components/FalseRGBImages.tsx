@@ -1,20 +1,20 @@
 "use client";
 
-import { useEffect, useState, useRef } from "react";
-import { Row, Column, Select } from "@/once-ui/components";
+import { useEffect, useState } from "react";
+import { Row, Column, Select, Spinner } from "@/once-ui/components";
 import FalseRGBGenerator from "@/components/FalseRGBGenerator";
 import type {
   SpectralImgData,
   SpectralTypeCode,
-  SpectralRangeCode,
-} from "@/app/utils/utils";
+  SpectralClassCode,
+} from "@/app/resources/types";
 import BandsSelector from "@/components/BandsSelector";
 import dynamic from "next/dynamic";
 import { OpenSeaDragonViewerProps } from "@/components/OpenSeaDragonViewer";
 import {
   spectralTypeLabels,
-  spectralRangeLabels,
-} from "@/app/resources/content";
+  spectralClassLabels,
+} from "@/app/resources/labels";
 
 const OpenSeaDragonViewer = dynamic<OpenSeaDragonViewerProps>(
   () => import("@/components/OpenSeaDragonViewer"),
@@ -33,10 +33,10 @@ const FalseRGBImages = ({
   const [spectralType, setSpectralType] = useState<SpectralTypeCode | null>(
     null
   );
-  const [spectralRange, setSpectralRange] = useState<SpectralRangeCode | null>(
+  const [spectralClass, setSpectralClass] = useState<SpectralClassCode | null>(
     null
   );
-  const [selectedSpectralImage, setSelectedSpectralImage] =
+  const [selectedSpectralImages, setSelectedSpectralImages] =
     useState<SpectralImgData | null>(null);
 
   const [bandURLs, setBandURLs] = useState<{
@@ -46,42 +46,48 @@ const FalseRGBImages = ({
   }>({ red: null, green: null, blue: null });
 
   const [imageUrl, setImageUrl] = useState<string | null>(null);
+  const [isViewerLoading, setIsViewerLoading] = useState(false);
 
   useEffect(() => {
     const firstType = spectralImages[0].spectralType;
     setSpectralType(firstType);
 
-    const rangesForType = spectralImages
+    const classesForType = spectralImages
       .filter((img) => img.spectralType === firstType)
-      .map((img) => img.spectralRange);
+      .map((img) => img.spectralClass);
 
-    setSpectralRange(rangesForType[0] ?? null);
+    setSpectralClass(classesForType[0] ?? null);
   }, [spectralImages]);
 
+  // When spectralType or spectralClass changes, find the matching spectral image
+  // from the list and update the selected image. If no match is found, set to null.
   useEffect(() => {
-    if (spectralType && spectralRange) {
+    if (spectralType && spectralClass) {
       const match = spectralImages.find(
         (img) =>
           img.spectralType === spectralType &&
-          img.spectralRange === spectralRange
+          img.spectralClass === spectralClass
       );
-      setSelectedSpectralImage(match ?? null);
+      setSelectedSpectralImages(match ?? null);
     }
-  }, [spectralType, spectralRange, spectralImages]);
+
+    // setImageUrl(null);
+    setIsViewerLoading(true);
+  }, [spectralType, spectralClass, spectralImages]);
 
   const handleSpectralType = (value: string) => {
     const selected = value as SpectralTypeCode;
     setSpectralType(selected);
 
-    const filteredRanges = spectralImages
+    const filteredClasses = spectralImages
       .filter((img) => img.spectralType === selected)
-      .map((img) => img.spectralRange);
+      .map((img) => img.spectralClass);
 
-    setSpectralRange(filteredRanges[0] ?? null);
+    setSpectralClass(filteredClasses[0] ?? null);
   };
 
-  const handleSpectralRange = (value: string) => {
-    setSpectralRange(value as SpectralRangeCode);
+  const handleSpectralClass = (value: string) => {
+    setSpectralClass(value as SpectralClassCode);
   };
 
   const spectralTypeOptions = Array.from(
@@ -91,17 +97,17 @@ const FalseRGBImages = ({
     value: type,
   }));
 
-  const spectralRangeOptions =
+  const spectralClassOptions =
     spectralType !== null
       ? Array.from(
           new Set(
             spectralImages
               .filter((img) => img.spectralType === spectralType)
-              .map((img) => img.spectralRange)
+              .map((img) => img.spectralClass)
           )
-        ).map((range) => ({
-          label: spectralRangeLabels[range],
-          value: range,
+        ).map((spctClass) => ({
+          label: spectralClassLabels[spctClass],
+          value: spctClass,
         }))
       : [];
 
@@ -120,31 +126,45 @@ const FalseRGBImages = ({
             <Select
               id="spectral-range-select"
               label="Spectral Range"
-              value={spectralRange ?? ""}
-              onSelect={handleSpectralRange}
-              options={spectralRangeOptions}
+              value={spectralClass ?? ""}
+              onSelect={handleSpectralClass}
+              options={spectralClassOptions}
             />
-            {selectedSpectralImage && (
+            {selectedSpectralImages && (
               <BandsSelector
-                spectralImage={selectedSpectralImage}
+                spectralImages={selectedSpectralImages}
                 onBandURLsChange={(urls) => setBandURLs(urls)}
                 isLargeScreen={isLargeScreen}
               />
             )}
           </Column>
-          {bandURLs.red && bandURLs.green && bandURLs.blue && (
-            <>
-              <FalseRGBGenerator
-                redSrc={bandURLs.red}
-                greenSrc={bandURLs.green}
-                blueSrc={bandURLs.blue}
-                onImageReady={(url) => setImageUrl(url)}
-              />
-              <Column fillWidth flex="4">
-                {imageUrl && <OpenSeaDragonViewer url={imageUrl} />}
-              </Column>
-            </>
-          )}
+          <Column fillWidth flex="4" center>
+            {bandURLs.red &&
+            bandURLs.green &&
+            bandURLs.blue &&
+            !bandURLs.red.includes("undefined") &&
+            !bandURLs.green.includes("undefined") &&
+            !bandURLs.blue.includes("undefined") ? (
+              <>
+                <FalseRGBGenerator
+                  redSrc={bandURLs.red}
+                  greenSrc={bandURLs.green}
+                  blueSrc={bandURLs.blue}
+                  onImageReady={(url) => {
+                    setImageUrl(url);
+                    setIsViewerLoading(false);
+                  }}
+                />
+                {isViewerLoading || !imageUrl ? (
+                  <Spinner size="xl" />
+                ) : (
+                  <OpenSeaDragonViewer url={imageUrl} />
+                )}
+              </>
+            ) : (
+              <Spinner size="xl" />
+            )}
+          </Column>
         </Row>
       )}
     </>

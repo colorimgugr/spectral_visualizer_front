@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { Row, Column } from "@/once-ui/components";
-import type { SpectralImgData } from "@/app/utils/utils";
+import type { SpectralImgData } from "@/app/resources/types";
 import SideTools from "@/components/SideTools";
 import dynamic from "next/dynamic";
 import { OpenSeaDragonViewerProps } from "@/components/OpenSeaDragonViewer";
@@ -63,7 +63,9 @@ const SingleView = ({
         isLargeScreen={isLargeScreen}
       />
       <Column fillWidth flex={isLargeScreen ? 4 : 10}>
-        <OpenSeaDragonViewer tileSource={selectedImage.source} />
+        {selectedImage.source && (
+          <OpenSeaDragonViewer url={selectedImage.source} />
+        )}
       </Column>
     </Row>
   );

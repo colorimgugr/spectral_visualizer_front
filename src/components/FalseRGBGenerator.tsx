@@ -90,7 +90,7 @@ const FalseRGBGenerator: React.FC<FalseRGBGeneratorProps> = ({
         canvas.height = height;
 
         drawFalseRGBImage(ctx, rImg, gImg, bImg, width, height);
-
+        
         requestAnimationFrame(() => {
           const url = canvas.toDataURL("image/png");
           onImageReady(url);

@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { Row, Column } from "@/once-ui/components";
-import type { SpectralImgData } from "@/app/utils/utils";
+import type { SpectralImgData } from "@/app/resources/types";
 import SideTools from "@/components/SideTools";
 import dynamic from "next/dynamic";
 import { OpenSeaDragonBlendProps } from "@/components/OpenSeaDragonBlend";
@@ -27,8 +27,8 @@ const BlendImages = ({
   handleSelectImage,
   isLargeScreen,
 }: BlendImagesProps) => {
-  const [leftOpacity, setLeftOpacity] = useState(1);
-  const [rightOpacity, setRightOpacity] = useState(1);
+  const [leftOpacity, setLeftOpacity] = useState(0.5);
+  const [rightOpacity, setRightOpacity] = useState(0.5);
 
   const handleOpacityChange = (val: number, side: number) => {
     if (side == 1) {
@@ -65,8 +65,8 @@ const BlendImages = ({
       <Column fillWidth flex={isLargeScreen ? 4 : 8}>
         {selectedImageLeft.source && selectedImageRight.source && (
           <OpenSeaDragonBlend
-            leftTile={selectedImageLeft.source}
-            rightTile={selectedImageRight.source}
+            leftUrl={selectedImageLeft.source}
+            rightUrl={selectedImageRight.source}
             leftOpacity={leftOpacity}
             rightOpacity={rightOpacity}
           />

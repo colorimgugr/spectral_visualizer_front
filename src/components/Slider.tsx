@@ -10,6 +10,7 @@ type SliderProps = {
   value: number;
   onChange: (value: number) => void;
   isLargeScreen: boolean;
+  isFloat?: boolean;
 };
 
 const Slider = ({
@@ -20,6 +21,7 @@ const Slider = ({
   value,
   onChange,
   isLargeScreen,
+  isFloat = true,
 }: SliderProps) => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     onChange(parseFloat(e.target.value));
@@ -38,7 +40,7 @@ const Slider = ({
             {title}
           </Column>
         )}
-        <Column flex="2" className="custom-slider">
+        <Column flex={isFloat ? 3 : 5} className="custom-slider">
           <input
             type="range"
             min={min}
@@ -49,7 +51,7 @@ const Slider = ({
           />
         </Column>
         <Column flex="1" horizontal="end">
-          <Tag variant="neutral">{value.toFixed(2)}</Tag>
+          <Tag variant="neutral">{value.toFixed(isFloat ? 2 : 0)}</Tag>
         </Column>
       </Row>
     </Column>

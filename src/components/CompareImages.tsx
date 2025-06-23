@@ -1,7 +1,7 @@
 "use client";
 
 import { Row, Column } from "@/once-ui/components";
-import type { SpectralImgData } from "@/app/utils/utils";
+import type { SpectralImgData } from "@/app/resources/types";
 import SideTools from "@/components/SideTools";
 import dynamic from "next/dynamic";
 import { OpenSeaDragonCompareProps } from "@/components/OpenSeaDragonCompare";
@@ -26,7 +26,6 @@ const CompareImages = ({
   handleSelectImage,
   isLargeScreen,
 }: CompareImagesProps) => {
-  console.log("img", imagesOptions);
   return (
     <Row fillWidth fillHeight gap="xs" mobileDirection="column">
       <SideTools
@@ -48,8 +47,8 @@ const CompareImages = ({
       <Column fillWidth flex={isLargeScreen ? 4 : 10}>
         {selectedImageLeft.source && selectedImageRight.source && (
           <OpenSeaDragonCompare
-            leftTile={selectedImageLeft.source}
-            rightTile={selectedImageRight.source}
+            leftUrl={selectedImageLeft.source}
+            rightUrl={selectedImageRight.source}
           />
         )}
       </Column>

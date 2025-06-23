@@ -4,15 +4,15 @@ import OpenSeaDragon, { Viewer } from "openseadragon";
 import { useEffect, useRef } from "react";
 
 export type OpenSeaDragonBlendProps = {
-  leftTile: string;
-  rightTile: string;
+  leftUrl: string;
+  rightUrl: string;
   leftOpacity: number;
   rightOpacity: number;
 };
 
 const OpenSeaDragonBlend = ({
-  leftTile,
-  rightTile,
+  leftUrl,
+  rightUrl,
   leftOpacity,
   rightOpacity,
 }: OpenSeaDragonBlendProps) => {
@@ -47,21 +47,31 @@ const OpenSeaDragonBlend = ({
       }
     };
 
-    viewer.addTiledImage({
-      tileSource: leftTile,
-      success: (e: any) => {
-        leftImageRef.current = e.item;
-        onImageLoad();
-      },
-    });
+    const addImage = (
+      url: string,
+      reference: React.RefObject<OpenSeadragon.TiledImage | null>
+    ) => {
+      if (url.endsWith(".dzi")) {
+        viewer.addTiledImage({
+          tileSource: url,
+          success: (e: any) => {
+            reference.current = e.item;
+            onImageLoad();
+          },
+        });
+      } else {
+        viewer.addSimpleImage({
+          url: url,
+          success: (e: any) => {
+            reference.current = e.item;
+            onImageLoad();
+          },
+        });
+      }
+    };
 
-    viewer.addTiledImage({
-      tileSource: rightTile,
-      success: (e: any) => {
-        rightImageRef.current = e.item;
-        onImageLoad();
-      },
-    });
+    addImage(leftUrl, leftImageRef);
+    addImage(rightUrl, rightImageRef);
 
     // viewerRef.current.addOnceHandler("open", () => {
     //   const tiledImage = viewerRef.current!.world.getItemAt(0);
@@ -74,7 +84,7 @@ const OpenSeaDragonBlend = ({
       leftImageRef.current = null;
       rightImageRef.current = null;
     };
-  }, [leftTile, rightTile]);
+  }, [leftUrl, rightUrl]);
 
   useEffect(() => {
     if (leftImageRef.current) leftImageRef.current.setOpacity(leftOpacity);

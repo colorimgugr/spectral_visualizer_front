@@ -2,17 +2,17 @@
 
 import OpenSeadragon from "openseadragon";
 import OpenSeaDragon, { Viewer } from "openseadragon";
-import { useEffect, useRef } from "react";
+import { Ref, useEffect, useRef } from "react";
 import styles from "@/styles/ImageSlider.module.scss";
 
 export type OpenSeaDragonCompareProps = {
-  leftTile: string;
-  rightTile: string;
+  leftUrl: string;
+  rightUrl: string;
 };
 
 const OpenSeaDragonCompare = ({
-  leftTile,
-  rightTile,
+  leftUrl,
+  rightUrl,
 }: OpenSeaDragonCompareProps) => {
   const viewerRef = useRef<Viewer | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -31,6 +31,7 @@ const OpenSeaDragonCompare = ({
   const rightRect = useRef(new OpenSeadragon.Rect(0, 0, 0, 0));
 
   useEffect(() => {
+
     const container = containerRef.current;
     if (!container) return;
 
@@ -62,37 +63,44 @@ const OpenSeaDragonCompare = ({
         containerRef.current
       ) {
         const container = containerRef.current;
-
         leftRect.current.height = leftImageRef.current.getContentSize().y;
         rightRect.current.height = rightImageRef.current.getContentSize().y;
-
         middleRef.current = new OpenSeadragon.Point(
           container.clientWidth / 2,
           container.clientHeight / 2
         );
-
         clipImages();
       }
     };
 
-    viewer.addTiledImage({
-      tileSource: leftTile,
-      success: (e: any) => {
-        leftImageRef.current = e.item;
-        onImageLoad();
-      },
-    });
+    const addImage = (
+      url: string,
+      reference: React.RefObject<OpenSeadragon.TiledImage | null>
+    ) => {
+      if (url.endsWith(".dzi")) {
+        viewer.addTiledImage({
+          tileSource: url,
+          success: (e: any) => {
+            reference.current = e.item;
+            onImageLoad();
+          },
+        });
+      } else {
+        viewer.addSimpleImage({
+          url: url,
+          success: (e: any) => {
+            reference.current = e.item;
+            onImageLoad();
+          },
+        });
+      }
+    };
 
-    viewer.addTiledImage({
-      tileSource: rightTile,
-      success: (e: any) => {
-        rightImageRef.current = e.item;
-        onImageLoad();
-      },
-    });
+    addImage(leftUrl, leftImageRef);
+    addImage(rightUrl, rightImageRef);
 
     return () => viewer.destroy();
-  }, [leftTile, rightTile]);
+  }, [leftUrl, rightUrl]);
 
   // Utility to update clipping center position
   function updateMiddle(offset: number) {

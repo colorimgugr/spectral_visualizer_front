@@ -15,8 +15,9 @@ import type {
   VisualModeCode,
   Artwork,
   SpectralImgData,
-} from "@/app/utils/utils";
-import { visualizationModes, artworks } from "@/app/resources/content";
+} from "@/app/resources/types";
+import { visualizationModes } from "@/app/resources/labels";
+import { artworks } from "@/app/resources/allArtworks";
 
 import SingleView from "@/components/SingleView";
 import CompareImages from "@/components/CompareImages";
@@ -32,9 +33,9 @@ export default function Home() {
   const [selectedImageRight, setSelectedImageRight] =
     useState<SpectralImgData | null>(null);
 
-  const [normSpectralImages, setNormSpectralImages] = useState<
-    SpectralImgData[] | null
-  >(null);
+  const [rgbMonoImages, setRgbMonoImages] = useState<SpectralImgData[] | null>(
+    null
+  );
   const [filteredSpectralImages, setFilteredSpectralImages] = useState<
     SpectralImgData[] | null
   >(null);
@@ -48,18 +49,18 @@ export default function Home() {
 
     setSelectedMode("single");
 
-    // Set the "normal" images vs "hsi" and "msi"
-    const normImages = selectedArtwork.spectralImages.filter(
-      (img) => img.spectralType === "nrm"
+    // Set the "rgb" and "mono" images vs "hsi" and "msi"
+    const rgbMonoImages = selectedArtwork.spectralImages.filter(
+      (img) => img.spectralType === "rgb" || img.spectralType === "mono"
     );
-    const nonNormImages = selectedArtwork.spectralImages.filter(
-      (img) => img.spectralType !== "nrm"
+    const msiHsiImages = selectedArtwork.spectralImages.filter(
+      (img) => img.spectralType === "msi" || img.spectralType === "hsi"
     );
 
-    setNormSpectralImages(normImages);
-    setFilteredSpectralImages(nonNormImages);
+    setRgbMonoImages(rgbMonoImages);
+    setFilteredSpectralImages(msiHsiImages);
 
-    const [first, second, ...rest] = normImages;
+    const [first, second, ...rest] = rgbMonoImages;
     setSelectedImageLeft(first ?? null);
     setSelectedImageRight(second ?? null);
   }, [selectedArtwork]);
@@ -91,8 +92,8 @@ export default function Home() {
   };
 
   const handleSelectImage = (value: string, side: number) => {
-    const currentImage = selectedArtwork?.spectralImages.find(
-      (spectralImg) => spectralImg.spectralRange === value
+    const currentImage = rgbMonoImages?.find(
+      (spectralImg) => spectralImg.spectralClass === value
     );
     if (currentImage) {
       side <= 1
@@ -183,10 +184,10 @@ export default function Home() {
       </Row>
       {selectedArtwork !== null &&
         selectedMode &&
-        normSpectralImages &&
+        rgbMonoImages &&
         (selectedMode === "single" && selectedImageLeft ? (
           <SingleView
-            imagesOptions={normSpectralImages}
+            imagesOptions={rgbMonoImages}
             selectedImage={selectedImageLeft}
             handleSelectImage={handleSelectImage}
             isLargeScreen={isLargeScreen}
@@ -194,9 +195,9 @@ export default function Home() {
         ) : selectedMode === "comp" &&
           selectedImageLeft &&
           selectedImageRight &&
-          normSpectralImages ? (
+          rgbMonoImages ? (
           <CompareImages
-            imagesOptions={normSpectralImages}
+            imagesOptions={rgbMonoImages}
             selectedImageLeft={selectedImageLeft}
             selectedImageRight={selectedImageRight}
             handleSelectImage={handleSelectImage}
@@ -206,7 +207,7 @@ export default function Home() {
           selectedImageLeft &&
           selectedImageRight ? (
           <BlendImages
-            imagesOptions={normSpectralImages}
+            imagesOptions={rgbMonoImages}
             selectedImageLeft={selectedImageLeft}
             selectedImageRight={selectedImageRight}
             handleSelectImage={handleSelectImage}

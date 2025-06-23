@@ -1,5 +1,5 @@
 import { Column } from "@/once-ui/components";
-import type { SpectralImgData } from "@/app/utils/utils";
+import type { SpectralImgData } from "@/app/resources/types";
 import SelectImage from "@/components/SelectImage";
 import Slider from "@/components/Slider";
 
@@ -33,7 +33,7 @@ const SideTools = ({
     />
     {showOpacity && opacity !== undefined && handleOpacityChange && (
       <Slider
-        title="Opacity"
+        title={`Opacity - ${side === 1 ? "Left" : "Right"}`}
         min={0}
         max={1}
         step={0.01}

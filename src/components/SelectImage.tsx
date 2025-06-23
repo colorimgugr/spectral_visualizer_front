@@ -1,6 +1,6 @@
 import { Select } from "@/once-ui/components";
-import type { Artwork, SpectralImgData } from "@/app/utils/utils";
-import { spectralRangeLabels } from "@/app/resources/content";
+import type { Artwork, SpectralImgData } from "@/app/resources/types";
+import { spectralClassLabels } from "@/app/resources/labels";
 
 type SelectImageProps = {
   imagesOptions: SpectralImgData[];
@@ -18,8 +18,8 @@ const SelectImage = ({
   const getImageOptions = () => {
     return imagesOptions
       .map((img) => ({
-        label: spectralRangeLabels[img.spectralRange],
-        value: img.spectralRange,
+        label: spectralClassLabels[img.spectralClass],
+        value: img.spectralClass,
       }));
   };
   
@@ -29,7 +29,7 @@ const SelectImage = ({
       label={`Select the${
         side === 1 ? " left" : side === 2 ? " right" : ""
       } image`}
-      value={selectedImage.spectralRange}
+      value={selectedImage.spectralClass}
       onSelect={(value: string) => handleSelect(value, side)}
       options={getImageOptions()}
     />
