@@ -47,6 +47,7 @@ const FalseRGBImages = ({
 
   const [imageUrl, setImageUrl] = useState<string | null>(null);
   const [isViewerLoading, setIsViewerLoading] = useState(false);
+  const [areBandsUpdating, setAreBandsUpdating] = useState(false);
 
   useEffect(() => {
     const firstType = spectralImages[0].spectralType;
@@ -74,6 +75,10 @@ const FalseRGBImages = ({
     // setImageUrl(null);
     setIsViewerLoading(true);
   }, [spectralType, spectralClass, spectralImages]);
+
+  useEffect(() => {
+    setAreBandsUpdating(true);
+  }, [bandURLs]);
 
   const handleSpectralType = (value: string) => {
     const selected = value as SpectralTypeCode;
@@ -153,12 +158,38 @@ const FalseRGBImages = ({
                   onImageReady={(url) => {
                     setImageUrl(url);
                     setIsViewerLoading(false);
+                    setAreBandsUpdating(false);
                   }}
                 />
-                {isViewerLoading || !imageUrl ? (
+                {/* {isViewerLoading || !imageUrl || areBandsUpdating ? (
                   <Spinner size="xl" />
                 ) : (
                   <OpenSeaDragonViewer url={imageUrl} />
+                )} */}
+                {isViewerLoading || !imageUrl ? (
+                  <Spinner size="xl" />
+                ) : (
+                  <>
+                    {areBandsUpdating && (
+                      <div
+                        style={{
+                          position: "absolute",
+                          top: 0,
+                          left: 0,
+                          right: 0,
+                          bottom: 0,
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          backgroundColor: "rgba(0, 0, 0, 0.2)", // optional blur overlay
+                          zIndex: 10,
+                        }}
+                      >
+                      <Spinner size="xl" />
+                      </div>
+                    )}
+                    <OpenSeaDragonViewer url={imageUrl} />
+                  </>
                 )}
               </>
             ) : (
