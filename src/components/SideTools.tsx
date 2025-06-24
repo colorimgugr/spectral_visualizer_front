@@ -18,7 +18,7 @@ type SideToolsProps = {
   selectedImage: SpectralImgData;
   handleSelectImage: (code: string, side: number) => void;
   artworkMetadata?: ArtworkMetadata;
-  showImageMetadata?: boolean;
+  showArtworkMetadata?: boolean;
   showOpacity?: boolean;
   opacity?: number;
   handleOpacityChange?: (val: number, side: number) => void;
@@ -31,7 +31,7 @@ const SideTools = ({
   selectedImage,
   handleSelectImage,
   artworkMetadata,
-  showImageMetadata = true,
+  showArtworkMetadata = false,
   showOpacity,
   opacity,
   handleOpacityChange,
@@ -55,8 +55,14 @@ const SideTools = ({
         isLargeScreen={isLargeScreen}
       />
     )}
-    <Column fillWidth paddingLeft="s" paddingRight="s" gap="m" mobileDirection="row">
-      {artworkMetadata && (
+    <Column
+      fillWidth
+      paddingLeft="s"
+      paddingRight="s"
+      gap="m"
+      mobileDirection="row"
+    >
+      {showArtworkMetadata && (
         <Column gap="xs" flex={1}>
           {Object.entries(artworkMetadataLables).map(([code, label]) => (
             <Row key={code} fillWidth gap="xs">
@@ -68,22 +74,17 @@ const SideTools = ({
           ))}
         </Column>
       )}
-      {artworkMetadata &&
-        showImageMetadata &&
-        (isLargeScreen && <Line />)}
-      {showImageMetadata && selectedImage.metadata && (
-        <Column gap="xs" flex={1}>
-          {Object.entries(imageMetadataLables).map(([code, label]) => (
-            <Row key={code} fillWidth gap="xs">
-              <Text onBackground="accent-weak">{`${label}:`}</Text>
-              <Text>
-                {selectedImage.metadata?.[code as ImageMetadataCode] ??
-                  "Unknown"}
-              </Text>
-            </Row>
-          ))}
-        </Column>
-      )}
+      {showArtworkMetadata && isLargeScreen && <Line />}
+      <Column gap="xs" flex={1}>
+        {Object.entries(imageMetadataLables).map(([code, label]) => (
+          <Row key={code} fillWidth gap="xs">
+            <Text onBackground="accent-weak">{`${label}:`}</Text>
+            <Text>
+              {selectedImage.metadata?.[code as ImageMetadataCode] ?? "Unknown"}
+            </Text>
+          </Row>
+        ))}
+      </Column>
     </Column>
   </Column>
 );

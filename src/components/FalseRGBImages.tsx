@@ -1,12 +1,13 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Row, Column, Select, Spinner } from "@/once-ui/components";
+import { Row, Column, Select, Spinner, Text, Line } from "@/once-ui/components";
 import FalseRGBGenerator from "@/components/FalseRGBGenerator";
 import type {
   SpectralImgData,
   SpectralTypeCode,
   SpectralClassCode,
+  ImageMetadataCode,
 } from "@/app/resources/types";
 import BandsSelector from "@/components/BandsSelector";
 import dynamic from "next/dynamic";
@@ -14,6 +15,7 @@ import { OpenSeaDragonViewerProps } from "@/components/OpenSeaDragonViewer";
 import {
   spectralTypeLabels,
   spectralClassLabels,
+  imageMetadataLables,
 } from "@/app/resources/labels";
 
 const OpenSeaDragonViewer = dynamic<OpenSeaDragonViewerProps>(
@@ -120,28 +122,49 @@ const FalseRGBImages = ({
     <>
       {spectralImages && (
         <Row fillWidth fillHeight gap="16" mobileDirection="column">
-          <Column fillWidth gap="l" flex="1">
-            <Select
-              id="spectral-type-select"
-              label="Spectral Type"
-              value={spectralType ?? ""}
-              onSelect={handleSpectralType}
-              options={spectralTypeOptions}
-            />
-            <Select
-              id="spectral-range-select"
-              label="Spectral Range"
-              value={spectralClass ?? ""}
-              onSelect={handleSpectralClass}
-              options={spectralClassOptions}
-            />
-            {selectedSpectralImages && (
-              <BandsSelector
-                spectralImages={selectedSpectralImages}
-                onBandURLsChange={(urls) => setBandURLs(urls)}
-                isLargeScreen={isLargeScreen}
+          <Column fillWidth gap="s" flex="1">
+            <Column fillWidth gap="s" mobileDirection="row">
+              <Select
+                id="spectral-type-select"
+                label="Spectral Type"
+                value={spectralType ?? ""}
+                onSelect={handleSpectralType}
+                options={spectralTypeOptions}
               />
-            )}
+              <Select
+                id="spectral-range-select"
+                label="Spectral Range"
+                value={spectralClass ?? ""}
+                onSelect={handleSpectralClass}
+                options={spectralClassOptions}
+              />
+            </Column>
+            <Column fillWidth gap="s" mobileDirection="row">
+              {selectedSpectralImages && (
+                <Column flex={1}>
+                <BandsSelector
+                  spectralImages={selectedSpectralImages}
+                  onBandURLsChange={(urls) => setBandURLs(urls)}
+                  isLargeScreen={isLargeScreen}
+                />
+                </Column>
+              )}
+              {isLargeScreen && <Line />}
+              {selectedSpectralImages?.metadata && (
+                <Column paddingLeft="s" paddingRight="s" gap="xs" flex={1}>
+                  {Object.entries(imageMetadataLables).map(([code, label]) => (
+                    <Row key={code} fillWidth gap="xs">
+                      <Text onBackground="accent-weak">{`${label}:`}</Text>
+                      <Text>
+                        {selectedSpectralImages.metadata?.[
+                          code as ImageMetadataCode
+                        ] ?? "Unknown"}
+                      </Text>
+                    </Row>
+                  ))}
+                </Column>
+              )}
+            </Column>
           </Column>
           <Column fillWidth flex="4" center>
             {bandURLs.red &&
@@ -185,7 +208,7 @@ const FalseRGBImages = ({
                           zIndex: 10,
                         }}
                       >
-                      <Spinner size="xl" />
+                        <Spinner size="xl" />
                       </div>
                     )}
                     <OpenSeaDragonViewer url={imageUrl} />

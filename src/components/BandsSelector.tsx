@@ -26,9 +26,6 @@ const BandsSelector = ({
   isLargeScreen,
 }: FalseRGBImagesProps) => {
   const [bandWavelengths, setBandWavelengths] = useState<number[]>([]);
-  const [redURL, setRedURL] = useState<string | null>(null);
-  const [greenURL, setGreenURL] = useState<string | null>(null);
-  const [blueURL, setBlueURL] = useState<string | null>(null);
 
   const [redBandIndex, setRedBandIndex] = useState(0);
   const [greenBandIndex, setGreenBandIndex] = useState(0);
@@ -60,10 +57,6 @@ const BandsSelector = ({
     const green = safeGet(greenBandIndex);
     const blue = safeGet(blueBandIndex);
 
-    setRedURL(red);
-    setGreenURL(green);
-    setBlueURL(blue);
-
     // Notify parent with updated band URLs
     onBandURLsChange({ red, green, blue });
   }, [redBandIndex, greenBandIndex, blueBandIndex, spectralImages]);
@@ -77,7 +70,7 @@ const BandsSelector = ({
   const bandCount = spectralImages.names?.length ?? 1;
 
   return (
-    <Column fillWidth gap="l" flex="1">
+    <Column fillWidth gap="s">
       <Slider
         title={`Red (${bandWavelengths[redBandIndex] ?? "?"} nm)`}
         min={0}
@@ -87,6 +80,7 @@ const BandsSelector = ({
         onChange={(val) => handleChannelChange(val, "r")}
         isLargeScreen={isLargeScreen}
         isFloat={false}
+        applyOnReleaseOnly
       />
       <Slider
         title={`Green (${bandWavelengths[greenBandIndex] ?? "?"} nm)`}
@@ -97,6 +91,7 @@ const BandsSelector = ({
         onChange={(val) => handleChannelChange(val, "g")}
         isLargeScreen={isLargeScreen}
         isFloat={false}
+        applyOnReleaseOnly
       />
       <Slider
         title={`Blue (${bandWavelengths[blueBandIndex] ?? "?"} nm)`}
@@ -107,6 +102,7 @@ const BandsSelector = ({
         onChange={(val) => handleChannelChange(val, "b")}
         isLargeScreen={isLargeScreen}
         isFloat={false}
+        applyOnReleaseOnly
       />
     </Column>
   );

@@ -46,4 +46,6 @@ export const imageMetadataLables: Record<ImageMetadataCode, string> = {
   illSys: "Illumination system",
   filter: "Filter",
   bands: "Bands",
+  hPix: "Horizontal pixels",
+  vPix: "Vertical pixels",
 };

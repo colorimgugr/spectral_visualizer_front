@@ -111,7 +111,7 @@ def build_spectral_data(base_path, artwork_id, type_codes, class_codes, metadata
                 title =  f"{spectral_type}-{spectral_class}"
                 metadata = build_metadata_from_labels(title, metadata_labels)
                 # Remove keys with None values
-                metadata = {k: v for k, v in metadata.items() if v is not None}
+                # metadata = {k: v for k, v in metadata.items() if v is not None}
                 
                 spectral_images.append({
                     "metadata": metadata,
@@ -140,7 +140,7 @@ def build_spectral_data(base_path, artwork_id, type_codes, class_codes, metadata
                 title =  f"{spectral_type}-{spectral_class}"
                 metadata = build_metadata_from_labels(title, metadata_labels)
                 # Remove keys with None values
-                metadata = {k: v for k, v in metadata.items() if v is not None}
+                # metadata = {k: v for k, v in metadata.items() if v is not None}
                 
                 spectral_images.append({
                     "metadata": metadata,
@@ -205,7 +205,7 @@ def main():
     
     metadata = build_metadata_from_labels("Artwork", ARTWORKS_METADATA_LABELS)
     # Remove keys with None values
-    metadata = {k: v for k, v in metadata.items() if v is not None}
+    # metadata = {k: v for k, v in metadata.items() if v is not None}
 
     output_data = {
         "id": artwork_id,

@@ -16,7 +16,7 @@ type SingleViewProps = {
   imagesOptions: SpectralImgData[];
   selectedImage: SpectralImgData;
   artworkMetadata?: ArtworkMetadata;
-  showImageMetadata?: boolean;
+  showArtworkMetadata?: boolean;
   handleSelectImage: (code: string, side: number) => void;
   isLargeScreen: boolean;
 };
@@ -25,6 +25,7 @@ const SingleView = ({
   imagesOptions,
   selectedImage,
   artworkMetadata,
+  showArtworkMetadata,
   handleSelectImage,
   isLargeScreen,
 }: SingleViewProps) => {
@@ -62,6 +63,7 @@ const SingleView = ({
         side={0}
         imagesOptions={imagesOptions}
         selectedImage={selectedImage}
+        showArtworkMetadata={showArtworkMetadata}
         handleSelectImage={handleSelectImage}
         artworkMetadata={artworkMetadata}
         isLargeScreen={isLargeScreen}

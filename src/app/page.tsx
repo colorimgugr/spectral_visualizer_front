@@ -191,7 +191,7 @@ export default function Home() {
             imagesOptions={rgbMonoImages}
             selectedImage={selectedImageLeft}
             artworkMetadata={selectedArtwork.metadata}
-            showImageMetadata
+            showArtworkMetadata
             handleSelectImage={handleSelectImage}
             isLargeScreen={isLargeScreen}
           />

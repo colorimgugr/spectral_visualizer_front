@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Row, Column, Tag } from "@/once-ui/components";
 import "@/styles/Slider.scss";
 
@@ -11,6 +11,7 @@ type SliderProps = {
   onChange: (value: number) => void;
   isLargeScreen: boolean;
   isFloat?: boolean;
+  applyOnReleaseOnly?: boolean;
 };
 
 const Slider = ({
@@ -22,13 +23,31 @@ const Slider = ({
   onChange,
   isLargeScreen,
   isFloat = true,
+  applyOnReleaseOnly = false,
 }: SliderProps) => {
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    onChange(parseFloat(e.target.value));
+  const [localValue, setLocalValue] = useState(value);
+
+  useEffect(() => {
+    setLocalValue(value);
+  }, [value]);
+
+  const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newValue = parseFloat(e.target.value);
+    setLocalValue(newValue);
+
+    if (!applyOnReleaseOnly) {
+      onChange(newValue);
+    }
+  };
+
+  const handleCommit = () => {
+    if (applyOnReleaseOnly) {
+      onChange(localValue); // Only commit on release
+    }
   };
 
   return (
-    <Column fillWidth padding="s">
+    <Column fillWidth paddingLeft="s" paddingRight="s">
       {isLargeScreen && (
         <Row fillWidth paddingBottom="xs" textVariant="label-default-m">
           {title}
@@ -46,12 +65,14 @@ const Slider = ({
             min={min}
             max={max}
             step={step}
-            value={value}
-            onChange={handleChange}
+            value={localValue}
+            onChange={handleInput}
+            onMouseUp={handleCommit}
+            onTouchEnd={handleCommit}
           />
         </Column>
         <Column flex="1" horizontal="end">
-          <Tag variant="neutral">{value.toFixed(isFloat ? 2 : 0)}</Tag>
+          <Tag variant="neutral">{localValue.toFixed(isFloat ? 2 : 0)}</Tag>
         </Column>
       </Row>
     </Column>

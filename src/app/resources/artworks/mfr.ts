@@ -3,8 +3,25 @@ import { Artwork } from "@/app/resources/types";
 const mfr: Artwork = {
   "id": "mfr",
   "name": "Madonna de Foligno de Rafael",
+  "metadata": {
+    "author": "Rafael Sanzio",
+    "date": "1521",
+    "rest": "No",
+    "varn": "No",
+    "subs": null,
+    "width": "1.94 m",
+    "height": "3.20 m"
+  },
   "spectralImages": [
     {
+      "metadata": {
+        "capSys": "PikaL",
+        "illSys": null,
+        "filter": null,
+        "bands": "150",
+        "hPix": "556",
+        "vPix": "900"
+      },
       "spectralType": "hsi",
       "spectralClass": "vnir",
       "path": "/artworks/mfr/hsi/vnir",
@@ -162,16 +179,40 @@ const mfr: Artwork = {
       ]
     },
     {
+      "metadata": {
+        "capSys": "Nikon D850",
+        "illSys": null,
+        "filter": null,
+        "bands": "3",
+        "hPix": "518",
+        "vPix": "703"
+      },
       "spectralType": "rgb",
       "spectralClass": "pht",
       "source": "/artworks/mfr/rgb/pht.dzi"
     },
     {
+      "metadata": {
+        "capSys": null,
+        "illSys": null,
+        "filter": null,
+        "bands": null,
+        "hPix": null,
+        "vPix": null
+      },
       "spectralType": "rgb",
       "spectralClass": "swir",
       "source": "/artworks/mfr/rgb/swir.dzi"
     },
     {
+      "metadata": {
+        "capSys": null,
+        "illSys": null,
+        "filter": null,
+        "bands": null,
+        "hPix": null,
+        "vPix": null
+      },
       "spectralType": "rgb",
       "spectralClass": "vnir",
       "source": "/artworks/mfr/rgb/vnir.dzi"
