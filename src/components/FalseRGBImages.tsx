@@ -142,28 +142,26 @@ const FalseRGBImages = ({
             <Column fillWidth gap="s" mobileDirection="row">
               {selectedSpectralImages && (
                 <Column flex={1}>
-                <BandsSelector
-                  spectralImages={selectedSpectralImages}
-                  onBandURLsChange={(urls) => setBandURLs(urls)}
-                  isLargeScreen={isLargeScreen}
-                />
+                  <BandsSelector
+                    spectralImages={selectedSpectralImages}
+                    onBandURLsChange={(urls) => setBandURLs(urls)}
+                    isLargeScreen={isLargeScreen}
+                  />
                 </Column>
               )}
               {isLargeScreen && <Line />}
-              {selectedSpectralImages?.metadata && (
-                <Column paddingLeft="s" paddingRight="s" gap="xs" flex={1}>
-                  {Object.entries(imageMetadataLables).map(([code, label]) => (
-                    <Row key={code} fillWidth gap="xs">
-                      <Text onBackground="accent-weak">{`${label}:`}</Text>
-                      <Text>
-                        {selectedSpectralImages.metadata?.[
-                          code as ImageMetadataCode
-                        ] ?? "Unknown"}
-                      </Text>
-                    </Row>
-                  ))}
-                </Column>
-              )}
+              <Column paddingLeft="s" paddingRight="s" gap="xs" flex={1}>
+                {Object.entries(imageMetadataLables).map(([code, label]) => (
+                  <Row key={code} fillWidth gap="xs">
+                    <Text onBackground="accent-weak">{`${label}:`}</Text>
+                    <Text>
+                      {selectedSpectralImages?.metadata?.[
+                        code as ImageMetadataCode
+                      ] ?? "Unknown"}
+                    </Text>
+                  </Row>
+                ))}
+              </Column>
             </Column>
           </Column>
           <Column fillWidth flex="4" center>
