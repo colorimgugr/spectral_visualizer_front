@@ -67,17 +67,25 @@ export default function Home() {
   }, [selectedArtwork]);
 
   const getVisualizationModeOptions = () => {
-    const imageCount = selectedArtwork?.spectralImages.length ?? 0;
+    const rgbMonoCount = rgbMonoImages?.length ?? 0;
+    const hasSpectral = (filteredSpectralImages?.length ?? 0) > 0;
 
     return Object.entries(visualizationModes)
       .filter(([key]) => {
-        if (imageCount === 1) {
-          return key === "single";
+        if (rgbMonoCount > 1) {
+          // All modes allowed if >1 image and spectral condition satisfied
+          return key !== "falseRGB" || hasSpectral;
         }
-        if (key === "falseRGB") {
-          return (filteredSpectralImages?.length ?? 0) > 0;
+        if (rgbMonoCount === 1) {
+          // Exclude "comp" and "blend"
+          return (
+            key !== "comp" &&
+            key !== "blend" &&
+            (key !== "falseRGB" || hasSpectral)
+          );
         }
-        return true;
+        // rgbCount === 0 → Exclude "single", "comp", and "blend"
+        return key === "falseRGB" && hasSpectral;
       })
       .map(([key, label]) => ({
         label,
@@ -196,9 +204,9 @@ export default function Home() {
             isLargeScreen={isLargeScreen}
           />
         ) : selectedMode === "comp" &&
+          rgbMonoImages.length > 1 &&
           selectedImageLeft &&
-          selectedImageRight &&
-          rgbMonoImages ? (
+          selectedImageRight ? (
           <CompareImages
             imagesOptions={rgbMonoImages}
             selectedImageLeft={selectedImageLeft}
@@ -207,6 +215,7 @@ export default function Home() {
             isLargeScreen={isLargeScreen}
           />
         ) : selectedMode === "blend" &&
+          rgbMonoImages.length > 1 &&
           selectedImageLeft &&
           selectedImageRight ? (
           <BlendImages

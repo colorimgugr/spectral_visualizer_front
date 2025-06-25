@@ -4,16 +4,23 @@ const mpa: Artwork = {
   "id": "mpa",
   "name": "Mart\u00edn P\u00e9rez de Ayala",
   "metadata": {
+    "author": null,
     "date": "XVth century",
-    "rest": "Yes",
-    "varn": "No",
-    "width": "1.5 m",
-    "height": "0.8 m"
+    "rest": null,
+    "varn": null,
+    "subs": null,
+    "width": null,
+    "height": null
   },
   "spectralImages": [
     {
       "metadata": {
-        "bands": "3"
+        "capSys": null,
+        "illSys": null,
+        "filter": null,
+        "bands": null,
+        "hPix": null,
+        "vPix": null
       },
       "spectralType": "rgb",
       "spectralClass": "swir",
@@ -22,16 +29,25 @@ const mpa: Artwork = {
     {
       "metadata": {
         "capSys": "Nikon D850",
-        "illSys": "Ultraviolet",
-        "filter": "None",
-        "bands": "3"
+        "illSys": "UV",
+        "filter": "UV+VIS cut-off (Robertina IR)",
+        "bands": null,
+        "hPix": null,
+        "vPix": null
       },
       "spectralType": "rgb",
       "spectralClass": "uvf",
       "source": "/artworks/mpa/rgb/uvf.dzi"
     },
     {
-      "metadata": {},
+      "metadata": {
+        "capSys": null,
+        "illSys": null,
+        "filter": null,
+        "bands": null,
+        "hPix": null,
+        "vPix": null
+      },
       "spectralType": "rgb",
       "spectralClass": "vnir",
       "source": "/artworks/mpa/rgb/vnir.dzi"
