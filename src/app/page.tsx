@@ -66,6 +66,16 @@ export default function Home() {
     setSelectedImageRight(second ?? null);
   }, [selectedArtwork]);
 
+  const getArtworksOptions = () => {
+    return artworks
+      .slice() // create a shallow copy to avoid mutating original array
+      .sort((a, b) => a.name.localeCompare(b.name))
+      .map((artwork) => ({
+        label: artwork.name,
+        value: artwork.id,
+      }));
+  };
+
   const getVisualizationModeOptions = () => {
     const rgbMonoCount = rgbMonoImages?.length ?? 0;
     const hasSpectral = (filteredSpectralImages?.length ?? 0) > 0;
@@ -170,10 +180,7 @@ export default function Home() {
                   label="Artwork"
                   value={selectedArtwork.id}
                   onSelect={(value: string) => handleArtwork(value)}
-                  options={artworks.map((artwork) => ({
-                    label: artwork.name,
-                    value: artwork.id,
-                  }))}
+                  options={getArtworksOptions()}
                 />
               </Column>
               <Column fillWidth flex="1">

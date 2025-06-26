@@ -4,6 +4,9 @@ import type {
   SpectralClassCode,
   ArtworkMetadataCode,
   ImageMetadataCode,
+  CapSysCode,
+  IllSysCode,
+  FilterCode,
 } from "@/app/resources/types";
 
 export const visualizationModes: Record<VisualModeCode, string> = {
@@ -31,7 +34,7 @@ export const spectralClassLabels: Record<SpectralClassCode, string> = {
   irrl: "IRR 900-1700",
 };
 
-export const artworkMetadataLables: Record<ArtworkMetadataCode, string> = {
+export const artworkMetadataLabels: Record<ArtworkMetadataCode, string> = {
   author: "Author",
   date: "Date",
   rest: "Restored",
@@ -41,11 +44,34 @@ export const artworkMetadataLables: Record<ArtworkMetadataCode, string> = {
   height: "Height",
 };
 
-export const imageMetadataLables: Record<ImageMetadataCode, string> = {
+export const imageMetadataLabels: Record<ImageMetadataCode, string> = {
   capSys: "Capturing system",
   illSys: "Illumination system",
   filter: "Filter",
   bands: "Bands",
   hPix: "Horizontal pixels",
   vPix: "Vertical pixels",
+};
+
+export const CapSysLabels: Record<CapSysCode, string> = {
+  spcIQ: "Specim IQ",
+  rsnPkL: "Resonon Pika L",
+  rsnPkIR: "Resonon Pika IR+",
+  rsnPkUV: "Resonon Pika UV",
+  nknD850: "Nikon D850",
+  pxlTqSpc: "PixelTeq Spectrocam",
+  xncsXv: "Xenics Xeva",
+};
+
+export const IllSysLabels: Record<IllSysCode, string> = {
+  hllg: "Hallogen",
+  uv: "UV",
+  led: "LED",
+};
+
+export const FilterLabels: Record<FilterCode, string> = {
+  visSwir: "VIS+SWIR cut-off (Robertina UV)",
+  uvSwir: "UV+SWIR cut-off (Robertina VIS)",
+  uvVis: "UV+VIS cut-off (Robertina IR)",
+  uvIr: "UV+IR cut-off (Robertina VIS)",
 };

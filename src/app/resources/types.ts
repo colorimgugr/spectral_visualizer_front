@@ -20,9 +20,17 @@ export type ArtworkMetadataCode =
   | "width"
   | "height";
 
-export type ImageMetadataCode = "capSys" | "illSys" | "filter" | "bands" | "hPix" | "vPix";
+export type ImageMetadataCode =
+  | "capSys"
+  | "illSys"
+  | "filter"
+  | "bands"
+  | "hPix"
+  | "vPix";
 
-export type ArtworkMetadata = Partial<Record<ArtworkMetadataCode, string | null>>;
+export type ArtworkMetadata = Partial<
+  Record<ArtworkMetadataCode, string | null>
+>;
 
 export type ImageMetadata = Partial<Record<ImageMetadataCode, string | null>>;
 
@@ -41,3 +49,26 @@ export type Artwork = {
   metadata?: ArtworkMetadata;
   spectralImages: SpectralImgData[];
 };
+
+export type TagVariant =
+  | "brand"
+  | "accent"
+  | "warning"
+  | "success"
+  | "danger"
+  | "neutral"
+  | "info"
+  | "gradient";
+
+export type CapSysCode =
+  | "spcIQ"
+  | "rsnPkL"
+  | "rsnPkIR"
+  | "rsnPkUV"
+  | "nknD850"
+  | "pxlTqSpc"
+  | "xncsXv";
+
+export type IllSysCode = "hllg" | "uv" | "led";
+
+export type FilterCode = "visSwir" | "uvSwir" | "uvVis" | "uvIr";

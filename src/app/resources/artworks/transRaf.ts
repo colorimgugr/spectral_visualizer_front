@@ -15,8 +15,8 @@ const transRaf: Artwork = {
   "spectralImages": [
     {
       "metadata": {
-        "capSys": "Resonon Pika IR+",
-        "illSys": "Hallogen",
+        "capSys": "rsnPkIR",
+        "illSys": "hllg",
         "filter": "-",
         "bands": "161",
         "hPix": "2409",
@@ -191,8 +191,8 @@ const transRaf: Artwork = {
     },
     {
       "metadata": {
-        "capSys": "Resonon Pika L",
-        "illSys": "Hallogen",
+        "capSys": "rsnPkL",
+        "illSys": "hllg",
         "filter": "-",
         "bands": "121",
         "hPix": "736",
@@ -327,9 +327,9 @@ const transRaf: Artwork = {
     },
     {
       "metadata": {
-        "capSys": "Nikon D850",
-        "illSys": "Hallogen",
-        "filter": "UV+IR cut-off (Robertina VIS)",
+        "capSys": "nknD850",
+        "illSys": "hllg",
+        "filter": "uvIr",
         "bands": "3",
         "hPix": "1980",
         "vPix": "2899"

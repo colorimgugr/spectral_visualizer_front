@@ -12,10 +12,11 @@ import type {
 import BandsSelector from "@/components/BandsSelector";
 import dynamic from "next/dynamic";
 import { OpenSeaDragonViewerProps } from "@/components/OpenSeaDragonViewer";
+import ImageMetadataDisplay from "@/components/ImageMetadataDisplay";
 import {
   spectralTypeLabels,
   spectralClassLabels,
-  imageMetadataLables,
+  imageMetadataLabels,
 } from "@/app/resources/labels";
 
 const OpenSeaDragonViewer = dynamic<OpenSeaDragonViewerProps>(
@@ -151,14 +152,13 @@ const FalseRGBImages = ({
               )}
               {isLargeScreen && <Line />}
               <Column paddingLeft="s" paddingRight="s" gap="xs" flex={1}>
-                {Object.entries(imageMetadataLables).map(([code, label]) => (
+                {Object.entries(imageMetadataLabels).map(([code, label]) => (
                   <Row key={code} fillWidth gap="xs">
-                    <Text onBackground="accent-weak">{`${label}:`}</Text>
-                    <Text>
-                      {selectedSpectralImages?.metadata?.[
-                        code as ImageMetadataCode
-                      ] ?? "Unknown"}
-                    </Text>
+                    <Text onBackground="accent-weak" variant="label-default-m">{`${label}:`}</Text>
+                    <ImageMetadataDisplay
+                      metadataCode={code as ImageMetadataCode}
+                      metadata={selectedSpectralImages?.metadata}
+                    />
                   </Row>
                 ))}
               </Column>

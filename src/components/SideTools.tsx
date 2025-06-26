@@ -1,4 +1,4 @@
-import { Column, Row, Text, Line } from "@/once-ui/components";
+import { Column, Row, Text, Line, Tag } from "@/once-ui/components";
 import type {
   SpectralImgData,
   ArtworkMetadataCode,
@@ -6,11 +6,12 @@ import type {
   ImageMetadataCode,
 } from "@/app/resources/types";
 import {
-  artworkMetadataLables,
-  imageMetadataLables,
+  artworkMetadataLabels,
+  imageMetadataLabels,
 } from "@/app/resources/labels";
 import SelectImage from "@/components/SelectImage";
 import Slider from "@/components/Slider";
+import ImageMetadataDisplay from "@/components/ImageMetadataDisplay";
 
 type SideToolsProps = {
   side: number;
@@ -64,7 +65,7 @@ const SideTools = ({
     >
       {showArtworkMetadata && (
         <Column gap="xs" flex={1}>
-          {Object.entries(artworkMetadataLables).map(([code, label]) => (
+          {Object.entries(artworkMetadataLabels).map(([code, label]) => (
             <Row key={code} fillWidth gap="xs">
               <Text onBackground="accent-weak">{`${label}:`}</Text>
               <Text>
@@ -76,12 +77,13 @@ const SideTools = ({
       )}
       {showArtworkMetadata && isLargeScreen && <Line />}
       <Column gap="xs" flex={1}>
-        {Object.entries(imageMetadataLables).map(([code, label]) => (
+        {Object.entries(imageMetadataLabels).map(([code, label]) => (
           <Row key={code} fillWidth gap="xs">
-            <Text onBackground="accent-weak">{`${label}:`}</Text>
-            <Text>
-              {selectedImage.metadata?.[code as ImageMetadataCode] ?? "Unknown"}
-            </Text>
+            <Text onBackground="accent-weak" variant="label-default-m">{`${label}:`}</Text>
+            <ImageMetadataDisplay
+              metadataCode={code as ImageMetadataCode}
+              metadata={selectedImage?.metadata}
+            />
           </Row>
         ))}
       </Column>

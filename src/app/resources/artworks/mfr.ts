@@ -14,16 +14,16 @@ const mfr: Artwork = {
   },
   "spectralImages": [
     {
+      "spectralType": "hsi",
+      "spectralClass": "vnir",
       "metadata": {
-        "capSys": "PikaL",
+        "capSys": "rsnPkL",
         "illSys": null,
         "filter": null,
         "bands": "150",
         "hPix": "556",
         "vPix": "900"
       },
-      "spectralType": "hsi",
-      "spectralClass": "vnir",
       "path": "/artworks/mfr/hsi/vnir",
       "names": [
         "1003nm.png",
@@ -179,19 +179,21 @@ const mfr: Artwork = {
       ]
     },
     {
+      "spectralType": "rgb",
+      "spectralClass": "pht",
       "metadata": {
-        "capSys": "Nikon D850",
+        "capSys": "nknD850",
         "illSys": null,
         "filter": null,
         "bands": "3",
         "hPix": "518",
         "vPix": "703"
       },
-      "spectralType": "rgb",
-      "spectralClass": "pht",
       "source": "/artworks/mfr/rgb/pht.dzi"
     },
     {
+      "spectralType": "rgb",
+      "spectralClass": "swir",
       "metadata": {
         "capSys": null,
         "illSys": null,
@@ -200,11 +202,11 @@ const mfr: Artwork = {
         "hPix": null,
         "vPix": null
       },
-      "spectralType": "rgb",
-      "spectralClass": "swir",
       "source": "/artworks/mfr/rgb/swir.dzi"
     },
     {
+      "spectralType": "rgb",
+      "spectralClass": "vnir",
       "metadata": {
         "capSys": null,
         "illSys": null,
@@ -213,8 +215,6 @@ const mfr: Artwork = {
         "hPix": null,
         "vPix": null
       },
-      "spectralType": "rgb",
-      "spectralClass": "vnir",
       "source": "/artworks/mfr/rgb/vnir.dzi"
     }
   ]

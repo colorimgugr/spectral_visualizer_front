@@ -198,8 +198,8 @@ def main():
 
     SPECTRAL_TYPE_CODES = extract_ts_enum_values(ts_types_path, "SpectralTypeCode")
     SPECTRAL_CLASS_CODES = extract_ts_enum_values(ts_types_path, "SpectralClassCode")
-    ARTWORKS_METADATA_LABELS = extract_ts_record_labels(ts_labels_path, "artworkMetadataLables")
-    IMAGE_METADATA_LABELS = extract_ts_record_labels(ts_labels_path, "imageMetadataLables")
+    ARTWORKS_METADATA_LABELS = extract_ts_record_labels(ts_labels_path, "artworkMetadataLabels")
+    IMAGE_METADATA_LABELS = extract_ts_record_labels(ts_labels_path, "imageMetadataLabels")
 
     artwork_name = input("Enter Name: ")
     

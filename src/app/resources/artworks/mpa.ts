@@ -28,9 +28,9 @@ const mpa: Artwork = {
     },
     {
       "metadata": {
-        "capSys": "Nikon D850",
-        "illSys": "UV",
-        "filter": "UV+VIS cut-off (Robertina IR)",
+        "capSys": "nknD850",
+        "illSys": "uv",
+        "filter": "uvVis",
         "bands": null,
         "hPix": null,
         "vPix": null
