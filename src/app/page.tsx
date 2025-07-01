@@ -1,6 +1,7 @@
 "use client";
 
 import {
+  Heading,
   Text,
   Column,
   Row,
@@ -42,14 +43,18 @@ export default function Home() {
   >(null);
 
   useEffect(() => {
-    setSelectedArtwork(artworks[0] ?? null);
+    const sortedArtworks = artworks
+      .slice() // create a shallow copy to avoid mutating original array
+      .sort((a, b) => a.name.localeCompare(b.name));
+
+    setSelectedArtwork(sortedArtworks[0] ?? null);
   }, [artworks]);
 
   useEffect(() => {
     if (!selectedArtwork) return;
 
     setSelectedMode("single");
-    
+
     const rgbMonoImages = selectedArtwork.spectralImages.filter(
       (img) => img.spectralType === "rgb" || img.spectralType === "mono"
     );
@@ -60,9 +65,13 @@ export default function Home() {
     setRgbMonoImages(rgbMonoImages);
     setFilteredSpectralImages(msiHsiImages);
 
-    const [first, second, ...rest] = rgbMonoImages;
-    setSelectedImageLeft(first ?? null);
-    setSelectedImageRight(second ?? null);
+    const phtImage = rgbMonoImages.find((img) => img.spectralClass === "pht");
+    const otherImages = rgbMonoImages.filter((img) => img !== phtImage);
+    const selectedImageLeft = phtImage ?? rgbMonoImages[0] ?? null;
+    const selectedImageRight = otherImages[0] ?? rgbMonoImages[1] ?? null;
+    setSelectedImageLeft(selectedImageLeft);
+    setSelectedImageRight(selectedImageRight);
+    
   }, [selectedArtwork]);
 
   const getArtworksOptions = () => {
@@ -169,6 +178,19 @@ export default function Home() {
               <LetterFx trigger="instant">Spectral Visualizer</LetterFx>
             </Text>
           </Badge>
+        </Column>
+        <Column
+          fillWidth
+          horizontal={isLargeScreen ? "start" : "center"}
+          vertical="center"
+          flex="1"
+          padding="m"
+        >
+          {selectedArtwork && (
+            <Heading variant="heading-strong-xl" onBackground="info-weak">
+              {selectedArtwork.name}
+            </Heading>
+          )}
         </Column>
         <Row center gap="s" mobileDirection="column">
           {selectedArtwork && (

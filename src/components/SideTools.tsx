@@ -53,6 +53,7 @@ const SideTools = ({
       />
     )}
     <Column
+      paddingTop="s"
       fillWidth
       paddingLeft="s"
       paddingRight="s"
@@ -63,8 +64,8 @@ const SideTools = ({
         <Column gap="xs" flex={1}>
           {Object.entries(artworkMetadataLabels).map(([code, label]) => (
             <Row key={code} fillWidth gap="xs">
-              <Text onBackground="accent-weak">{`${label}:`}</Text>
-              <Text>
+              <Text variant="label-strong-l" onBackground="info-weak">{`${label}:`}</Text>
+              <Text variant="label-default-l">
                 {artworkMetadata?.[code as ArtworkMetadataCode] ?? "Unknown"}
               </Text>
             </Row>
@@ -78,6 +79,7 @@ const SideTools = ({
           spectralClass={selectedImage.spectralClass}
           specification={selectedImage.specification}
           imageMetadata={selectedImage.metadata}
+          isLargeScreen={isLargeScreen}
         />
       </Column>
     </Column>

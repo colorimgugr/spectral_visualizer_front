@@ -24,8 +24,9 @@ import type {
 type MetadataDisplayProps = {
   spectralType: SpectralTypeCode;
   spectralClass: SpectralClassCode;
-  specification?: string;
+  specification?: CapSysCode | IllSysCode | null;
   imageMetadata: ImageMetadata;
+  isLargeScreen: boolean;
 };
 
 const ImageMetadataDisplay = ({
@@ -33,6 +34,7 @@ const ImageMetadataDisplay = ({
   spectralClass,
   specification,
   imageMetadata,
+  isLargeScreen,
 }: MetadataDisplayProps) => {
   const getTechnicalMetadata = (): TechnicalMetadata | null => {
     const typeEntry = technicalMetadata[spectralType];
@@ -102,7 +104,11 @@ const ImageMetadataDisplay = ({
         value,
         filterLabels,
         filterTags
-      ) ?? <Text variant="label-default-m">{value ?? "Unknown"}</Text>
+      ) ?? (
+        <Text variant={isLargeScreen ? "label-default-m" : "label-default-l"}>
+          {value ?? "Unknown"}
+        </Text>
+      )
     );
   };
 
@@ -111,8 +117,8 @@ const ImageMetadataDisplay = ({
       {Object.entries(technicalMetadatLabels).map(([code, label]) => (
         <Row key={code} fillWidth gap="xs">
           <Text
-            onBackground="accent-weak"
-            variant="label-default-m"
+            onBackground="info-weak"
+            variant={isLargeScreen ? "label-strong-m" : "label-strong-l"}
           >{`${label}:`}</Text>
           {renderTechnicalMetadata(code as TechnicalMetadataCode)}
         </Row>
@@ -120,10 +126,10 @@ const ImageMetadataDisplay = ({
       {Object.entries(imageMetadataLabels).map(([code, label]) => (
         <Row key={code} fillWidth gap="xs">
           <Text
-            onBackground="accent-weak"
-            variant="label-default-m"
+            onBackground="info-weak"
+            variant={isLargeScreen ? "label-strong-m" : "label-strong-l"}
           >{`${label}:`}</Text>
-          <Text variant="label-default-m">
+          <Text variant={isLargeScreen ? "label-default-m" : "label-default-l"}>
             {imageMetadata[code as ImageMetadataCode] ?? "Unknown"}
           </Text>
         </Row>

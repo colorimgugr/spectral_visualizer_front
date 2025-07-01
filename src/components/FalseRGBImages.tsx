@@ -154,6 +154,7 @@ const FalseRGBImages = ({
                     spectralClass={selectedSpectralImages.spectralClass}
                     specification={selectedSpectralImages.specification}
                     imageMetadata={selectedSpectralImages.metadata}
+                    isLargeScreen={isLargeScreen}
                   />
                 </Column>
               </Column>
