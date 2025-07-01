@@ -6,24 +6,24 @@ import type {
 } from "@/app/resources/types";
 
 export const capSysTags: Record<CapSysCode, TagVariant> = {
-  spcIQ: "brand",
-  rsnPkL: "warning",
+  spcIQ: "warning",
+  rsnPkL: "brand",
   rsnPkIR: "danger",
   rsnPkUV: "accent",
-  nknD850: "neutral",
+  nknD850: "brand",
   pxlTqSpc: "success",
-  xncsXv: "info",
+  xncsXv: "accent",
 };
 
 export const illSysTags: Record<IllSysCode, TagVariant> = {
   hllg: "warning",
   hllgUv: "brand",
   uv: "accent",
-  led: "info",
+  led: "success",
 };
 
 export const filterTags: Record<FilterCode, TagVariant> = {
-  visSwir: "info",
+  visSwir: "success",
   uvSwir: "accent",
   uvVis: "danger",
   uvIr: "warning",
