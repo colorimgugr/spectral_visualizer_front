@@ -5,51 +5,42 @@ const mpa: Artwork = {
   "name": "Mart\u00edn P\u00e9rez de Ayala",
   "metadata": {
     "author": null,
-    "date": "XVth century",
-    "rest": null,
-    "varn": null,
+    "date": null,
+    "rest": "No",
+    "varn": "No",
     "subs": null,
     "width": null,
     "height": null
   },
   "spectralImages": [
     {
+      "spectralType": "rgb",
+      "spectralClass": "swir",
+      "specification": null,
       "metadata": {
-        "capSys": null,
-        "illSys": null,
-        "filter": null,
-        "bands": null,
         "hPix": null,
         "vPix": null
       },
-      "spectralType": "rgb",
-      "spectralClass": "swir",
       "source": "/artworks/mpa/rgb/swir.dzi"
     },
     {
+      "spectralType": "rgb",
+      "spectralClass": "uvf",
+      "specification": null,
       "metadata": {
-        "capSys": "nknD850",
-        "illSys": "uv",
-        "filter": "uvVis",
-        "bands": null,
         "hPix": null,
         "vPix": null
       },
-      "spectralType": "rgb",
-      "spectralClass": "uvf",
       "source": "/artworks/mpa/rgb/uvf.dzi"
     },
     {
+      "spectralType": "rgb",
+      "spectralClass": "vnir",
+      "specification": null,
       "metadata": {
-        "capSys": null,
-        "illSys": null,
-        "filter": null,
-        "bands": null,
         "hPix": null,
         "vPix": null
       },
-      "spectralType": "rgb",
-      "spectralClass": "vnir",
       "source": "/artworks/mpa/rgb/vnir.dzi"
     }
   ]

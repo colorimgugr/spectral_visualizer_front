@@ -49,8 +49,7 @@ export default function Home() {
     if (!selectedArtwork) return;
 
     setSelectedMode("single");
-
-    // Set the "rgb" and "mono" images vs "hsi" and "msi"
+    
     const rgbMonoImages = selectedArtwork.spectralImages.filter(
       (img) => img.spectralType === "rgb" || img.spectralType === "mono"
     );

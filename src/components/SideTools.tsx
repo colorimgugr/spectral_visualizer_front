@@ -1,14 +1,10 @@
-import { Column, Row, Text, Line, Tag } from "@/once-ui/components";
+import { Column, Row, Text, Line } from "@/once-ui/components";
 import type {
   SpectralImgData,
   ArtworkMetadataCode,
   ArtworkMetadata,
-  ImageMetadataCode,
 } from "@/app/resources/types";
-import {
-  artworkMetadataLabels,
-  imageMetadataLabels,
-} from "@/app/resources/labels";
+import { artworkMetadataLabels } from "@/app/resources/labels";
 import SelectImage from "@/components/SelectImage";
 import Slider from "@/components/Slider";
 import ImageMetadataDisplay from "@/components/ImageMetadataDisplay";
@@ -77,15 +73,12 @@ const SideTools = ({
       )}
       {showArtworkMetadata && isLargeScreen && <Line />}
       <Column gap="xs" flex={1}>
-        {Object.entries(imageMetadataLabels).map(([code, label]) => (
-          <Row key={code} fillWidth gap="xs">
-            <Text onBackground="accent-weak" variant="label-default-m">{`${label}:`}</Text>
-            <ImageMetadataDisplay
-              metadataCode={code as ImageMetadataCode}
-              metadata={selectedImage?.metadata}
-            />
-          </Row>
-        ))}
+        <ImageMetadataDisplay
+          spectralType={selectedImage.spectralType}
+          spectralClass={selectedImage.spectralClass}
+          specification={selectedImage.specification}
+          imageMetadata={selectedImage.metadata}
+        />
       </Column>
     </Column>
   </Column>

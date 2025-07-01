@@ -3,10 +3,24 @@ import { Artwork } from "@/app/resources/types";
 const edt: Artwork = {
   "id": "edt",
   "name": "Escena de una taberna",
+  "metadata": {
+    "author": null,
+    "date": null,
+    "rest": null,
+    "varn": null,
+    "subs": null,
+    "width": null,
+    "height": null
+  },
   "spectralImages": [
     {
       "spectralType": "hsi",
       "spectralClass": "swir",
+      "specification": null,
+      "metadata": {
+        "hPix": "1091",
+        "vPix": "624"
+      },
       "path": "/artworks/edt/hsi/swir",
       "names": [
         "1000 nm.png",
@@ -175,6 +189,11 @@ const edt: Artwork = {
     {
       "spectralType": "hsi",
       "spectralClass": "vnir",
+      "specification": "rsnPkL",
+      "metadata": {
+        "hPix": "1590",
+        "vPix": "891"
+      },
       "path": "/artworks/edt/hsi/vnir",
       "names": [
         "1000 nm.png",
@@ -303,11 +322,21 @@ const edt: Artwork = {
     {
       "spectralType": "mono",
       "spectralClass": "irrl",
+      "specification": null,
+      "metadata": {
+        "hPix": "320",
+        "vPix": "256"
+      },
       "source": "/artworks/edt/mono/irrl.png"
     },
     {
       "spectralType": "msi",
       "spectralClass": "uvis",
+      "specification": null,
+      "metadata": {
+        "hPix": "320",
+        "vPix": "256"
+      },
       "path": "/artworks/edt/msi/uvis",
       "names": [
         "425nm.png",
@@ -331,6 +360,11 @@ const edt: Artwork = {
     {
       "spectralType": "msi",
       "spectralClass": "vnir",
+      "specification": "hllg",
+      "metadata": {
+        "hPix": "320",
+        "vPix": "256"
+      },
       "path": "/artworks/edt/msi/vnir",
       "names": [
         "425nm.jpg",
@@ -354,6 +388,11 @@ const edt: Artwork = {
     {
       "spectralType": "rgb",
       "spectralClass": "uvf",
+      "specification": null,
+      "metadata": {
+        "hPix": "320",
+        "vPix": "256"
+      },
       "source": "/artworks/edt/rgb/uvf.dzi"
     }
   ]

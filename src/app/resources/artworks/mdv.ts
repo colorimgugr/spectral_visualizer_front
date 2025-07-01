@@ -8,6 +8,7 @@ const mdv: Artwork = {
     "date": "XVI Century",
     "rest": "Yes",
     "varn": "No",
+    "subs": null,
     "width": "60 cm",
     "height": "40 cm"
   },
@@ -15,16 +16,31 @@ const mdv: Artwork = {
     {
       "spectralType": "rgb",
       "spectralClass": "pht",
+      "specification": "hllg",
+      "metadata": {
+        "hPix": "320",
+        "vPix": "256"
+      },
       "source": "/artworks/mdv/rgb/pht.dzi"
     },
     {
       "spectralType": "rgb",
       "spectralClass": "swir",
+      "specification": null,
+      "metadata": {
+        "hPix": "320",
+        "vPix": "256"
+      },
       "source": "/artworks/mdv/rgb/swir.dzi"
     },
     {
       "spectralType": "rgb",
       "spectralClass": "vnir",
+      "specification": null,
+      "metadata": {
+        "hPix": "320",
+        "vPix": "256"
+      },
       "source": "/artworks/mdv/rgb/vnir.dzi"
     }
   ]

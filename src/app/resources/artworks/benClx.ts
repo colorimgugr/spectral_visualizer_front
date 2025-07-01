@@ -16,11 +16,8 @@ const benClx: Artwork = {
     {
       "spectralType": "hsi",
       "spectralClass": "swir",
+      "specification": null,
       "metadata": {
-        "capSys": "rsnPkIR",
-        "illSys": "hllg",
-        "filter": "-",
-        "bands": "161",
         "hPix": "1091",
         "vPix": "624"
       },
@@ -192,11 +189,8 @@ const benClx: Artwork = {
     {
       "spectralType": "hsi",
       "spectralClass": "vnir",
+      "specification": "rsnPkL",
       "metadata": {
-        "capSys": "rsnPkL",
-        "illSys": "hllg",
-        "filter": "-",
-        "bands": "121",
         "hPix": "1590",
         "vPix": "891"
       },
@@ -328,11 +322,8 @@ const benClx: Artwork = {
     {
       "spectralType": "mono",
       "spectralClass": "irrl",
+      "specification": null,
       "metadata": {
-        "capSys": "xncsXv",
-        "illSys": "hllg",
-        "filter": "-",
-        "bands": "1",
         "hPix": "320",
         "vPix": "256"
       },
@@ -341,11 +332,8 @@ const benClx: Artwork = {
     {
       "spectralType": "rgb",
       "spectralClass": "pht",
+      "specification": "hllg",
       "metadata": {
-        "capSys": "nknD850",
-        "illSys": "hllg",
-        "filter": "uvIr",
-        "bands": "3",
         "hPix": "8140",
         "vPix": "4774"
       },
@@ -354,11 +342,8 @@ const benClx: Artwork = {
     {
       "spectralType": "rgb",
       "spectralClass": "uvf",
+      "specification": null,
       "metadata": {
-        "capSys": "nknD850",
-        "illSys": "uv",
-        "filter": "uvSwir",
-        "bands": "3",
         "hPix": "4032",
         "vPix": "3024"
       },

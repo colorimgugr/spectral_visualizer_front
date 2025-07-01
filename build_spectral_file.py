@@ -3,6 +3,7 @@ import json
 import sys
 import re
 from typing import Dict
+import questionary
 
 def update_all_artworks_ts(artwork_id: str, all_artworks_path: str = "./src/app/resources/allArtworks.ts"):
     if os.path.exists(all_artworks_path):
@@ -109,14 +110,13 @@ def build_spectral_data(base_path, artwork_id, type_codes, class_codes, metadata
                 relative_path = os.path.join("artworks", artwork_id, spectral_type, spectral_class)
                 
                 title =  f"{spectral_type}-{spectral_class}"
-                metadata = build_metadata_from_labels(title, metadata_labels)
-                # Remove keys with None values
-                # metadata = {k: v for k, v in metadata.items() if v is not None}
+                metadata, specification = build_metadata_from_labels(title, metadata_labels)
                 
                 spectral_images.append({
-                    "metadata": metadata,
                     "spectralType": spectral_type,
                     "spectralClass": spectral_class,
+                    "specification": specification,
+                    "metadata": metadata,
                     "path": f"/{relative_path.replace(os.sep, '/')}",
                     "names": image_files
                 })
@@ -135,46 +135,61 @@ def build_spectral_data(base_path, artwork_id, type_codes, class_codes, metadata
                     continue
                 
                 relative_path = os.path.join("artworks", artwork_id, spectral_type, file)
-                # web_path = f"/artworks/{artwork_id}/rgb/{file}"
 
                 title =  f"{spectral_type}-{spectral_class}"
-                metadata = build_metadata_from_labels(title, metadata_labels)
-                # Remove keys with None values
-                # metadata = {k: v for k, v in metadata.items() if v is not None}
+                metadata, specification = build_metadata_from_labels(title, metadata_labels)
                 
                 spectral_images.append({
-                    "metadata": metadata,
                     "spectralType": spectral_type,
                     "spectralClass": spectral_class,
+                    "specification": specification,
+                    "metadata": metadata,
                     "source": f"/{relative_path.replace(os.sep, '/')}",
                 })
                 
 
     return spectral_images
 
-def prompt_metadata_field(field_name: str, yes_no=False):
-    while True:
-        user_input = input(f"Enter {field_name}{' (Yes/No)' if yes_no else ''} (press Enter to skip): ").strip()
-        if user_input == "":
+def prompt_metadata_field(field_name: str, yes_no: bool = False) -> str | None:
+    if yes_no:
+        selection = questionary.select(
+            f"{field_name} (Yes/No):",
+            choices=["Yes", "No", "(Skip)"]
+        ).ask()
+
+        if selection in ("(Skip)", None):
             return None
-        if yes_no:
-            if user_input.lower() in ["yes", "no"]:
-                if user_input.lower() == "yes":
-                    return "Yes"
-                else:
-                    return "No"
-            else:
-                print("Please enter 'Yes', 'No', or press Enter to skip.")
-        else:
-            return user_input
+        return selection
+    else:
+        user_input = questionary.text(f"Enter {field_name}:").ask()
+        return user_input.strip() if user_input else None
+    
+def prompt_specification_field(field_name: str, options: dict) -> str:
+    selection = questionary.select(
+        f"Select the {field_name}:",
+        choices=[{"name": label, "value": key} for key, label in options.items()]
+    ).ask()
+    
+    return selection
+
 
 def build_metadata_from_labels(title, labels: Dict[str, str]) -> Dict[str, str]:
-    print(f"-- Enter {title} metadata (press Enter to skip a field) --")
+    print(f"\n-- Enter {title} metadata (press Enter to skip a field) --")
+    specification = None
+    if (title == "hsi-vnir"):
+         specification  = prompt_specification_field("Capturing System",
+                                                     {"rsnPkL": "Resonon Pika L", "spcIQ": "Specim IQ"})
+    elif (title == "rgb-pht"):
+         specification  = prompt_specification_field("Illumination System",
+                                                     {"hllg": "Hallogen", "led": "LED"})
+    elif (title == "msi-vnir" or title == "msi-uvf"):
+         specification  = prompt_specification_field("Illumination System",
+                                                     {"hllg": "Hallogen", "uv": "UV"})
     metadata = {}
     for key, label in labels.items():
         is_yes_no = key in ["rest", "varn"]
         metadata[key] = prompt_metadata_field(label, yes_no=is_yes_no)
-    return metadata
+    return metadata, specification
 
 def main():
     if len(sys.argv) != 1:
@@ -203,15 +218,14 @@ def main():
 
     artwork_name = input("Enter Name: ")
     
-    metadata = build_metadata_from_labels("Artwork", ARTWORKS_METADATA_LABELS)
-    # Remove keys with None values
-    # metadata = {k: v for k, v in metadata.items() if v is not None}
+    metadata, _ = build_metadata_from_labels("Artwork", ARTWORKS_METADATA_LABELS)
 
     output_data = {
         "id": artwork_id,
         "name": artwork_name,
         "metadata": metadata,
-        "spectralImages": build_spectral_data(input_folder, artwork_id, SPECTRAL_TYPE_CODES, SPECTRAL_CLASS_CODES, IMAGE_METADATA_LABELS)
+        "spectralImages": build_spectral_data(input_folder, artwork_id, 
+                                              SPECTRAL_TYPE_CODES, SPECTRAL_CLASS_CODES, IMAGE_METADATA_LABELS)
     }
     
     output_dir = os.path.join(".", "src", "app", "resources", "artworks")

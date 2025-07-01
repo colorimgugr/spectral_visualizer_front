@@ -7,7 +7,6 @@ import type {
   SpectralImgData,
   SpectralTypeCode,
   SpectralClassCode,
-  ImageMetadataCode,
 } from "@/app/resources/types";
 import BandsSelector from "@/components/BandsSelector";
 import dynamic from "next/dynamic";
@@ -16,7 +15,6 @@ import ImageMetadataDisplay from "@/components/ImageMetadataDisplay";
 import {
   spectralTypeLabels,
   spectralClassLabels,
-  imageMetadataLabels,
 } from "@/app/resources/labels";
 
 const OpenSeaDragonViewer = dynamic<OpenSeaDragonViewerProps>(
@@ -140,8 +138,8 @@ const FalseRGBImages = ({
                 options={spectralClassOptions}
               />
             </Column>
-            <Column fillWidth gap="s" mobileDirection="row">
-              {selectedSpectralImages && (
+            {selectedSpectralImages && (
+              <Column fillWidth gap="s" mobileDirection="row">
                 <Column flex={1}>
                   <BandsSelector
                     spectralImages={selectedSpectralImages}
@@ -149,20 +147,17 @@ const FalseRGBImages = ({
                     isLargeScreen={isLargeScreen}
                   />
                 </Column>
-              )}
-              {isLargeScreen && <Line />}
-              <Column paddingLeft="s" paddingRight="s" gap="xs" flex={1}>
-                {Object.entries(imageMetadataLabels).map(([code, label]) => (
-                  <Row key={code} fillWidth gap="xs">
-                    <Text onBackground="accent-weak" variant="label-default-m">{`${label}:`}</Text>
-                    <ImageMetadataDisplay
-                      metadataCode={code as ImageMetadataCode}
-                      metadata={selectedSpectralImages?.metadata}
-                    />
-                  </Row>
-                ))}
+                {isLargeScreen && <Line />}
+                <Column paddingLeft="s" paddingRight="s" gap="xs" flex={1}>
+                  <ImageMetadataDisplay
+                    spectralType={selectedSpectralImages.spectralType}
+                    spectralClass={selectedSpectralImages.spectralClass}
+                    specification={selectedSpectralImages.specification}
+                    imageMetadata={selectedSpectralImages.metadata}
+                  />
+                </Column>
               </Column>
-            </Column>
+            )}
           </Column>
           <Column fillWidth flex="4" center>
             {bandURLs.red &&

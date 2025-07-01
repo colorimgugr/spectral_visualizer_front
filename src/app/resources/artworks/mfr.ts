@@ -16,11 +16,8 @@ const mfr: Artwork = {
     {
       "spectralType": "hsi",
       "spectralClass": "vnir",
+      "specification": "rsnPkL",
       "metadata": {
-        "capSys": "rsnPkL",
-        "illSys": null,
-        "filter": null,
-        "bands": "150",
         "hPix": "556",
         "vPix": "900"
       },
@@ -181,11 +178,8 @@ const mfr: Artwork = {
     {
       "spectralType": "rgb",
       "spectralClass": "pht",
+      "specification": "hllg",
       "metadata": {
-        "capSys": "nknD850",
-        "illSys": null,
-        "filter": null,
-        "bands": "3",
         "hPix": "518",
         "vPix": "703"
       },
@@ -194,11 +188,8 @@ const mfr: Artwork = {
     {
       "spectralType": "rgb",
       "spectralClass": "swir",
+      "specification": null,
       "metadata": {
-        "capSys": null,
-        "illSys": null,
-        "filter": null,
-        "bands": null,
         "hPix": null,
         "vPix": null
       },
@@ -207,11 +198,8 @@ const mfr: Artwork = {
     {
       "spectralType": "rgb",
       "spectralClass": "vnir",
+      "specification": null,
       "metadata": {
-        "capSys": null,
-        "illSys": null,
-        "filter": null,
-        "bands": null,
         "hPix": null,
         "vPix": null
       },

@@ -7,6 +7,7 @@ import type {
   CapSysCode,
   IllSysCode,
   FilterCode,
+  TechnicalMetadataCode,
 } from "@/app/resources/types";
 
 export const visualizationModes: Record<VisualModeCode, string> = {
@@ -45,15 +46,18 @@ export const artworkMetadataLabels: Record<ArtworkMetadataCode, string> = {
 };
 
 export const imageMetadataLabels: Record<ImageMetadataCode, string> = {
-  capSys: "Capturing system",
-  illSys: "Illumination system",
-  filter: "Filter",
-  bands: "Bands",
   hPix: "Horizontal pixels",
   vPix: "Vertical pixels",
 };
 
-export const CapSysLabels: Record<CapSysCode, string> = {
+export const technicalMetadatLabels: Record<TechnicalMetadataCode, string> = {
+  capSys: "Equipment",
+  illSys: "Illumination",
+  filter: "Filter",
+  bands: "Bands",
+};
+
+export const capSysLabels: Record<CapSysCode, string> = {
   spcIQ: "Specim IQ",
   rsnPkL: "Resonon Pika L",
   rsnPkIR: "Resonon Pika IR+",
@@ -63,15 +67,18 @@ export const CapSysLabels: Record<CapSysCode, string> = {
   xncsXv: "Xenics Xeva",
 };
 
-export const IllSysLabels: Record<IllSysCode, string> = {
+export const illSysLabels: Record<IllSysCode, string> = {
   hllg: "Hallogen",
+  hllgUv: "Hallogen + UV",
   uv: "UV",
   led: "LED",
 };
 
-export const FilterLabels: Record<FilterCode, string> = {
+export const filterLabels: Record<FilterCode, string> = {
   visSwir: "VIS+SWIR cut-off (Robertina UV)",
   uvSwir: "UV+SWIR cut-off (Robertina VIS)",
   uvVis: "UV+VIS cut-off (Robertina IR)",
   uvIr: "UV+IR cut-off (Robertina VIS)",
+  intf: "Interference Filter",
+  none: "None",
 };

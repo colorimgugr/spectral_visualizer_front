@@ -14,16 +14,13 @@ const transRaf: Artwork = {
   },
   "spectralImages": [
     {
+      "spectralType": "hsi",
+      "spectralClass": "swir",
+      "specification": null,
       "metadata": {
-        "capSys": "rsnPkIR",
-        "illSys": "hllg",
-        "filter": "-",
-        "bands": "161",
         "hPix": "2409",
         "vPix": "640"
       },
-      "spectralType": "hsi",
-      "spectralClass": "swir",
       "path": "/artworks/transRaf/hsi/swir",
       "names": [
         "1000nm.png",
@@ -190,16 +187,13 @@ const transRaf: Artwork = {
       ]
     },
     {
+      "spectralType": "hsi",
+      "spectralClass": "vnir",
+      "specification": "rsnPkL",
       "metadata": {
-        "capSys": "rsnPkL",
-        "illSys": "hllg",
-        "filter": "-",
-        "bands": "121",
         "hPix": "736",
         "vPix": "516"
       },
-      "spectralType": "hsi",
-      "spectralClass": "vnir",
       "path": "/artworks/transRaf/hsi/vnir",
       "names": [
         "1000nm.png",
@@ -326,16 +320,13 @@ const transRaf: Artwork = {
       ]
     },
     {
+      "spectralType": "rgb",
+      "spectralClass": "pht",
+      "specification": "hllg",
       "metadata": {
-        "capSys": "nknD850",
-        "illSys": "hllg",
-        "filter": "uvIr",
-        "bands": "3",
         "hPix": "1980",
         "vPix": "2899"
       },
-      "spectralType": "rgb",
-      "spectralClass": "pht",
       "source": "/artworks/transRaf/rgb/pht.dzi"
     }
   ]

@@ -20,13 +20,9 @@ export type ArtworkMetadataCode =
   | "width"
   | "height";
 
-export type ImageMetadataCode =
-  | "capSys"
-  | "illSys"
-  | "filter"
-  | "bands"
-  | "hPix"
-  | "vPix";
+export type ImageMetadataCode = "hPix" | "vPix";
+
+export type TechnicalMetadataCode = "capSys" | "illSys" | "filter" | "bands";
 
 export type ArtworkMetadata = Partial<
   Record<ArtworkMetadataCode, string | null>
@@ -34,10 +30,13 @@ export type ArtworkMetadata = Partial<
 
 export type ImageMetadata = Partial<Record<ImageMetadataCode, string | null>>;
 
+export type TechnicalMetadata = Partial<Record<TechnicalMetadataCode, string>>;
+
 export type SpectralImgData = {
-  metadata?: ImageMetadata;
+  metadata: ImageMetadata;
   spectralType: SpectralTypeCode;
   spectralClass: SpectralClassCode;
+  specification: CapSysCode | IllSysCode | null;
   source?: string;
   path?: string;
   names?: string[];
@@ -46,7 +45,7 @@ export type SpectralImgData = {
 export type Artwork = {
   id: string;
   name: string;
-  metadata?: ArtworkMetadata;
+  metadata: ArtworkMetadata;
   spectralImages: SpectralImgData[];
 };
 
@@ -69,6 +68,25 @@ export type CapSysCode =
   | "pxlTqSpc"
   | "xncsXv";
 
-export type IllSysCode = "hllg" | "uv" | "led";
+export type IllSysCode = "hllg" | "hllgUv" | "uv" | "led";
 
-export type FilterCode = "visSwir" | "uvSwir" | "uvVis" | "uvIr";
+export type FilterCode =
+  | "visSwir"
+  | "uvSwir"
+  | "uvVis"
+  | "uvIr"
+  | "intf"
+  | "none";
+
+export type TechnicalMetadataEntry =
+  | TechnicalMetadata
+  | Partial<Record<CapSysCode | IllSysCode, TechnicalMetadata>>;
+
+export type SpectralTypeMetadata = Partial<
+  Record<SpectralClassCode, TechnicalMetadataEntry>
+>;
+
+export type TechnicalMetadataMap = Record<
+  SpectralTypeCode,
+  SpectralTypeMetadata
+>;
