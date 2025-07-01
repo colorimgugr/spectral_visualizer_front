@@ -182,9 +182,6 @@ def build_metadata_from_labels(title, labels: Dict[str, str]) -> Dict[str, str]:
     elif (title == "rgb-pht"):
          specification  = prompt_specification_field("Illumination System",
                                                      {"hllg": "Hallogen", "led": "LED"})
-    elif (title == "msi-vnir" or title == "msi-uvf"):
-         specification  = prompt_specification_field("Illumination System",
-                                                     {"hllg": "Hallogen", "uv": "UV"})
     metadata = {}
     for key, label in labels.items():
         is_yes_no = key in ["rest", "varn"]

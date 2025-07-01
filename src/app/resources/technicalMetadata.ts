@@ -14,14 +14,8 @@ export const technicalMetadata: TechnicalMetadataMap = {
     uvr: { capSys: "nknD850", illSys: "uv", filter: "visSwir", bands: "1" },
   },
   msi: {
-    uvf: {
-      hllg: { capSys: "pxlTqSpc", illSys: "hllg", filter: "intf", bands: "16" },
-      uv: { capSys: "pxlTqSpc", illSys: "uv", filter: "intf", bands: "16" },
-    },
-    vnir: {
-      hllg: { capSys: "pxlTqSpc", illSys: "hllg", filter: "intf", bands: "16" },
-      uv: { capSys: "pxlTqSpc", illSys: "uv", filter: "intf", bands: "16" },
-    },
+    uvf: { capSys: "pxlTqSpc", illSys: "uv", filter: "intf", bands: "16" },
+    vnir: { capSys: "pxlTqSpc", illSys: "hllg", filter: "intf", bands: "16" },
   },
   hsi: {
     uvis: { capSys: "rsnPkUV", illSys: "hllg", filter: "none", bands: "95" },

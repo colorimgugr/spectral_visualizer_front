@@ -5,11 +5,11 @@ import type {
 
 import mdv from "@/app/resources/artworks/mdv";
 import madFolgRaf from "@/app/resources/artworks/madFolgRaf";
-import edt from "@/app/resources/artworks/edt";
 import transRaf from "@/app/resources/artworks/transRaf";
 import benClx from "@/app/resources/artworks/benClx";
 import martPrzAya from "@/app/resources/artworks/martPrzAya";
+import escTab from "@/app/resources/artworks/escTab";
 
 export const artworks: Artwork[] = [
-  mdv, madFolgRaf, edt, transRaf, benClx, martPrzAya
+  mdv, madFolgRaf, transRaf, benClx, martPrzAya, escTab
 ];
