@@ -18,31 +18,54 @@ This project was built with:
 
 ### 📦 How to install the project
 
-1. **Install Node.js**  
+1. **Install Git**  
+   Download and install Git from [git-scm.com](https://git-scm.com/downloads)
+   - After installation, check if it's correctly installed by running:
+   ```bash
+   git --version
+   ```
+   
+2. **Install Node.js**  
    Download and install Node.js from [nodejs.org](https://nodejs.org/) (recommended: LTS version).
-
-2. **Clone the repository**  
+   ```bash
+   node --version
+   ```
+   
+3. **Clone the repository**  
    Open a terminal and run:
    ```bash
    git clone https://github.com/colorimgugr/spectral_visualizer_front.git
    cd spectral_visualizer_front
-
-3. **Install the dependencies**
+   ```
+   
+4. **Install the dependencies**
    ```bash
    npm install
-
-3. **Start the development server**
+   ```
+   
+5. **Start the development server**
    ```bash
    npm run dev
+   ```
 
 Open [http://localhost:3000](http://localhost:3000) in your browser to see the app locally.
 
 ### 🚀 Deployment
+This project is hosted online using **Vercel**, a platform that makes it easy to publish web apps.
+
+When you **push your code to GitHub**, Vercel automatically deploys (publishes) the latest version of the site online. 
+
 Deploy to Vercel with a single click: [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/colorimgs-projects/multispectral-visualizer)
 
-The deployment is automatically launch one you do a push in github, it will take a minute to start. The status should be as Ready
+> 💡 **How it works:**  
+> Every time you **make changes**, **commit**, and **push** to GitHub, Vercel will:
+> - Build your project  
+> - Publish a new version of the website  
+>
+> You’ll see the status as **"Ready"** if the deployment is successful.  
+> ⚠️ If there's an error (e.g. typo or bug), the deployment won't update — make sure the status shows **Ready** after each push!
 
-## License
+### License
 Distributed under the MIT License. See LICENSE.txt for more information.
 
 ---
