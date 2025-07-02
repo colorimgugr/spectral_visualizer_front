@@ -1,13 +1,13 @@
 <?xml version="1.0"?>
-<image xmlns="http://www.vips.ecs.soton.ac.uk//dzsave" date="2025-07-01T14:27:31.817560+02" version="8.16.0">
+<image xmlns="http://www.vips.ecs.soton.ac.uk//dzsave" date="2025-07-02T13:38:34.263187+02" version="8.16.0">
   <properties>
     <property>
       <name>width</name>
-      <value type="gint">5512</value>
+      <value type="gint">8280</value>
     </property>
     <property>
       <name>height</name>
-      <value type="gint">8280</value>
+      <value type="gint">5512</value>
     </property>
     <property>
       <name>bands</name>
@@ -55,7 +55,7 @@
     </property>
     <property>
       <name>exif-ifd0-Orientation</name>
-      <value type="VipsRefString">8 (Left-bott, Short, 1 components, 2 bytes)</value>
+      <value type="VipsRefString">1 (Top-left, Short, 1 components, 2 bytes)</value>
     </property>
     <property>
       <name>exif-ifd0-XResolution</name>
@@ -64,6 +64,10 @@
     <property>
       <name>exif-ifd0-YResolution</name>
       <value type="VipsRefString">300/1 (300, Rational, 1 components, 8 bytes)</value>
+    </property>
+    <property>
+      <name>exif-ifd0-ResolutionUnit</name>
+      <value type="VipsRefString">2 (Inch, Short, 1 components, 2 bytes)</value>
     </property>
     <property>
       <name>exif-ifd0-Software</name>
@@ -80,10 +84,6 @@
     <property>
       <name>exif-ifd0-Copyright</name>
       <value type="VipsRefString">Copyright  (Photographer) - [None] (Editor) (Copyright  (Photographer) - [None] (Editor), ASCII, 55 components, 55 bytes)</value>
-    </property>
-    <property>
-      <name>exif-ifd0-ResolutionUnit</name>
-      <value type="VipsRefString">2 (Inch, Short, 1 components, 2 bytes)</value>
     </property>
     <property>
       <name>exif-ifd1-Compression</name>
@@ -114,6 +114,10 @@
       <value type="VipsRefString">100 (100, Short, 1 components, 2 bytes)</value>
     </property>
     <property>
+      <name>exif-ifd2-ExifVersion</name>
+      <value type="VipsRefString">Exif Version 2.1 (Exif Version 2.1, Undefined, 4 components, 4 bytes)</value>
+    </property>
+    <property>
       <name>exif-ifd2-DateTimeOriginal</name>
       <value type="VipsRefString">2024:10:28 17:14:40 (2024:10:28 17:14:40, ASCII, 20 components, 20 bytes)</value>
     </property>
@@ -134,14 +138,6 @@
       <value type="VipsRefString">Captured by Color Imaging Lab (Captured by Color Imaging Lab, Undefined, 44 components, 44 bytes)</value>
     </property>
     <property>
-      <name>exif-ifd2-LensModel</name>
-      <value type="VipsRefString">Nikon AF Nikkor 50mm f/1.8D (Nikon AF Nikkor 50mm f/1.8D, ASCII, 28 components, 28 bytes)</value>
-    </property>
-    <property>
-      <name>exif-ifd2-ExifVersion</name>
-      <value type="VipsRefString">Exif Version 2.1 (Exif Version 2.1, Undefined, 4 components, 4 bytes)</value>
-    </property>
-    <property>
       <name>exif-ifd2-FlashpixVersion</name>
       <value type="VipsRefString">FlashPix Version 1. (FlashPix Version 1., Undefined, 4 components, 4 bytes)</value>
     </property>
@@ -150,8 +146,20 @@
       <value type="VipsRefString">65535 (65535, Short, 1 components, 2 bytes)</value>
     </property>
     <property>
+      <name>exif-ifd2-PixelXDimension</name>
+      <value type="VipsRefString">8280 (8280, Long, 1 components, 4 bytes)</value>
+    </property>
+    <property>
+      <name>exif-ifd2-PixelYDimension</name>
+      <value type="VipsRefString">5512 (5512, Long, 1 components, 4 bytes)</value>
+    </property>
+    <property>
+      <name>exif-ifd2-LensModel</name>
+      <value type="VipsRefString">Nikon AF Nikkor 50mm f/1.8D (Nikon AF Nikkor 50mm f/1.8D, ASCII, 28 components, 28 bytes)</value>
+    </property>
+    <property>
       <name>orientation</name>
-      <value type="gint">8</value>
+      <value type="gint">1</value>
     </property>
     <property>
       <name>vips-sequential</name>

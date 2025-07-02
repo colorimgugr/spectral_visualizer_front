@@ -27,7 +27,7 @@ import BlendImages from "@/components/BlendImages";
 import FalseRGBImages from "@/components/FalseRGBImages";
 
 export default function Home() {
-  const [selectedMode, setSelectedMode] = useState<VisualModeCode>("single");
+  const [selectedMode, setSelectedMode] = useState<VisualModeCode | null>(null);
 
   const [selectedArtwork, setSelectedArtwork] = useState<Artwork | null>(null);
   const [selectedImageLeft, setSelectedImageLeft] =
@@ -53,8 +53,6 @@ export default function Home() {
   useEffect(() => {
     if (!selectedArtwork) return;
 
-    setSelectedMode("single");
-
     const rgbMonoImages = selectedArtwork.spectralImages.filter(
       (img) => img.spectralType === "rgb" || img.spectralType === "mono"
     );
@@ -71,8 +69,15 @@ export default function Home() {
     const selectedImageRight = otherImages[0] ?? rgbMonoImages[1] ?? null;
     setSelectedImageLeft(selectedImageLeft);
     setSelectedImageRight(selectedImageRight);
-    
   }, [selectedArtwork]);
+
+  useEffect(() => {
+    const modes = getVisualizationModeOptions();
+
+    if (modes.length > 0) {
+      setSelectedMode(modes[0].value as VisualModeCode);
+    }
+  }, [rgbMonoImages, filteredSpectralImages]);
 
   const getArtworksOptions = () => {
     return artworks
@@ -183,8 +188,7 @@ export default function Home() {
           fillWidth
           horizontal={isLargeScreen ? "start" : "center"}
           vertical="center"
-          flex="1"
-          padding="m"
+          flex="2"
         >
           {selectedArtwork && (
             <Heading variant="heading-strong-xl" onBackground="info-weak">
@@ -193,7 +197,7 @@ export default function Home() {
           )}
         </Column>
         <Row center gap="s" mobileDirection="column">
-          {selectedArtwork && (
+          {selectedArtwork && selectedMode && (
             <>
               <Column fillWidth flex="1">
                 <Select
