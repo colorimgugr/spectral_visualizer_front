@@ -70,63 +70,153 @@ Distributed under the MIT License. See LICENSE.txt for more information.
 
 ---
 
-## 🖼️ Part 2: Image Structure & Artwork Data
 
-This project uses **OpenSeaDragon**, which requires image tiles in a specific format. Here’s how to prepare your artwork data and imagery.
+## 🗃️ Part 2: Understanding the code
+This section explains the project structure, how artwork images are classified, the folder organization, technical metadata, spectral files, and visualization modes. This is important when uploading new artworks or editing existing ones.
 
-### 🗂️ Folder structure
-All images and artwork metadata are placed inside the public/artworks/ folder. Each artwork must have its own folder, named with its artwork ID. Th
+---
+
+### 🖼️ Codes and Labels
+You can find the codes and corresponding labels used in the project below.  
+- The **codes** are used internally for folder names and program logic.  
+- The **labels** are the user-friendly names displayed on the website.
+
+- 👉 The full list of **codes** is in the [types.ts](https://github.com/colorimgugr/spectral_visualizer_front/blob/main/src/app/resources/types.ts) file.
+- 👉 The full list of **labels** is in the [labels.ts](https://github.com/colorimgugr/spectral_visualizer_front/blob/main/src/app/resources/labels.ts) file.
+
+> ⚠️ **Warning:** If you edit these files, be very careful! They contain critical data used throughout the entire project.
+
+---
+
+### 🖼️ Classification and nomenclature
+
+Artwork images are classified by two criteria: **spectral type** and **spectral class**.
+
+- **Spectral type** codes (used for subfolder names):  
+  `"rgb" | "mono" | "hsi" | "msi"`
+
+- **Spectral class** codes (used for further classification inside subfolders):  
+  `"vnir" | "swir" | "uvis" | "pht" | "uvr" | "uvf" | "irrs" | "irrl"`
+
+The spectral class helps define whether images are simple images, `.dzi` files with tiles, or false RGB images organized as:  
+`[class]/[wavelength]nm.png`
+
+These classifications are essential for the program to correctly identify and use the images.
+
+> ⚠️ **Important:** Always use lowercase letters for these codes.
+
+---
+
+### 🗂️ Images folder structure
+All artwork's images are placed inside the `public/artworks/` folder. Each artwork has its own folder named by its artwork ID, following this structure `[artworkID]/[type]`:
   ```bash
     public/
     └── artworks/
-        └── artwork123/
-            ├── RGB/
-            │   └── visible/
-            │       └── image.dzi
-            ├── MSI/
-            │   └── vnir/
-            │       ├── 450nm.png
+        └── artworkId/
+            ├── mono/
+            │   └── irrl
+	    ├── rgb/
+            │   ├── irrs
+            │   ├── pht
+            │   ├── uvf
+            │   └── uvr
+            ├── msi/
+            │   ├── uvf
+            │   │   └── 550nm.png
+            │   └── vnir
             │       └── 550nm.png
-            └── artwork123.json
+            └── hsi/
+                ├── swir
+                │   └── 550nm.png
+                └── vnir
+                    └── 550nm.png
   ```
-👉 You can find the official types and classes in the [types.ts](https://github.com/colorimgugr/spectral_visualizer_front/blob/main/src/app/resources/types.ts) file.
+
+## 🖼 Part 3:Image visualization with OpenSeaDragon
+This project uses **OpenSeaDragon** for image visualization. OpenSeaDragon can display simple images like PNG or JPG, but using large images without tiling can severely impact performance. 
+
+As explained in the [OpenSeaDragon Zooming Images documentation](https://openseadragon.github.io/examples/creating-zooming-images/):
+
+> *"OpenSeadragon works with a variety of zooming image formats. These zooming images generally consist of a number of individual tiles, organized so they can be accessed as needed. If you have a large image you'd like to zoom, you'll need to convert it first."*
+
+In this project, the image tiles used are in **Deep Zoom Image (DZI)** format.
+
+> For more info on simple images, see:  
+> https://openseadragon.github.io/examples/tilesource-image/  
+> For more info on Deep Zoom Images, see:  
+> https://openseadragon.github.io/examples/tilesource-dzi/
+
+### 🖼 Convert to DZI format
+To convert your images to DZI format, you can use [libvips](https://libvips.github.io/libvips/) or any other tool recommended by the [OpenSeaDragon Zooming Images documentation](https://openseadragon.github.io/examples/creating-zooming-images/). The original images can be PNG, JPG, or any format supported by libvips. Remember to assign the corresponding name to the output base on the class of the image.
+
+```bash
+   vips dzsave input.png output
+```
+
+This command will generate:
+   - A .dzi file
+   - A folder with image tiles (used by OpenSeaDragon)
+   
+> ⚠️ Note about image rotation:
+> If the converted image appears rotated, it's likely due to EXIF orientation metadata from your camera or phone.
+> To fix this, apply autorotation before converting:
+> ```bash
+>    vips autorot input.png temp.png && vips dzsave temp.png output
+> ```
+
+## 🖼 Part 4: Upload artworks
+
+Here’s how to prepare and upload the artwork data and imagery.
 
 ### 🧾 How to prepare and add images
-1. Create a folder inside public/artworks/ with your artwork ID.
-2. Inside that folder, create subfolders for RGB, Mono, MSI, or HSI as needed.
-3. Follow the rules for each image type:
-     For Mono and RGB:
-         Convert the .png image to DZI format using libvips (must be installed):
-               vips dzsave input.png output-name
-      This command will produce:
-           a .dzi file
-           a folder with image tiles
-   when using vips dzsave, images may appear rotated if the original image contains EXIF orientation metadata (common in images from cameras or phones). By default, vips may not respect or apply that orientation.
+1. Create a folder inside `public/artworks/` with the **artworkID** as the folder name.  
+2.  Inside that folder, create subfolders for the image types you want to include:
+   - `rgb/`
+   - `mono/`
+   - `msi/`
+   - `hsi/`  
+   > Follow the folder structure shown [above](####images-folder-structure)
+     
+3. Image-specific instructions:
+   #### ✅ For mono and rgb images
+   These images are used for the **Single, Blend, and Compare** modes. They can be either simple imagse like `.png` or `.jpg`, or zooming images like a `.dzi` file and its folder.
+    
+   1. Place the image inside the corresponding type folder (`rgb` or `mono`) with the appropriate class name as the file name (`irrs`, `pht`, `uvf`, or `uvr` for `rgb`, and `irrl` for `mono`).
+   
+   > See [Image Visualization with OpenSeaDragon](##image-visualization-with-openseadragon) for better understanding of the image fomat.
 
-	To fix this and ensure the Deep Zoom tiles are exported with the correct visual orientation, you can use the autorotate operation before saving.
-	vips autorot: applies the EXIF orientation tag (if any) and saves the correctly rotated image.
-	Then vips dzsave generates the tiles from that corrected image.
-		vips autorot image-name.png temp-image.png && vips dzsave temp-image.png output-folder
+   #### 🌈 For MSI and HSI:
+   These images are used for the **FalseRGB** mode and can be in `.png` or `.jpg` format.
 
-     For MSI and HSI:
-           Add .png files named with the wavelength:
-               450nm.png, 550nm.png, 680nm.png
+   1. Create a subfolder for the spectral class inside the `msi/` or `hsi/` folder, for example:  
+   - `vnir/`  
+   - `uvis/`  
+   - `swir/`  
+  
+   2. Inside these subfolders, add your images named with their wavelength, e.g.:
+   	`450nm.png, 550nm.jpg, 680nm.png`
 
+   
 ### 🧪 How to update artwork metadata
-After placing the images:
+After placing the images, it's necessary to **connect them with metadata** so the program can correctly load and display them. This is done by generating a **spectral file** that contains paths and technical data about each image.
 
-Henerate the ts file with the metadata by running the following Python script in the project root:
+1. Run the following Python script from the project root to generate the TypeScript metadata file:
   ```bash
   python build_spectral_file.py
   ```
-It'll generate a file in the src/app/resources/artowrks/[id]. Here you can manually edit the artwork metadata. It will also going to add the arwork to the [allArtworks.ts](https://github.com/colorimgugr/spectral_visualizer_front/blob/main/src/app/resources/allArtworks.ts) 
+This will:
+- ✅ Generate a file in `src/app/resources/artworks/[artworkID].ts`
+- ✅ Automatically register the artwork in [allArtworks.ts] (https://github.com/colorimgugr/spectral_visualizer_front/blob/main/src/app/resources/allArtworks.ts).
 
-In case you want to temporary remove 
+> 💡 You can manually edit the generated file to update any metadata. All artwork metadata files are located in [src/app/resources/artworks/](https://github.com/colorimgugr/spectral_visualizer_front/blob/main/src/app/resources/artworks).
 
-### 🗃️ Important files & folders
 
-File / Folder	Purpose
-public/artworks/	All images and their structure go here.
-build_spectral_file.py	Python script to build or update metadata for artworks.
-src/app/resources/types.ts	Definitions of image types and spectral bands.
-src/app/resources/	Contains editable configs, constants, and metadata helpers. (You can specify the content of these later.)
+### 🧹 Temporarily Removing an Artwork
+If you want to **temporarily remove** an artwork, follow these steps:
+1. ❌ Delete or move its image folder from `public/artworks`.
+2. ❌ Remove its ID from the [allArtworks.ts] (https://github.com/colorimgugr/spectral_visualizer_front/blob/main/src/app/resources/allArtworks.ts) list.
+
+> ✅ To restore it later, just:
+> 1. Place the image folder back into public/artworks/
+> 2. Add its ID back to [allArtworks.ts] (https://github.com/colorimgugr/spectral_visualizer_front/blob/main/src/app/resources/allArtworks.ts)
+> No need to regenerate the spectral file unless you’ve made changes to the metadata.
