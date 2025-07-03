@@ -2,9 +2,9 @@ import { Artwork } from "@/app/resources/types";
 
 const matVerOrg: Artwork = {
   "id": "matVerOrg",
-  "name": "Maternidad de Veronesse (Original)",
+  "name": "Maternidad de Veronese (Original)",
   "metadata": {
-    "author": "Paolo Veronesse",
+    "author": "Paolo Veronese",
     "date": "XVI Century",
     "rest": "No",
     "varn": null,
