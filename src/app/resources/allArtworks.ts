@@ -12,8 +12,7 @@ import matVerOrg from "@/app/resources/artworks/matVerOrg";
 import matVerRep from "@/app/resources/artworks/matVerRep";
 import matVerRest from "@/app/resources/artworks/matVerRest";
 import matVerSket from "@/app/resources/artworks/matVerSket";
-import mona from "@/app/resources/artworks/mona";
+// import mona from "@/app/resources/artworks/mona";
 
 export const artworks: Artwork[] = [
-  madFolgRaf, transRaf, benClx, martPrzAya, escTab, matVerOrg, matVerRep, matVerRest, matVerSket, mona
-];
+  madFolgRaf, transRaf, benClx, martPrzAya, escTab, matVerOrg, matVerRep, matVerRest, matVerSket];
