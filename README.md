@@ -213,10 +213,10 @@ If you want to **update** the metadata of an existing artwork, you have two opti
 1. Navigate to the artwork metadata file (e.g., [`src/app/resources/artworks/[artworkID].ts`](https://github.com/colorimgugr/spectral_visualizer_front/tree/main/src/app/resources/artworks)).
 2. Click the ✏️ **pencil icon** in the top-right corner of the file view to enter edit mode.
 3. Make your changes.
-4. Scroll down and click **"Commit changes"** to save.
+4. Click **"Commit changes"** to save.
 
 **Option B – Edit locally and push**
-1. First, make sure your local repository is up to date:
+1. First, make sure your local repository is up to date. Open a terminal in the root folder of the project and run:
    ```bash
    git pull
    git status
@@ -238,7 +238,7 @@ If you want to **temporarily remove** an artwork, follow these steps:
 
 
 ### ☁️ 3. Upload Everything to GitHub
-Once you’ve added your images and metadata, and confirmed everything works correctly **locally**. Then, follow these steps to upload your changes to GitHub:
+Once you’ve added your images and metadata, and confirmed everything works correctly **locally**. Then, open a terminal in the root folder of the project and follow these steps to upload your changes to GitHub:
 1. Stage all the new and modified files:
    ```bash
    git add .
