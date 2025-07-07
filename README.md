@@ -44,6 +44,8 @@ This project was built with:
    ```bash
    git clone https://github.com/colorimgugr/spectral_visualizer_front.git
    ```
+   > ⚠️ If you receive an error and the folder is empty, move the location and don't put the project inside any cloud like Google Drive.
+
 6. **Install the dependencies**
    After downloading the repository, move to the project folder:
    ```bash
@@ -52,6 +54,19 @@ This project was built with:
    ```bash
    npm install
    ```
+   > ⚠️ If you receive an error, try to execute the terminal as "Administrator".
+   > 🪟 On Windows:
+   > 1. Click the Start menu.
+   > 2. Type cmd or Terminal.
+   > 3. Right-click the result and select “Run as administrator”.
+   > 
+   > 🍎 On macOS or 🐧 Linux:
+   > 1. Open the Terminal.
+   > 2. Add sudo before the command you want to run:
+   >    ```bash
+   >    sudo npm run dev
+   >    ```
+   > 3. Enter your computer password when prompted.
 
 ## 🧰 Part 2: Preview and Publish the Website
 ### 🖥️ Preview the Website on Your Computer (Offline)
@@ -67,11 +82,13 @@ Running the website locally means you're launching the project on your own compu
 3. Open [http://localhost:3000](http://localhost:3000) in your browser to see it.
 
 ### 🚀 Publish the Website Online (Deployment)
-This project is hosted online using **Vercel**, a platform that makes it easy to publish web apps.
+This project is hosted online using **Vercel**, a platform that makes it easy to publish websites.
 
 When you **push your code to GitHub**, Vercel automatically deploys (publishes) the latest version of the site online. 
 
-Deploy to Vercel with a single click: [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/colorimgs-projects/multispectral-visualizer)
+You can check it here: [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/colorimgs-projects/multispectral-visualizer)
+
+In the tab `Deployments`, you can find all the commits done.
 
 > 💡 **How it works:**  
 > Every time you **make changes**, **commit**, and **push** to GitHub, Vercel will:
@@ -79,7 +96,7 @@ Deploy to Vercel with a single click: [![Deploy with Vercel](https://vercel.com/
 > - Publish a new version of the website  
 >
 > You’ll see the status as **"Ready"** if the deployment is successful.  
-> ⚠️ If there's an error (e.g. typo or bug), the deployment won't update — make sure the status shows **Ready** after each push!
+> ⚠️ If there's an error (e.g., typo or bug), the deployment won't update — make sure the status shows **Ready** after each push!
 
 
 ---
