@@ -251,5 +251,10 @@ Once you’ve added your images and metadata, and confirmed everything works cor
   ```bash
   git push
   ```
+4. ✅ Make sure all your changes are reflected on the live website:
+   - Go to the **Deployment** section and confirm that the latest commit is marked as **"Ready"**.
+   - Then, visit the final website to verify that everything looks and works as expected.
+
 > 📘 For more details on using Git and GitHub, visit the official documentation:
 [https://docs.github.com/en/get-started](https://docs.github.com/en/get-started)
+
