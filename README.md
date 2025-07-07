@@ -34,19 +34,29 @@ This project was built with:
    
 3. **Install Python**  
    Download and install Python from [python.org](https://www.python.org/downloads/). This is necessary to run the script to add the artwork's metadata.
+   - During installation, make sure to check the box that says "Add Python to PATH".
    - After installation, check if it's correctly installed by opening a terminal and running:
+   
    ```bash
    python --version
    ```
+   📦 Install questionary
+
+   Once Python is installed, run the following command to install the required Python package:
+   ```bash
+   pip install questionary
+   ```
+
+   This package is used by the script to interactively create the artwork metadata.
      
-4. **Clone the repository**  
+5. **Clone the repository**  
    Open a terminal where you want to have your local repository and run:
    ```bash
    git clone https://github.com/colorimgugr/spectral_visualizer_front.git
    ```
    > ⚠️ If you receive an error and the folder is empty, move the location and don't put the project inside any cloud like Google Drive.
 
-5. **Install the dependencies** 
+6. **Install the dependencies** 
 
    After downloading the repository, move to the project folder:
    ```bash
@@ -132,7 +142,6 @@ These classifications are essential for the program to correctly identify and us
 
 > ⚠️ **Important:** Always use lowercase letters for these codes.
 
-
 ### 🗂️ Images folder structure
 All artwork images are placed inside the [public/artworks/](https://github.com/colorimgugr/spectral_visualizer_front/tree/main/public/artworks) folder. Each artwork has its folder named by its artwork ID, following this structure `[artworkID]/[type]`:
   ```bash
@@ -157,6 +166,10 @@ All artwork images are placed inside the [public/artworks/](https://github.com/c
                 └── vnir
                     └── 550nm.png
   ```
+
+### 🖼️ Technical metadata
+You can find the imaging techniques data in the [technicalMetadata.ts](https://github.com/colorimgugr/spectral_visualizer_front/blob/main/src/app/resources/technicalMetadata.ts).
+
 
 ---
 ## 🖼 Part 4: Image visualization with OpenSeaDragon
@@ -290,7 +303,8 @@ If you want to **update** the metadata of an existing artwork, you have two opti
 #### 🧹 Temporarily removing an artwork
 If you want to **temporarily remove** an artwork, follow these steps:
 1. ❌ Delete or move its image folder from `public/artworks`.
-2. ❌ Remove its ID from the [allArtworks.ts](https://github.com/colorimgugr/spectral_visualizer_front/blob/main/src/app/resources/allArtworks.ts) list.
+2. ❌ Comment the import of the artwork from [allArtworks.ts] (use //).
+3. ❌ Remove its ID from the [allArtworks.ts](https://github.com/colorimgugr/spectral_visualizer_front/blob/main/src/app/resources/allArtworks.ts) list.
 
 > ✅ To restore it later, just:
 > 1. Place the image folder back into `public/artworks/`.
@@ -315,10 +329,10 @@ Once you’ve added your images and metadata, and confirmed everything works cor
 4. ✅ Make sure all your changes are reflected on the live website:
    - Go to the **Deployment** section and confirm that the latest commit is marked as **"Ready"**.
    - Then, visit the final website to verify that everything looks and works as expected.
+5. Check how much space you have left [here](https://github.com/settings/repositories).
 
 > 📘 For more details on using Git and GitHub, visit the official documentation:
 [https://docs.github.com/en/get-started](https://docs.github.com/en/get-started)
-
 
 ## License
 Distributed under the MIT License. See LICENSE.txt for more information.
