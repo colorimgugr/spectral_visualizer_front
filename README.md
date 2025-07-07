@@ -5,9 +5,9 @@ You can see it live at [spectral-visualizer.vercel.app](https://spectral-visuali
 
 ---
 
-## 🧰 Part 1: Project Setup & Installation
+## 🧰 Part 1: Project setup & installation
 
-### 🔧 Technologies Used
+### 🔧 Technologies used
 This project was built with:
 
 - [React](https://reactjs.org/)
@@ -38,27 +38,35 @@ This project was built with:
    ```bash
    python --version
    ```
-   
-6. **Clone the repository**  
+     
+5. **Clone the repository**  
    Open a terminal where you want to have your local repository and run:
    ```bash
    git clone https://github.com/colorimgugr/spectral_visualizer_front.git
-   cd spectral_visualizer_front
    ```
-   
-7. **Install the dependencies**
+6. **Install the dependencies**
+   After downloading the repository, move to the project folder:
+   ```bash
+   cd [path_to_folder]/spectral_visualizer_front
+   ```
    ```bash
    npm install
    ```
-   
-8. **Start the development server**
+
+## 🧰 Part 2: Preview and Publish the Website
+### 🖥️ Preview the Website on Your Computer (Offline)
+Running the website locally means you're launching the project on your own computer, so you can preview and test it before pushing any changes online.
+1. Open a terminal in the root folder of the project 'spectral_visualizer_front'.
+   ```bash
+   cd [path_to_folder]
+   ```
+2. Run the following command to start the local preview:
    ```bash
    npm run dev
    ```
+3. Open [http://localhost:3000](http://localhost:3000) in your browser to see it.
 
-Open [http://localhost:3000](http://localhost:3000) in your browser to see the app locally.
-
-### 🚀 Deployment
+### 🚀 Publish the Website Online (Deployment)
 This project is hosted online using **Vercel**, a platform that makes it easy to publish web apps.
 
 When you **push your code to GitHub**, Vercel automatically deploys (publishes) the latest version of the site online. 
@@ -73,13 +81,11 @@ Deploy to Vercel with a single click: [![Deploy with Vercel](https://vercel.com/
 > You’ll see the status as **"Ready"** if the deployment is successful.  
 > ⚠️ If there's an error (e.g. typo or bug), the deployment won't update — make sure the status shows **Ready** after each push!
 
-### License
-Distributed under the MIT License. See LICENSE.txt for more information.
 
 ---
 
 
-## 🗃️ Part 2: Understanding the code
+## 🗃️ Part 3: Understanding the code
 This section explains the project structure, how artwork images are classified, the folder organization, technical metadata, spectral files, and visualization modes. This is important when uploading new artworks or editing existing ones.
 
 
@@ -133,7 +139,7 @@ All artwork images are placed inside the `public/artworks/` folder. Each artwork
   ```
 
 ---
-## 🖼 Part 3: Image visualization with OpenSeaDragon
+## 🖼 Part 4: Image visualization with OpenSeaDragon
 This project uses **OpenSeaDragon** for image visualization. OpenSeaDragon can display simple images as PNG or JPG, but using large images without tiling can severely impact performance. 
 
 As explained in the [OpenSeaDragon Zooming Images documentation](https://openseadragon.github.io/examples/creating-zooming-images/):
@@ -146,7 +152,7 @@ In this project, the image tiles used are in **Deep Zoom Image (DZI)** format.
 > For more info on Deep Zoom Images, see:  
 > https://openseadragon.github.io/examples/tilesource-dzi/
 
-### 🖼 Convert to DZI format
+### 📦 Convert to DZI format
 To convert your images to DZI format, you can use [libvips](https://libvips.github.io/libvips/) or any other tool recommended by the [OpenSeaDragon Zooming Images documentation](https://openseadragon.github.io/examples/creating-zooming-images/). The original images can be PNG, JPG, or any format supported by libvips. Remember to assign the corresponding name to the output based on the class of the image.
 ```bash
    vips dzsave input.png output
@@ -161,7 +167,7 @@ This command will generate:
 >    vips autorot input.png temp.png && vips dzsave temp.png output
 > ```
 
-## 🖼 Part 4: Upload artworks
+## 🖼 Part 5: Upload artworks
 Here’s how to prepare and upload the artwork data and imagery.
 
 ### 🧾 1. Prepare and add images
@@ -260,3 +266,6 @@ Once you’ve added your images and metadata, and confirmed everything works cor
 > 📘 For more details on using Git and GitHub, visit the official documentation:
 [https://docs.github.com/en/get-started](https://docs.github.com/en/get-started)
 
+
+## License
+Distributed under the MIT License. See LICENSE.txt for more information.
