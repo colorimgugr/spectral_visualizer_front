@@ -32,21 +32,22 @@ This project was built with:
    node --version
    ```
    
-4. **Install Python**  
+3. **Install Python**  
    Download and install Python from [python.org](https://www.python.org/downloads/). This is necessary to run the script to add the artwork's metadata.
    - After installation, check if it's correctly installed by opening a terminal and running:
    ```bash
    python --version
    ```
      
-5. **Clone the repository**  
+4. **Clone the repository**  
    Open a terminal where you want to have your local repository and run:
    ```bash
    git clone https://github.com/colorimgugr/spectral_visualizer_front.git
    ```
    > ⚠️ If you receive an error and the folder is empty, move the location and don't put the project inside any cloud like Google Drive.
 
-6. **Install the dependencies**
+5. **Install the dependencies** 
+
    After downloading the repository, move to the project folder:
    ```bash
    cd [path_to_folder]/spectral_visualizer_front
@@ -70,6 +71,7 @@ This project was built with:
 
 ## 🧰 Part 2: Preview and Publish the Website
 ### 🖥️ Preview the Website on Your Computer (Offline)
+
 Running the website locally means you're launching the project on your own computer, so you can preview and test it before pushing any changes online.
 1. Open a terminal in the root folder of the project 'spectral_visualizer_front'.
    ```bash
@@ -82,13 +84,13 @@ Running the website locally means you're launching the project on your own compu
 3. Open [http://localhost:3000](http://localhost:3000) in your browser to see it.
 
 ### 🚀 Publish the Website Online (Deployment)
-This project is hosted online using **Vercel**, a platform that makes it easy to publish websites.
 
+This project is hosted online using **Vercel**, a platform that makes it easy to publish websites.
 When you **push your code to GitHub**, Vercel automatically deploys (publishes) the latest version of the site online. 
 
 You can check it here: [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/colorimgs-projects/multispectral-visualizer)
 
-In the tab `Deployments`, you can find all the commits done.
+In the "Deployments" tab, you can find all the commits made.
 
 > 💡 **How it works:**  
 > Every time you **make changes**, **commit**, and **push** to GitHub, Vercel will:
@@ -123,6 +125,7 @@ Artwork images are classified by two criteria: **spectral type** and **spectral 
   `"rgb" | "mono" | "hsi" | "msi"`
 - **Spectral class** codes (used for further classification inside subfolders):  
   `"vnir" | "swir" | "uvis" | "pht" | "uvr" | "uvf" | "irrs" | "irrl"`
+
 The spectral class helps define whether images are simple images, `.dzi` files with tiles, or false RGB images organized as:  
 `[class]/[wavelength]nm.png`
 These classifications are essential for the program to correctly identify and use the images.
@@ -131,7 +134,7 @@ These classifications are essential for the program to correctly identify and us
 
 
 ### 🗂️ Images folder structure
-All artwork images are placed inside the `public/artworks/` folder. Each artwork has its folder named by its artwork ID, following this structure `[artworkID]/[type]`:
+All artwork images are placed inside the [public/artworks/](https://github.com/colorimgugr/spectral_visualizer_front/tree/main/public/artworks) folder. Each artwork has its folder named by its artwork ID, following this structure `[artworkID]/[type]`:
   ```bash
     public/
     └── artworks/
@@ -170,10 +173,43 @@ In this project, the image tiles used are in **Deep Zoom Image (DZI)** format.
 > https://openseadragon.github.io/examples/tilesource-dzi/
 
 ### 📦 Convert to DZI format
-To convert your images to DZI format, you can use [libvips](https://libvips.github.io/libvips/) or any other tool recommended by the [OpenSeaDragon Zooming Images documentation](https://openseadragon.github.io/examples/creating-zooming-images/). The original images can be PNG, JPG, or any format supported by libvips. Remember to assign the corresponding name to the output based on the class of the image.
+To convert your images to DZI format, you can use [libvips](https://libvips.github.io/libvips/) or any other tool recommended by the [OpenSeaDragon Zooming Images documentation](https://openseadragon.github.io/examples/creating-zooming-images/).
+
+> 💡 How to Install libvips on Windows
+> libvips is a fast image processing library needed for the project to handle image transformations efficiently.
+>
+> 📥 Step-by-step Installation:
+>
+> 1. Go to the official website: [(https://libvips.github.io/libvips/)](https://libvips.github.io/libvips/)
+> 2. Click on the “Download” tab.
+> 3. Scroll down to the Windows binaries link.
+> 4. Inside the "Assets", you'll find the vips-dev-w64-web-[version].zip to download
+> 5. Download the zip file (e.g., Source code (zip)).
+> 6. Unzip the file into a folder of your choice (e.g., C:\libvips).
+> 
+> ⚙️ Add libvips to your system PATH:
+>
+> 8. Open the Start menu, search for “Environment Variables”, and click on “Edit the system environment variables”.
+> 9. In the System Properties window, click “Environment Variables…”.
+> 10. Under System variables, find and select the variable called Path, then click Edit.
+> 11. Click New, and paste the full path to the vips-dev-xxx\bin folder.
+> 12. Click OK to close all windows.
+> 
+> ✅ To check that libvips is installed correctly:
+> Open a new terminal and run:
+> ```bash
+>    vips --version
+> ```
+
+The original images can be PNG, JPG, or any format supported by libvips. Remember to assign the corresponding name to the output based on the class of the image.
+
+Open a terminal in the same folder where the image is and run:
 ```bash
-   vips dzsave input.png output
+   vips dzsave [input_name].png [output_name]
 ```
+
+> The output name is the name that the generated files will have
+
 This command will generate:
    - A .dzi file
    - A folder with image tiles (used by OpenSeaDragon)
