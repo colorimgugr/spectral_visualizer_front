@@ -20,36 +20,38 @@ This project was built with:
 
 1. **Install Git**  
    Download and install Git from [git-scm.com](https://git-scm.com/downloads)
-   - After installation, check if it's correctly installed by running:
+   - After installation, check if it's correctly installed by opening a terminal and running:
    ```bash
    git --version
    ```
    
 2. **Install Node.js**  
    Download and install Node.js from [nodejs.org](https://nodejs.org/) (recommended: LTS version).
+    - After installation, check if it's correctly installed by opening a terminal and running:
    ```bash
    node --version
    ```
    
-3. **Install Python**  
+4. **Install Python**  
    Download and install Python from [python.org](https://www.python.org/downloads/). This is necessary to run the script to add the artwork's metadata.
+   - After installation, check if it's correctly installed by opening a terminal and running:
    ```bash
    python --version
    ```
    
-4. **Clone the repository**  
-   Open a terminal and run:
+6. **Clone the repository**  
+   Open a terminal where you want to have your local repository and run:
    ```bash
    git clone https://github.com/colorimgugr/spectral_visualizer_front.git
    cd spectral_visualizer_front
    ```
    
-5. **Install the dependencies**
+7. **Install the dependencies**
    ```bash
    npm install
    ```
    
-6. **Start the development server**
+8. **Start the development server**
    ```bash
    npm run dev
    ```
