@@ -103,7 +103,7 @@ Running the website locally means you're launching the project on your own compu
 This project is hosted online using **Vercel**, a platform that makes it easy to publish websites.
 When you **push your code to GitHub**, Vercel automatically deploys (publishes) the latest version of the site online. 
 
-You can check it here: [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/colorimgs-projects/multispectral-visualizer)
+You can check it here: [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/colorimgs-projects/spectral-visualizer)
 
 In the "Deployments" tab, you can find all the commits made.
 
