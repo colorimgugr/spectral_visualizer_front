@@ -1,6 +1,5 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import { Row, Column } from "@/once-ui/components";
 import type { SpectralImgData, ArtworkMetadata } from "@/app/resources/types";
 import SideTools from "@/components/SideTools";
@@ -29,33 +28,6 @@ const SingleView = ({
   handleSelectImage,
   isLargeScreen,
 }: SingleViewProps) => {
-  // const [tileSource, setTileSource] = useState<string>("");
-
-  // useEffect(() => {
-  //   if (!selectedImage?.code) return;
-
-  //   const fetchDZI = async () => {
-  //     try {
-  //       console.log("trying")
-  //       // const res = await fetch("http://localhost:5000/dzi", {
-  //       const res = await fetch("https://multispectral-visualizer-back.onrender.com/dzi", {
-  //         method: "POST",
-  //         headers: { "Content-Type": "application/json" },
-  //         body: JSON.stringify({ filename: selectedImage.code }),
-  //       });
-
-  //       const data = await res.json();
-  //       if (data.dzi_url) {
-  //         // setTileSource(`http://localhost:5000${data.dzi_url}`);
-  //         setTileSource(`https://multispectral-visualizer-back.onrender.com${data.dzi_url}`);
-  //       }
-  //     } catch (error) {
-  //       console.error("Failed to fetch DZI:", error);
-  //     }
-  //   };
-
-  //   fetchDZI();
-  // }, [selectedImage]);
 
   return (
     <Row fillWidth fillHeight gap="s" mobileDirection="column">
