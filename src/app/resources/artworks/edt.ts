@@ -364,7 +364,7 @@ const edt: Artwork = {
     {
       "spectralType": "msi",
       "spectralClass": "vnir",
-      "specification": "hllg",
+      "specification": "hlg",
       "metadata": {
         "hPix": "320",
         "vPix": "256",

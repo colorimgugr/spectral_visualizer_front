@@ -69,8 +69,8 @@ export const capSysLabels: Record<CapSysCode, string> = {
 };
 
 export const illSysLabels: Record<IllSysCode, string> = {
-  hllg: "Hallogen",
-  hllgUv: "Hallogen + UV",
+  hlg: "Halogen",
+  hlgUv: "Halogen + UV",
   uv: "UV",
   led: "LED",
 };

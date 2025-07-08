@@ -42,9 +42,14 @@ This project was built with:
    ```
    📦 Install questionary
 
-   Once Python is installed, run the following command to install the required Python package:
+   Once Python is installed, run the following commands to install the required Python packages.
+   - For Questionary:
    ```bash
    pip install questionary
+   ```
+   - For Pillow:
+   ```bash
+   pip install pillow   
    ```
 
    This package is used by the script to interactively create the artwork metadata.

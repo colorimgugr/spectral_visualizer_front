@@ -1,5 +1,5 @@
 // IMPORTANT: Replace with your own domain address - it's used for SEO in meta tags and schema
-const baseURL = "https://demo.once-ui.com";
+const baseURL = "https://spectral-visualizer.vercel.app/";
 
 // Import and set font for each variant
 import { Geist } from "next/font/google";
@@ -86,10 +86,10 @@ const meta = {
     title: "Spectral Visualizer",
     description:
       "Spectral Visualizer for Artworks",
-    image: "/og/home.jpg",
-    canonical: "https://once-ui.com",
+    image: "/og/home.png",
+    canonical: "https://spectral-visualizer.vercel.app/",
     robots: "index,follow",
-    alternates: [{ href: "https://once-ui.com", hrefLang: "en" }],
+    alternates: [{ href: "https://spectral-visualizer.vercel.app/", hrefLang: "en" }],
   },
   // add more routes and reference them in page.tsx
 };
@@ -100,7 +100,6 @@ const schema = {
   type: "Organization",
   name: "Universidad de Granada",
   description: meta.home.description,
-  email: "lorant@once-ui.com",
 };
 
 // social links

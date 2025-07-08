@@ -335,7 +335,7 @@ const benClx: Artwork = {
     {
       "spectralType": "rgb",
       "spectralClass": "pht",
-      "specification": "hllg",
+      "specification": "hlg",
       "metadata": {
         "hPix": "8140",
         "vPix": "4774",

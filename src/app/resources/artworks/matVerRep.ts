@@ -443,7 +443,7 @@ const matVerRep: Artwork = {
     {
       "spectralType": "rgb",
       "spectralClass": "pht",
-      "specification": "hllg",
+      "specification": "hlg",
       "metadata": {
         "hPix": "5069",
         "vPix": "5512",

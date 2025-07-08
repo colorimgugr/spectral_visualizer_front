@@ -38,7 +38,7 @@ const martPrzAya: Artwork = {
     {
       "spectralType": "rgb",
       "spectralClass": "pht",
-      "specification": "hllg",
+      "specification": "hlg",
       "metadata": {
         "hPix": "1551",
         "vPix": "2224",

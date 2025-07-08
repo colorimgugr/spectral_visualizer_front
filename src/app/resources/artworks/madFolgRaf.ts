@@ -324,7 +324,7 @@ const madFolgRaf: Artwork = {
     {
       "spectralType": "rgb",
       "spectralClass": "pht",
-      "specification": "hllg",
+      "specification": "hlg",
       "metadata": {
         "hPix": "518",
         "vPix": "703",

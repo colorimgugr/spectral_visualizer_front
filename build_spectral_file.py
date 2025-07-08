@@ -218,7 +218,7 @@ def build_image_metadata_from_labels(title, labels: Dict[str, str], hPix, vPix, 
                                                      {"rsnPkL": "Resonon Pika L", "spcIQ": "Specim IQ"})
     elif (title == "rgb-pht"):
          specification  = prompt_specification_field("Illumination System",
-                                                     {"hllg": "Hallogen", "led": "LED"})
+                                                     {"hlg": "Halogen", "led": "LED"})
     metadata = {}
     
     for key, label in labels.items():

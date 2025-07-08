@@ -324,7 +324,7 @@ const matVerOrg: Artwork = {
     {
       "spectralType": "rgb",
       "spectralClass": "pht",
-      "specification": "hllg",
+      "specification": "hlg",
       "metadata": {
         "hPix": "5438",
         "vPix": "6809",

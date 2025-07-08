@@ -324,7 +324,7 @@ const transRaf: Artwork = {
     {
       "spectralType": "rgb",
       "spectralClass": "pht",
-      "specification": "hllg",
+      "specification": "hlg",
       "metadata": {
         "hPix": "1980",
         "vPix": "2899",

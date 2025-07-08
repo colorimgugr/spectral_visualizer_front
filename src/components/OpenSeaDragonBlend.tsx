@@ -6,14 +6,12 @@ import { useEffect, useRef } from "react";
 export type OpenSeaDragonBlendProps = {
   leftUrl: string;
   rightUrl: string;
-  leftOpacity: number;
   rightOpacity: number;
 };
 
 const OpenSeaDragonBlend = ({
   leftUrl,
   rightUrl,
-  leftOpacity,
   rightOpacity,
 }: OpenSeaDragonBlendProps) => {
   const viewerRef = useRef<Viewer | null>(null);
@@ -41,7 +39,6 @@ const OpenSeaDragonBlend = ({
     const onImageLoad = () => {
       imagesLoadedCount++;
       if (imagesLoadedCount === 2) {
-        if (leftImageRef.current) leftImageRef.current.setOpacity(leftOpacity);
         if (rightImageRef.current)
           rightImageRef.current.setOpacity(rightOpacity);
       }
@@ -87,9 +84,8 @@ const OpenSeaDragonBlend = ({
   }, [leftUrl, rightUrl]);
 
   useEffect(() => {
-    if (leftImageRef.current) leftImageRef.current.setOpacity(leftOpacity);
     if (rightImageRef.current) rightImageRef.current.setOpacity(rightOpacity);
-  }, [leftOpacity, rightOpacity]);
+  }, [rightOpacity]);
 
   return (
     <>

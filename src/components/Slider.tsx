@@ -10,6 +10,7 @@ type SliderProps = {
   value: number;
   onChange: (value: number) => void;
   isLargeScreen: boolean;
+  inline?: boolean;
   isFloat?: boolean;
   applyOnReleaseOnly?: boolean;
 };
@@ -22,6 +23,7 @@ const Slider = ({
   value,
   onChange,
   isLargeScreen,
+  inline = false,
   isFloat = true,
   applyOnReleaseOnly = false,
 }: SliderProps) => {
@@ -48,18 +50,21 @@ const Slider = ({
 
   return (
     <Column fillWidth paddingLeft="s" paddingRight="s">
-      {isLargeScreen && (
+      {isLargeScreen && !inline && (
         <Row fillWidth paddingBottom="xs" textVariant="label-default-m">
           {title}
         </Row>
       )}
       <Row fillWidth gap="16" horizontal="space-between" vertical="center">
-        {!isLargeScreen && (
-          <Column flex="1" textVariant="label-default-s">
+        {(!isLargeScreen || inline) && (
+          <Column
+            flex="1"
+            textVariant={inline ? "label-default-xl" : "label-default-s"}
+          >
             {title}
           </Column>
         )}
-        <Column flex={isFloat ? 3 : 5} className="custom-slider">
+        <Column flex={inline ? 5 : isFloat ? 3 : 5} className="custom-slider">
           <input
             type="range"
             min={min}

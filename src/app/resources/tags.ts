@@ -16,8 +16,8 @@ export const capSysTags: Record<CapSysCode, TagVariant> = {
 };
 
 export const illSysTags: Record<IllSysCode, TagVariant> = {
-  hllg: "warning",
-  hllgUv: "brand",
+  hlg: "warning",
+  hlgUv: "brand",
   uv: "accent",
   led: "success",
 };

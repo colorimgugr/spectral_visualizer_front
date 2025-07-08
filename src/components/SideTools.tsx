@@ -6,7 +6,6 @@ import type {
 } from "@/app/resources/types";
 import { artworkMetadataLabels } from "@/app/resources/labels";
 import SelectImage from "@/components/SelectImage";
-import Slider from "@/components/Slider";
 import ImageMetadataDisplay from "@/components/ImageMetadataDisplay";
 
 type SideToolsProps = {
@@ -16,9 +15,6 @@ type SideToolsProps = {
   handleSelectImage: (code: string, side: number) => void;
   artworkMetadata?: ArtworkMetadata;
   showArtworkMetadata?: boolean;
-  showOpacity?: boolean;
-  opacity?: number;
-  handleOpacityChange?: (val: number, side: number) => void;
   isLargeScreen: boolean;
 };
 
@@ -29,9 +25,6 @@ const SideTools = ({
   handleSelectImage,
   artworkMetadata,
   showArtworkMetadata = false,
-  showOpacity,
-  opacity,
-  handleOpacityChange,
   isLargeScreen,
 }: SideToolsProps) => (
   <Column fillWidth gap={isLargeScreen ? "xs" : "m"} flex="1">
@@ -41,17 +34,6 @@ const SideTools = ({
       handleSelect={handleSelectImage}
       side={side}
     />
-    {showOpacity && opacity !== undefined && handleOpacityChange && (
-      <Slider
-        title={`Opacity - ${side === 1 ? "Left" : "Right"}`}
-        min={0}
-        max={1}
-        step={0.01}
-        value={opacity}
-        onChange={(value) => handleOpacityChange(value, side)}
-        isLargeScreen={isLargeScreen}
-      />
-    )}
     <Column
       paddingTop="s"
       fillWidth

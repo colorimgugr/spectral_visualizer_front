@@ -77,7 +77,7 @@ export default function Home() {
     if (modes.length > 0) {
       setSelectedMode(modes[0].value as VisualModeCode);
     }
-  }, [rgbMonoImages, filteredSpectralImages]);
+  }, [selectedArtwork, rgbMonoImages, filteredSpectralImages]);
 
   const getArtworksOptions = () => {
     return artworks

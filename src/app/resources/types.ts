@@ -68,7 +68,7 @@ export type CapSysCode =
   | "pxlTqSpc"
   | "xncsXv";
 
-export type IllSysCode = "hllg" | "hllgUv" | "uv" | "led";
+export type IllSysCode = "hlg" | "hlgUv" | "uv" | "led";
 
 export type FilterCode =
   | "visSwir"
