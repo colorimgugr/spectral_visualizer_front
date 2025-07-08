@@ -19,7 +19,8 @@ const matVerRep: Artwork = {
       "specification": null,
       "metadata": {
         "hPix": "622",
-        "vPix": "795"
+        "vPix": "795",
+        "resl": null
       },
       "path": "/artworks/matVerRep/hsi/swir",
       "names": [
@@ -192,7 +193,8 @@ const matVerRep: Artwork = {
       "specification": null,
       "metadata": {
         "hPix": "1499",
-        "vPix": "1904"
+        "vPix": "1904",
+        "resl": null
       },
       "path": "/artworks/matVerRep/hsi/uvis",
       "names": [
@@ -299,7 +301,8 @@ const matVerRep: Artwork = {
       "specification": "rsnPkL",
       "metadata": {
         "hPix": "876",
-        "vPix": "1107"
+        "vPix": "1107",
+        "resl": null
       },
       "path": "/artworks/matVerRep/hsi/vnir",
       "names": [
@@ -432,7 +435,8 @@ const matVerRep: Artwork = {
       "specification": null,
       "metadata": {
         "hPix": "8280",
-        "vPix": "5512"
+        "vPix": "5512",
+        "resl": null
       },
       "source": "/artworks/matVerRep/rgb/irrs.dzi"
     },
@@ -442,7 +446,8 @@ const matVerRep: Artwork = {
       "specification": "hllg",
       "metadata": {
         "hPix": "5069",
-        "vPix": "5512"
+        "vPix": "5512",
+        "resl": null
       },
       "source": "/artworks/matVerRep/rgb/pht.dzi"
     },
@@ -452,7 +457,8 @@ const matVerRep: Artwork = {
       "specification": null,
       "metadata": {
         "hPix": "4986",
-        "vPix": "5512"
+        "vPix": "5512",
+        "resl": null
       },
       "source": "/artworks/matVerRep/rgb/uvf.dzi"
     },
@@ -462,7 +468,8 @@ const matVerRep: Artwork = {
       "specification": null,
       "metadata": {
         "hPix": "5140",
-        "vPix": "5512"
+        "vPix": "5512",
+        "resl": null
       },
       "source": "/artworks/matVerRep/rgb/uvr.dzi"
     }

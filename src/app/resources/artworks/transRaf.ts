@@ -19,7 +19,8 @@ const transRaf: Artwork = {
       "specification": null,
       "metadata": {
         "hPix": "2409",
-        "vPix": "640"
+        "vPix": "640",
+        "resl": null
       },
       "path": "/artworks/transRaf/hsi/swir",
       "names": [
@@ -192,7 +193,8 @@ const transRaf: Artwork = {
       "specification": "rsnPkL",
       "metadata": {
         "hPix": "736",
-        "vPix": "516"
+        "vPix": "516",
+        "resl": null
       },
       "path": "/artworks/transRaf/hsi/vnir",
       "names": [
@@ -325,7 +327,8 @@ const transRaf: Artwork = {
       "specification": "hllg",
       "metadata": {
         "hPix": "1980",
-        "vPix": "2899"
+        "vPix": "2899",
+        "resl": null
       },
       "source": "/artworks/transRaf/rgb/pht.dzi"
     }

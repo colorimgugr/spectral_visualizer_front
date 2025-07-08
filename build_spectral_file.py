@@ -4,6 +4,7 @@ import sys
 import re
 from typing import Dict
 import questionary
+from PIL import Image
 
 def update_all_artworks_ts(artwork_id: str, all_artworks_path: str = "./src/app/resources/allArtworks.ts"):
     if os.path.exists(all_artworks_path):
@@ -82,7 +83,7 @@ def extract_ts_record_labels(ts_path: str, const_name: str) -> Dict[str, str]:
     entries = re.findall(r'(\w+)\s*:\s*"([^"]+)"', record_body)
     return dict(entries)
 
-def build_spectral_data(base_path, artwork_id, type_codes, class_codes, metadata_labels):
+def build_spectral_data(base_path, artwork_id, artwork_metadata, type_codes, class_codes, metadata_labels):
     spectral_images = []
 
     for entry in os.listdir(base_path):
@@ -109,8 +110,10 @@ def build_spectral_data(base_path, artwork_id, type_codes, class_codes, metadata
                 
                 relative_path = os.path.join("artworks", artwork_id, spectral_type, spectral_class)
                 
+                hPix, vPix = get_first_image_dimensions(os.path.join(spectral_class_path))
+    
                 title =  f"{spectral_type}-{spectral_class}"
-                metadata, specification = build_metadata_from_labels(title, metadata_labels)
+                metadata, specification = build_image_metadata_from_labels(title, metadata_labels, hPix, vPix, artwork_metadata)
                 
                 spectral_images.append({
                     "spectralType": spectral_type,
@@ -128,7 +131,7 @@ def build_spectral_data(base_path, artwork_id, type_codes, class_codes, metadata
                     continue
                 
                 spectral_class, ext = os.path.splitext(file)
-                if ext.lower() not in {".jpeg", ".jpg", ".png", ".dzi"}:
+                if ext.lower() not in {".jpeg", ".jpg", ".png", '.tif', '.tiff', ".dzi"}:
                     continue
                 
                 if spectral_class not in class_codes:
@@ -136,8 +139,13 @@ def build_spectral_data(base_path, artwork_id, type_codes, class_codes, metadata
                 
                 relative_path = os.path.join("artworks", artwork_id, spectral_type, file)
 
+                hPix = None
+                vPix = None
+                if ext.lower() != ".dzi":
+                    hPix, vPix = get_image_dimensions(file_path)
+                    
                 title =  f"{spectral_type}-{spectral_class}"
-                metadata, specification = build_metadata_from_labels(title, metadata_labels)
+                metadata, specification = build_image_metadata_from_labels(title, metadata_labels, hPix, vPix, artwork_metadata)
                 
                 spectral_images.append({
                     "spectralType": spectral_type,
@@ -147,7 +155,6 @@ def build_spectral_data(base_path, artwork_id, type_codes, class_codes, metadata
                     "source": f"/{relative_path.replace(os.sep, '/')}",
                 })
                 
-
     return spectral_images
 
 def prompt_metadata_field(field_name: str, yes_no: bool = False) -> str | None:
@@ -169,12 +176,42 @@ def prompt_specification_field(field_name: str, options: dict) -> str:
         f"Select the {field_name}:",
         choices=[{"name": label, "value": key} for key, label in options.items()]
     ).ask()
-    
     return selection
 
-
-def build_metadata_from_labels(title, labels: Dict[str, str]) -> Dict[str, str]:
+def build_artwork_metadata_from_labels(title, labels: Dict[str, str]) -> Dict[str, str]:
     print(f"\n-- Enter {title} metadata (press Enter to skip a field) --")
+    metadata = {}
+    for key, label in labels.items():
+        is_yes_no = key in ["rest", "varn"]
+        metadata[key] = prompt_metadata_field(label, yes_no=is_yes_no)
+    return metadata
+
+def get_image_resolution(artwork_metadata: dict, image_metadata: dict) -> float | None:
+    height = artwork_metadata.get("height")
+    vertical_pixels = image_metadata.get("vPix")
+    if height is not None and vertical_pixels is not None:
+        resolution = float(height) / float(vertical_pixels)
+        resolution = round(resolution, 4)
+        return str(resolution)
+    return None
+
+def get_image_dimensions(image_path: str) -> tuple[int | None, int | None]:
+    try:
+        with Image.open(image_path) as img:
+            return img.width, img.height
+    except Exception as e:
+        print(f"Warning: Could not read image {image_path}: {e}")
+    return None, None
+
+def get_first_image_dimensions(folder_path: str) -> tuple[int | None, int | None]:
+    for filename in sorted(os.listdir(folder_path)):
+        file_path = os.path.join(folder_path, filename)
+        if os.path.isfile(file_path) and filename.lower().endswith(('.jpg', '.jpeg', '.png', '.tif', '.tiff')):
+            return get_image_dimensions(file_path)
+    return None, None
+
+def build_image_metadata_from_labels(title, labels: Dict[str, str], hPix, vPix, artwork_metadata: dict) -> Dict[str, str]:
+    print(f"\n-- Generating {title} metadata (press Enter to skip a field) --")
     specification = None
     if (title == "hsi-vnir"):
          specification  = prompt_specification_field("Capturing System",
@@ -183,9 +220,17 @@ def build_metadata_from_labels(title, labels: Dict[str, str]) -> Dict[str, str]:
          specification  = prompt_specification_field("Illumination System",
                                                      {"hllg": "Hallogen", "led": "LED"})
     metadata = {}
+    
     for key, label in labels.items():
-        is_yes_no = key in ["rest", "varn"]
-        metadata[key] = prompt_metadata_field(label, yes_no=is_yes_no)
+        if key == "hPix" and hPix:
+            metadata[key] = str(hPix)
+        elif key == "vPix" and vPix:
+            metadata[key] = str(vPix)
+        elif key == "resl":
+            metadata[key] = get_image_resolution(artwork_metadata, metadata)
+        else:    
+            metadata[key] = prompt_metadata_field(label)
+    
     return metadata, specification
 
 def main():
@@ -215,14 +260,14 @@ def main():
 
     artwork_name = input("Enter Name: ")
     
-    metadata, _ = build_metadata_from_labels("Artwork", ARTWORKS_METADATA_LABELS)
+    metadata = build_artwork_metadata_from_labels("Artwork", ARTWORKS_METADATA_LABELS)
 
     output_data = {
         "id": artwork_id,
         "name": artwork_name,
         "metadata": metadata,
-        "spectralImages": build_spectral_data(input_folder, artwork_id, 
-                                              SPECTRAL_TYPE_CODES, SPECTRAL_CLASS_CODES, IMAGE_METADATA_LABELS)
+        "spectralImages": build_spectral_data(input_folder, artwork_id, metadata,
+                                            SPECTRAL_TYPE_CODES, SPECTRAL_CLASS_CODES, IMAGE_METADATA_LABELS)
     }
     
     output_dir = os.path.join(".", "src", "app", "resources", "artworks")

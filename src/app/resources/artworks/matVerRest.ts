@@ -9,8 +9,8 @@ const matVerRest: Artwork = {
     "rest": "Yes",
     "varn": null,
     "subs": null,
-    "width": "60 cm",
-    "height": "40 cm"
+    "width": "40",
+    "height": "60"
   },
   "spectralImages": [
     {
@@ -19,7 +19,8 @@ const matVerRest: Artwork = {
       "specification": null,
       "metadata": {
         "hPix": "640",
-        "vPix": "931"
+        "vPix": "931",
+        "resl": "0.0644"
       },
       "path": "/artworks/matVerRest/hsi/swir",
       "names": [
@@ -191,8 +192,9 @@ const matVerRest: Artwork = {
       "spectralClass": "vnir",
       "specification": "rsnPkL",
       "metadata": {
-        "hPix": "452",
-        "vPix": "642"
+        "hPix": "450",
+        "vPix": "642",
+        "resl": "0.0935"
       },
       "path": "/artworks/matVerRest/hsi/vnir",
       "names": [

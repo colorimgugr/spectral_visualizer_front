@@ -19,7 +19,8 @@ const escTab: Artwork = {
       "specification": null,
       "metadata": {
         "hPix": "1091",
-        "vPix": "624"
+        "vPix": "624",
+        "resl": null
       },
       "path": "/artworks/escTab/hsi/swir",
       "names": [
@@ -192,7 +193,8 @@ const escTab: Artwork = {
       "specification": "rsnPkL",
       "metadata": {
         "hPix": "1590",
-        "vPix": "891"
+        "vPix": "891",
+        "resl": null
       },
       "path": "/artworks/escTab/hsi/vnir",
       "names": [
@@ -325,7 +327,8 @@ const escTab: Artwork = {
       "specification": null,
       "metadata": {
         "hPix": "320",
-        "vPix": "256"
+        "vPix": "256",
+        "resl": null
       },
       "source": "/artworks/escTab/mono/irrl.png"
     },
@@ -335,7 +338,8 @@ const escTab: Artwork = {
       "specification": null,
       "metadata": {
         "hPix": "320",
-        "vPix": "256"
+        "vPix": "256",
+        "resl": null
       },
       "path": "/artworks/escTab/msi/uvf",
       "names": [
@@ -363,7 +367,8 @@ const escTab: Artwork = {
       "specification": null,
       "metadata": {
         "hPix": "320",
-        "vPix": "256"
+        "vPix": "256",
+        "resl": null
       },
       "path": "/artworks/escTab/msi/vnir",
       "names": [
@@ -391,7 +396,8 @@ const escTab: Artwork = {
       "specification": null,
       "metadata": {
         "hPix": "320",
-        "vPix": "256"
+        "vPix": "256",
+        "resl": null
       },
       "source": "/artworks/escTab/rgb/uvf.dzi"
     }

@@ -2,15 +2,15 @@ import { Artwork } from "@/app/resources/types";
 
 const matVerOrg: Artwork = {
   "id": "matVerOrg",
-  "name": "Maternidad de Veronese (Original)",
+  "name": "Maternidad de Veronesse (Original)",
   "metadata": {
-    "author": "Paolo Veronese",
+    "author": "Paolo Veronesse",
     "date": "XVI Century",
     "rest": "No",
     "varn": null,
     "subs": null,
-    "width": "60 cm",
-    "height": "40 cm"
+    "width": "40",
+    "height": "60"
   },
   "spectralImages": [
     {
@@ -19,7 +19,8 @@ const matVerOrg: Artwork = {
       "specification": null,
       "metadata": {
         "hPix": "421",
-        "vPix": "521"
+        "vPix": "521",
+        "resl": "0.1152"
       },
       "path": "/artworks/matVerOrg/hsi/swir",
       "names": [
@@ -192,7 +193,8 @@ const matVerOrg: Artwork = {
       "specification": "rsnPkL",
       "metadata": {
         "hPix": "881",
-        "vPix": "1111"
+        "vPix": "1111",
+        "resl": "0.054"
       },
       "path": "/artworks/matVerOrg/hsi/vnir",
       "names": [
@@ -325,7 +327,8 @@ const matVerOrg: Artwork = {
       "specification": "hllg",
       "metadata": {
         "hPix": "5438",
-        "vPix": "6809"
+        "vPix": "6809",
+        "resl": "0.0088"
       },
       "source": "/artworks/matVerOrg/rgb/pht.dzi"
     }

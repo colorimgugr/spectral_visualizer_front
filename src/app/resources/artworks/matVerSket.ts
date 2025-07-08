@@ -19,7 +19,8 @@ const matVerSket: Artwork = {
       "specification": null,
       "metadata": {
         "hPix": "882",
-        "vPix": "1103"
+        "vPix": "1103",
+        "resl": null
       },
       "path": "/artworks/matVerSket/hsi/swir",
       "names": [
@@ -152,7 +153,8 @@ const matVerSket: Artwork = {
       "specification": null,
       "metadata": {
         "hPix": "1500",
-        "vPix": "1950"
+        "vPix": "1950",
+        "resl": null
       },
       "path": "/artworks/matVerSket/hsi/uvis",
       "names": [
@@ -259,7 +261,8 @@ const matVerSket: Artwork = {
       "specification": "rsnPkL",
       "metadata": {
         "hPix": "626",
-        "vPix": "795"
+        "vPix": "795",
+        "resl": null
       },
       "path": "/artworks/matVerSket/hsi/vnir",
       "names": [

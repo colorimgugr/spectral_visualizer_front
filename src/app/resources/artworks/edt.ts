@@ -19,7 +19,8 @@ const edt: Artwork = {
       "specification": null,
       "metadata": {
         "hPix": "1091",
-        "vPix": "624"
+        "vPix": "624",
+        "resl": null
       },
       "path": "/artworks/edt/hsi/swir",
       "names": [
@@ -192,7 +193,8 @@ const edt: Artwork = {
       "specification": "rsnPkL",
       "metadata": {
         "hPix": "1590",
-        "vPix": "891"
+        "vPix": "891",
+        "resl": null
       },
       "path": "/artworks/edt/hsi/vnir",
       "names": [
@@ -325,7 +327,8 @@ const edt: Artwork = {
       "specification": null,
       "metadata": {
         "hPix": "320",
-        "vPix": "256"
+        "vPix": "256",
+        "resl": null
       },
       "source": "/artworks/edt/mono/irrl.png"
     },
@@ -335,7 +338,8 @@ const edt: Artwork = {
       "specification": null,
       "metadata": {
         "hPix": "320",
-        "vPix": "256"
+        "vPix": "256",
+        "resl": null
       },
       "path": "/artworks/edt/msi/uvis",
       "names": [
@@ -363,7 +367,8 @@ const edt: Artwork = {
       "specification": "hllg",
       "metadata": {
         "hPix": "320",
-        "vPix": "256"
+        "vPix": "256",
+        "resl": null
       },
       "path": "/artworks/edt/msi/vnir",
       "names": [
@@ -391,7 +396,8 @@ const edt: Artwork = {
       "specification": null,
       "metadata": {
         "hPix": "320",
-        "vPix": "256"
+        "vPix": "256",
+        "resl": null
       },
       "source": "/artworks/edt/rgb/uvf.dzi"
     }

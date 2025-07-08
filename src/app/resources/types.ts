@@ -20,7 +20,7 @@ export type ArtworkMetadataCode =
   | "width"
   | "height";
 
-export type ImageMetadataCode = "hPix" | "vPix";
+export type ImageMetadataCode = "hPix" | "vPix" | "resl";
 
 export type TechnicalMetadataCode = "capSys" | "illSys" | "filter" | "bands";
 
@@ -28,7 +28,7 @@ export type ArtworkMetadata = Partial<
   Record<ArtworkMetadataCode, string | null>
 >;
 
-export type ImageMetadata = Partial<Record<ImageMetadataCode, string | null>>;
+export type ImageMetadata = Record<ImageMetadataCode, string | null>;
 
 export type TechnicalMetadata = Partial<Record<TechnicalMetadataCode, string>>;
 

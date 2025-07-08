@@ -9,8 +9,8 @@ const madFolgRaf: Artwork = {
     "rest": null,
     "varn": null,
     "subs": null,
-    "width": "1.94 m",
-    "height": "3.20 m"
+    "width": "194",
+    "height": "320"
   },
   "spectralImages": [
     {
@@ -19,7 +19,8 @@ const madFolgRaf: Artwork = {
       "specification": null,
       "metadata": {
         "hPix": "250",
-        "vPix": "320"
+        "vPix": "320",
+        "resl": "1.0"
       },
       "path": "/artworks/madFolgRaf/hsi/swir",
       "names": [
@@ -192,7 +193,8 @@ const madFolgRaf: Artwork = {
       "specification": "rsnPkL",
       "metadata": {
         "hPix": "556",
-        "vPix": "900"
+        "vPix": "900",
+        "resl": "0.3556"
       },
       "path": "/artworks/madFolgRaf/hsi/vnir",
       "names": [
@@ -325,7 +327,8 @@ const madFolgRaf: Artwork = {
       "specification": "hllg",
       "metadata": {
         "hPix": "518",
-        "vPix": "703"
+        "vPix": "703",
+        "resl": "0.4552"
       },
       "source": "/artworks/madFolgRaf/rgb/pht.dzi"
     }

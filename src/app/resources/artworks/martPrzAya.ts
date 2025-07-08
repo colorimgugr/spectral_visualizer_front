@@ -19,7 +19,8 @@ const martPrzAya: Artwork = {
       "specification": null,
       "metadata": {
         "hPix": "1598",
-        "vPix": "2255"
+        "vPix": "2255",
+        "resl": null
       },
       "source": "/artworks/martPrzAya/mono/irrl.dzi"
     },
@@ -29,7 +30,8 @@ const martPrzAya: Artwork = {
       "specification": null,
       "metadata": {
         "hPix": "15956",
-        "vPix": "22971"
+        "vPix": "22971",
+        "resl": null
       },
       "source": "/artworks/martPrzAya/rgb/irrs.dzi"
     },
@@ -39,7 +41,8 @@ const martPrzAya: Artwork = {
       "specification": "hllg",
       "metadata": {
         "hPix": "1551",
-        "vPix": "2224"
+        "vPix": "2224",
+        "resl": null
       },
       "source": "/artworks/martPrzAya/rgb/pht.dzi"
     },
@@ -49,7 +52,8 @@ const martPrzAya: Artwork = {
       "specification": null,
       "metadata": {
         "hPix": "16096",
-        "vPix": "22943"
+        "vPix": "22943",
+        "resl": null
       },
       "source": "/artworks/martPrzAya/rgb/uvf.dzi"
     },
@@ -59,7 +63,8 @@ const martPrzAya: Artwork = {
       "specification": null,
       "metadata": {
         "hPix": "15748",
-        "vPix": "22778"
+        "vPix": "22778",
+        "resl": null
       },
       "source": "/artworks/martPrzAya/rgb/uvr.dzi"
     }

@@ -41,13 +41,14 @@ export const artworkMetadataLabels: Record<ArtworkMetadataCode, string> = {
   rest: "Restored",
   varn: "Varnished",
   subs: "Substrate",
-  width: "Width",
-  height: "Height",
+  width: "Width (cm)",
+  height: "Height (cm)",
 };
 
 export const imageMetadataLabels: Record<ImageMetadataCode, string> = {
-  hPix: "Horizontal pixels",
-  vPix: "Vertical pixels",
+  hPix: "Horizontal (pixels)",
+  vPix: "Vertical (pixels)",
+  resl: "Resolution (cm/pixels)"
 };
 
 export const technicalMetadatLabels: Record<TechnicalMetadataCode, string> = {

@@ -19,7 +19,8 @@ const benClx: Artwork = {
       "specification": null,
       "metadata": {
         "hPix": "1091",
-        "vPix": "624"
+        "vPix": "624",
+        "resl": null
       },
       "path": "/artworks/benClx/hsi/swir",
       "names": [
@@ -192,7 +193,8 @@ const benClx: Artwork = {
       "specification": "rsnPkL",
       "metadata": {
         "hPix": "1590",
-        "vPix": "891"
+        "vPix": "891",
+        "resl": null
       },
       "path": "/artworks/benClx/hsi/vnir",
       "names": [
@@ -325,7 +327,8 @@ const benClx: Artwork = {
       "specification": null,
       "metadata": {
         "hPix": "320",
-        "vPix": "256"
+        "vPix": "256",
+        "resl": null
       },
       "source": "/artworks/benClx/mono/irrl.png"
     },
@@ -335,7 +338,8 @@ const benClx: Artwork = {
       "specification": "hllg",
       "metadata": {
         "hPix": "8140",
-        "vPix": "4774"
+        "vPix": "4774",
+        "resl": null
       },
       "source": "/artworks/benClx/rgb/pht.dzi"
     },
@@ -345,7 +349,8 @@ const benClx: Artwork = {
       "specification": null,
       "metadata": {
         "hPix": "4032",
-        "vPix": "3024"
+        "vPix": "3024",
+        "resl": null
       },
       "source": "/artworks/benClx/rgb/uvf.dzi"
     }
