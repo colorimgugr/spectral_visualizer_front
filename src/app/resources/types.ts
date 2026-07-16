@@ -1,4 +1,9 @@
-export type VisualModeCode = "single" | "comp" | "blend" | "falseRGB";
+export type VisualModeCode =
+  | "single"
+  | "comp"
+  | "blend"
+  | "falseRGB"
+  | "stitchCompare";
 
 export type SpectralTypeCode = "rgb" | "mono" | "hsi" | "msi";
 export type SpectralClassCode =
@@ -32,6 +37,18 @@ export type ImageMetadata = Record<ImageMetadataCode, string | null>;
 
 export type TechnicalMetadata = Partial<Record<TechnicalMetadataCode, string>>;
 
+/**
+ * Registration of a stitched image into a shared reference frame, produced
+ * offline by prepare_compare.py. `H` is a row-major 3x3 homography mapping
+ * THIS image's pixel coordinates into the reference image's pixel frame.
+ * Two images sharing the same `ref` can be co-registered pairwise via
+ * H_pair = inv(H_b) * H_a.
+ */
+export type StitchAlign = {
+  ref: string;
+  H: number[];
+};
+
 export type SpectralImgData = {
   metadata: ImageMetadata;
   spectralType: SpectralTypeCode;
@@ -40,6 +57,7 @@ export type SpectralImgData = {
   source?: string;
   path?: string;
   names?: string[];
+  align?: StitchAlign;
 };
 
 export type Artwork = {

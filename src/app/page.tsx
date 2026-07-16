@@ -25,6 +25,7 @@ import SingleView from "@/components/SingleView";
 import CompareImages from "@/components/CompareImages";
 import BlendImages from "@/components/BlendImages";
 import FalseRGBImages from "@/components/FalseRGBImages";
+import StitchedCompare from "@/components/StitchedCompare";
 
 export default function Home() {
   const [selectedMode, setSelectedMode] = useState<VisualModeCode | null>(null);
@@ -92,9 +93,16 @@ export default function Home() {
   const getVisualizationModeOptions = () => {
     const rgbMonoCount = rgbMonoImages?.length ?? 0;
     const hasSpectral = (filteredSpectralImages?.length ?? 0) > 0;
+    // panels usable by "Stitched compare": direct source or HSI band stack
+    const panelEligibleCount = (selectedArtwork?.spectralImages ?? []).filter(
+      (img) => img.source || (img.path && (img.names?.length ?? 0) > 0)
+    ).length;
 
     return Object.entries(visualizationModes)
       .filter(([key]) => {
+        if (key === "stitchCompare") {
+          return panelEligibleCount > 1;
+        }
         if (rgbMonoCount > 1) {
           // All modes allowed if >1 image and spectral condition satisfied
           return key !== "falseRGB" || hasSpectral;
@@ -260,6 +268,11 @@ export default function Home() {
         ) : selectedMode === "falseRGB" && filteredSpectralImages ? (
           <FalseRGBImages
             spectralImages={filteredSpectralImages}
+            isLargeScreen={isLargeScreen}
+          />
+        ) : selectedMode === "stitchCompare" ? (
+          <StitchedCompare
+            artwork={selectedArtwork}
             isLargeScreen={isLargeScreen}
           />
         ) : (

@@ -15,6 +15,7 @@ export const visualizationModes: Record<VisualModeCode, string> = {
   comp: "Compare",
   blend: "Blend",
   falseRGB: "False RGB",
+  stitchCompare: "Stitched compare",
 };
 
 export const spectralTypeLabels: Record<SpectralTypeCode, string> = {
