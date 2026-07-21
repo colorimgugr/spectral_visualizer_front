@@ -93,17 +93,17 @@ export default function Home() {
   const getVisualizationModeOptions = () => {
     const rgbMonoCount = rgbMonoImages?.length ?? 0;
     const hasSpectral = (filteredSpectralImages?.length ?? 0) > 0;
-    // "Stitched compare" is only meaningful for artworks that carry pre-computed
-    // alignment homographies (produced by prepare_compare.py). Showing the mode
-    // for artworks without align data would render an unsynchronised viewer.
-    const hasAlignData = (selectedArtwork?.spectralImages ?? []).some(
-      (img) => img.align
-    );
+    // panels usable by "Stitched compare": any image with a direct source or
+    // an HSI band stack. Artworks with pre-computed alignment homographies sync
+    // by registration; the rest fall back to proportional (approximate) sync.
+    const panelEligibleCount = (selectedArtwork?.spectralImages ?? []).filter(
+      (img) => img.source || (img.path && (img.names?.length ?? 0) > 0)
+    ).length;
 
     return Object.entries(visualizationModes)
       .filter(([key]) => {
         if (key === "stitchCompare") {
-          return hasAlignData;
+          return panelEligibleCount > 1;
         }
         if (rgbMonoCount > 1) {
           // All modes allowed if >1 image and spectral condition satisfied

@@ -18,8 +18,8 @@ const inmaculada: Artwork = {
       "spectralClass": "pht",
       "specification": null,
       "metadata": {
-        "hPix": "12006",
-        "vPix": "8294",
+        "hPix": "8294",
+        "vPix": "12006",
         "resl": null
       },
       "source": "/artworks/inmaculada/rgb/vis.dzi",
@@ -43,8 +43,8 @@ const inmaculada: Artwork = {
       "spectralClass": "vnir",
       "specification": null,
       "metadata": {
-        "hPix": "1474",
-        "vPix": "1029",
+        "hPix": "1029",
+        "vPix": "1474",
         "resl": null
       },
       "path": "/artworks/inmaculada/hsi/vnir",
@@ -174,14 +174,14 @@ const inmaculada: Artwork = {
       "align": {
         "ref": "VIS",
         "H": [
-          8.34333024,
-          -0.00362211,
-          -227.93283927,
-          -0.00120179,
-          8.35525995,
-          -209.77393123,
+          8.36015725,
+          -0.00642969,
+          -88.93211897,
+          0.00362319,
+          8.3458183,
+          -231.72545034,
+          2.9e-07,
           -9.2e-07,
-          -2.9e-07,
           1.0
         ]
       }

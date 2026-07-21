@@ -1,5 +1,0 @@
-# Artwork binary assets for the Stitched Compare feature are too large to
-# bundle inside a Vercel deployment. These files must be served from an
-# external CDN or object-storage bucket and the paths updated in
-# src/app/resources/artworks/inmaculada.ts accordingly.
-public/artworks/inmaculada/

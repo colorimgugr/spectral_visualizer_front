@@ -339,5 +339,60 @@ Once you’ve added your images and metadata, and confirmed everything works cor
 > 📘 For more details on using Git and GitHub, visit the official documentation:
 [https://docs.github.com/en/get-started](https://docs.github.com/en/get-started)
 
+## 🔍 Part 6: Stitched compare mode
+The **Stitched compare** mode places **two synchronized viewers side by side** so you
+can inspect two modalities of the same artwork at the same spot, at the same
+magnification, at once — for example a **VIS panorama** on the left and a **HSI
+band** on the right. Panning or zooming either panel drives the other, and a
+crosshair mirrors your cursor from one panel into the other.
+
+### 🧭 When the mode appears
+The **Stitched compare** option shows up in the visualization-mode selector for any
+artwork that has **at least two panel-eligible images** — that is, two images that
+each have either a direct `source` (a `.dzi`/`.png`/`.jpg`) or an `hsi`/`msi` band
+stack (`path` + `names`). No extra flag is required.
+
+### 🎯 How the two panels stay aligned
+Each image can carry an optional `align` block in its metadata:
+
+```ts
+align: {
+  ref: "VIS",          // name of the shared reference frame
+  H:   [ /* 9 numbers */ ]  // row-major 3×3 homography: THIS image px → ref px
+}
+```
+
+- **Registered sync** — when both selected images share the same `align.ref`, the
+  app composes the pairwise homography `H = inv(H_right) · H_left` and syncs the
+  viewports through it, so features line up pixel-accurately even when the two
+  modalities differ in resolution or were captured at different scales.
+- **Proportional sync (fallback)** — when alignment data is missing, the panels are
+  synced by simple width/height proportion. The mode still works, but the UI notes
+  that *“alignment is approximate.”*
+
+### 🛠️ Preparing an artwork with alignment (`prepare_compare.py`)
+For stitched multi-modal artworks produced by the **hsi_stitcher** pipeline, the
+helper script `prepare_compare.py` generates everything in one step:
+
+```bash
+python prepare_compare.py --id inmaculada --name "Inmaculada" \
+    --modality VIS:"../Output/VIS" --modality HSI:"../Output/HIS":vnir \
+    --ref VIS
+```
+
+It will:
+1. Export display assets under `public/artworks/<id>/` (a **DZI pyramid** for the
+   large VIS/RGB mosaic; per-band `<wavelength>nm.png` files for HSI/MSI cubes).
+2. Compute each modality's registration homography into the reference frame
+   (from the stitcher's `placement.json` when available, SIFT between previews as a
+   fallback, or proportional scaling as a last resort).
+3. Write `src/app/resources/artworks/<id>.ts` and register it in `allArtworks.ts`.
+
+> 🔄 **Orientation:** assets are shown exactly as stored. If an artwork should be
+> displayed upright (portrait) but the stitched mosaic is landscape, rotate the VIS
+> mosaic **and** every HSI band by the same amount, then transform the homography by
+> the same rotation (`H' = R_ref · H · R_imgᐟ¹`) so registration is preserved. The
+> `inmaculada` artwork ships already rotated 90° clockwise to portrait.
+
 ## License
 Distributed under the MIT License. See LICENSE.txt for more information.
