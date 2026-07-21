@@ -1,6 +1,6 @@
 # Spectral Visualizer
 
-Welcome to **Spectral Visualizer** — a web-based app to explore multispectral and hyperspectral images using deep zoom technology.  
+Welcome to **Spectral Visualizer**  a web-based app to explore multispectral and hyperspectral images using deep zoom technology.  
 You can see it live at [spectral-visualizer.vercel.app](https://spectral-visualizer.vercel.app/).
 
 ---
